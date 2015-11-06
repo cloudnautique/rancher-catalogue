@@ -1,0 +1,5 @@
+name: Convoy Gluster
+description: |
+  Docker Volume Manager for Gluster volumes
+version: v0.3
+category: Storage
