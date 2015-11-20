@@ -1,0 +1,26 @@
+.catalog:
+    name: "Convoy"
+    version: "v0.3"
+    description: "Convoy - Docker volume plugin" 
+    uuid: "convoy-0"
+    questions:
+     - variable: "MOUNT_HOST"
+       description: "IP or Hostname of the nfs-server"
+       label: "NFS Server"
+       required: true
+       type: "string"
+     - variable: "MOUNT_PATH"
+       description: "PATH to the nfs volume"
+       label: "NFS path"
+       required: true
+       type: "string"
+     - variable: "MOUNT_OPTS"
+       description: "Special Options for mounting nfs volume"
+       label: "Mount Options"
+       required: false
+       type: "string"
+convoy:
+    metadata:
+        mount_host: "${MOUNT_HOST}"
+        mount_path: "${MOUNT_PATH}"
+        mount_opts: "${MOUNT_OPTS}"
