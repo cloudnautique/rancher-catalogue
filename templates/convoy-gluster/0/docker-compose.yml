@@ -1,0 +1,22 @@
+convoy-gluster:
+  restart: always
+  labels:
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=convoy-gluster
+    io.rancher.container.pull_image: always
+    io.rancher.container.create_agent: 'true'
+    io.rancher.scheduler.global: 'true'
+  privileged: true
+  working_dir: /storage
+  volumes:
+   - /proc:/host/proc
+   - /var/run/convoy:/var/run/convoy
+   - /var/lib/convoy:/var/lib/convoy
+   - /etc/docker/plugins:/etc/docker/plugins
+   - /storage
+  image: wlan0/convoy-gluster-volume-agent
+convoy-gluster-storagepool:
+    restart: always
+    labels:
+      io.rancher.container.pull_image: always
+      io.rancher.container.create_agent: 'true'
+    image: wlan0/convoy-gluster-storagepool-agent
