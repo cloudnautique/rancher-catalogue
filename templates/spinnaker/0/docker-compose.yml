@@ -15,7 +15,7 @@ clouddriver-app:
   labels:
     io.rancher.sidekicks: clouddriver-config
     io.rancher.container.hostname_override: container_name
-  image: spinnaker/clouddriver:v1.34.0
+  image: quay.io/spinnaker/clouddriver:v1.37.0
   links:
     - redis-db
   volumes_from:
@@ -31,7 +31,7 @@ front50-app:
     io.rancher.container.hostname_override: container_name
   environment:
     JAVA_OPTS: -javaagent:/opt/front50/lib/jamm-0.2.5.jar
-  image: spinnaker/front50:v1.5.0
+  image: quay.io/spinnaker/front50:v1.8.0
   external_links:
   - ${cassandra_target_link}:cassandra-db
   volumes_from:
@@ -45,7 +45,7 @@ igor-app:
   labels:
     io.rancher.sidekicks: igor-config
     io.rancher.container.hostname_override: container_name
-  image: spinnaker/igor:v1.5.0
+  image: quay.io/spinnaker/igor:v1.12.0
   links:
     - redis-db
     - echo-app
@@ -62,7 +62,7 @@ echo-app:
     io.rancher.container.hostname_override: container_name
   environment:
     JAVA_OPTS: -javaagent:/opt/echo/lib/jamm-0.2.5.jar
-  image: spinnaker/echo:v1.73.0
+  image: spinnaker/echo:v1.74.0
   volumes_from:
     - echo-config
   external_links:
@@ -81,7 +81,7 @@ deck-ui:
     DECK_PORT: 9000
     PROTOCOL: http
     AUTH: false
-  image: spinnaker/deck
+  image: quay.io/spinnaker/deck:v2.462.0
   links:
     - gate-app
 
@@ -93,7 +93,7 @@ gate-app:
   labels:
     io.rancher.sidekicks: gate-config
     io.rancher.container.hostname_override: container_name
-  image: spinnaker/gate:v2.25.0
+  image: quay.io/spinnaker/gate:v2.28.0
   links:
     - redis-db
     - clouddriver-app
@@ -112,7 +112,7 @@ orca-app:
   labels:
     io.rancher.sidekicks: orca-config
     io.rancher.container.hostname_override: container_name
-  image: spinnaker/orca:v1.22.0
+  image: quay.io/spinnaker/orca:v1.45.0
   links:
     - redis-db
     - clouddriver-app
@@ -130,7 +130,7 @@ rosco-app:
   labels:
     io.rancher.sidekicks: rosco-config
     io.rancher.container.hostname_override: container_name
-  image: spinnaker/rosco:v0.12.0
+  image: quay.io/spinnaker/rosco:v0.15.0
   volumes_from:
     - rosco-config
   links:
@@ -147,7 +147,7 @@ rush-app:
     io.rancher.container.hostname_override: container_name
   environment:
     JAVA_OPTS: -javaagent:/opt/rush/lib/jamm-0.2.5.jar
-  image: spinnaker/rush:v1.21.0
+  image: quay.io/spinnaker/rush:v1.21.0
   external_links:
   - ${cassandra_target_link}:cassandra-db
   volumes_from:
