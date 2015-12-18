@@ -8,6 +8,7 @@
     - variable: "DNSIMPLE_EMAIL"
       label: "DNSimple account email address"
       description: "EMail address associated with your DNSimple account"
+      type: "string"
       required: true
     - variable: "DNSIMPLE_TOKEN"
       label: "DNSimple API token"
