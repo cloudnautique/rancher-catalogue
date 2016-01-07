@@ -1,0 +1,62 @@
+.catalog:
+  name: Kafka
+  version: 0.0.1-rancher1
+  description: |
+    (Experimental) Apache Kafka cluster.
+  minimum_rancher_version: v0.47.0
+  uuid: kafka-0
+  questions:
+    - variable: "zk_scale"
+      description: "Number of zk nodes. Note: Recommended an odd number"
+      label: "Zk Nodes:"
+      required: true
+      default: 3
+      type: "int"
+    - variable: "kafka_scale"
+      description: "Number of brokers nodes. Note: Recommended an odd number"
+      label: "Broker Nodes:"
+      required: true
+      default: 3
+      type: "int"
+    - variable: "zk_mem"
+      description: "Amount of memory to config zk."
+      label: "Zk Memory (mb):"
+      required: true
+      default: 512 
+      type: "string"
+    - variable: "kafka_mem"
+      description: "Amount of memory to config brokers."
+      label: "Broker Memory (mb):"
+      required: true
+      default: 1024 
+      type: "string"
+    - variable: "zk_interval"
+      description: "Interval to poll/apply configuration changes. 0 to disable, reconfiguration will be done when you restart the zookeeper"
+      label: "Zk Interval (s):"
+      required: true
+      default: 120
+      type: "int"
+    - variable: "kafka_interval"
+      description: "Interval to poll/apply configuration changes. 0 to disable, reconfiguration will be done when you restart the kafka"
+      label: "Kafka Interval (s):"
+      required: true
+      default: 120 
+      type: "int"
+broker:
+  scale: ${kafka_scale}
+  health_check:
+    port: 9092
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
+zk:
+  scale: ${zk_scale}
+  health_check:
+    port: 2181
+    interval: 5000
+    unhealthy_threshold: 3
+    request_line: ''
+    healthy_threshold: 2
+    response_timeout: 5000
