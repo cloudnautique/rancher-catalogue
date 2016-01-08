@@ -1,6 +1,6 @@
 zk:
   tty: true
-  image: cf-registry.innotechapp.com/rancher-zk:0.0.2-18
+  image: rawmind/rancher-zk:0.0.1-1
   volumes:
   - /opt/zookeeper/data
   environment:
@@ -8,7 +8,7 @@ zk:
   - CONFD_INTERVAL=${zk_interval}
 broker:
   tty: true
-  image: cf-registry.innotechapp.com/rancher-kafka:0.0.2-17
+  image: rawmind/rancher-kafka:0.0.1-1
   links:
   - 'zk:'
   volumes:
