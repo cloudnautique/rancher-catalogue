@@ -10,6 +10,13 @@
       required: true
       default: "my_vol"
       type: "string"
+    - variable: "HOST_LABEL"
+      label: "Host label"
+      description: "Specify a Rancher host label here that will be used to determine where the GlusterFS service will be deployed"
+      type: "string"
+      default: glusterfs=true
+      required: true
+
 glusterfs-server:
   scale: 3
   metadata:
