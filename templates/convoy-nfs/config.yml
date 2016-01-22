@@ -2,4 +2,4 @@ name: Convoy NFS
 description: |
   Docker Volume Manager for NFS-backed Volumes
 version: v0.1
-category: Storage
+category: Rancher Services

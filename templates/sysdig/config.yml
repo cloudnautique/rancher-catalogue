@@ -2,4 +2,4 @@ name: Sysdig
 description: |
   Container-Native System Visibility and Troubleshooting
 version: v0
-category: monitoring
+category: Monitoring
