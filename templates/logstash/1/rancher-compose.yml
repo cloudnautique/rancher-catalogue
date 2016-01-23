@@ -1,6 +1,6 @@
 .catalog:
   name: "Logstash"
-  version: "2.1.1-1-Rancher1"
+  version: "2.1.1-1-rancher1"
   description: "Logstash: Process Any Data, From Any Source"
   uuid: logstash-2
   questions:
