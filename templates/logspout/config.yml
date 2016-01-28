@@ -1,5 +1,0 @@
-name: Logspout
-description: |
-  Glider Labs Logspout with Logstash adapter
-version: 0.2.0-rancher1
-category: Logging
