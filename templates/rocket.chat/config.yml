@@ -1,5 +1,5 @@
-name: CloudFlare DNS
+name: Rocket.Chat
 description: |
-  Rancher External DNS service powered by CloudFlare
-version: v0.2.1-rancher1
-category: Rancher Services
+  Have your own Slack like online chat, built with Meteor.
+version: v0.1-educaas
+category: Chat
