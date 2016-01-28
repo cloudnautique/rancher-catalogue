@@ -1,4 +1,4 @@
 ghost:
   image: ghost
-  expose:
-    - "2368"
+  ports:
+    - "80:2368"

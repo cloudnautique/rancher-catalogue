@@ -1,7 +1,7 @@
 owncloud:
   image: owncloud
-  expose:
-   - "80"
+  ports:
+   - "80:80"
   links:
     - db
   environment:
