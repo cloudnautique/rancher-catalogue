@@ -1,5 +1,5 @@
-name: CloudFlare DNS
+name: Taiga
 description: |
-  Rancher External DNS service powered by CloudFlare
-version: v0.2.1-rancher1
-category: Rancher Services
+  Project management platform for agile developers
+version: v0.1-educaas1
+category: Agile
