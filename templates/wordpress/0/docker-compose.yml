@@ -1,13 +1,11 @@
-cloudflare:
-  image: rancher/external-dns:v0.1.9
-  command: -provider=cloudflare
-  expose: 
-   - 1000
+wordpress:
+  image: wordpress
+  links:
+    - db:mysql
+  ports:
+    - 80:80
+
+db:
+  image: mariadb
   environment:
-    CLOUDFLARE_EMAIL: ${CLOUDFLARE_EMAIL}
-    CLOUDFLARE_KEY: ${CLOUDFLARE_KEY}
-    ROOT_DOMAIN: ${ROOT_DOMAIN}
-    TTL: ${TTL}
-  labels:
-    io.rancher.container.create_agent: "true"
-    io.rancher.container.agent.role: "external-dns"
+    MYSQL_ROOT_PASSWORD: example

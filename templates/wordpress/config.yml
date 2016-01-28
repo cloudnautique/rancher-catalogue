@@ -1,5 +1,5 @@
-name: CloudFlare DNS
+name: Wordpress
 description: |
-  Rancher External DNS service powered by CloudFlare
-version: v0.2.1-rancher1
-category: Rancher Services
+  Blog tool, publishing platform and CMS
+version: v0.1-educaas1
+category: Blog
