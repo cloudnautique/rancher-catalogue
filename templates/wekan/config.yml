@@ -1,5 +1,5 @@
-name: CloudFlare DNS
+name: Wekan
 description: |
-  Rancher External DNS service powered by CloudFlare
-version: v0.2.1-rancher1
-category: Rancher Services
+  The open-source Trello-like kanban (build with Meteor)
+version: v0.1-educaas
+category: Kanban
