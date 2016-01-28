@@ -1,8 +1,8 @@
 .catalog:
-  name: "Rocket.Chat"
+  name: "RocketChat"
   version: "v0.1-educaas"
   description: "Have your own Slack like online chat, built with Meteor."
-  uuid: rocket.chat-0
+  uuid: rocketchat-0
   minimum_rancher_version: v0.51.0
   questions:
 
