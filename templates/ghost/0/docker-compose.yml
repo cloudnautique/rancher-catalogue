@@ -1,3 +1,2 @@
-cloudflare:
+ghost:
   image: ghost
-  
