@@ -1,5 +1,0 @@
-name: Kubernetes
-description: |
-  Manage a cluster of Linux containers as a single system to accelerate Dev and simplify Ops.
-version: v1.1.0-rancher1
-category: Container Management

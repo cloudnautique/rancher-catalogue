@@ -1,5 +1,0 @@
-name: (Experimental) Galera DB 
-description: |
-    Maria GaleraDB cluster based on MariaDB 10.0.22 the Galera cluster plugin
-version: 10.0.22-rancher1
-category: Database
