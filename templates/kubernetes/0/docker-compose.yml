@@ -47,7 +47,21 @@ etcd:
         - --advertise-client-urls=http://etcd:4001
         - --listen-client-urls=http://0.0.0.0:4001
         - --data-dir=/var/etcd/data
-    image: gcr.io/google_containers/etcd:2.0.12
+    image: rancher/etcd:v2.2.1-2
+    labels:
+        - io.rancher.sidekicks: etcd-data
+    volumes_from:
+        - etcd-data
+
+etcd-data:
+    image: busybox
+    volumes:
+        - /var/etcd/data
+    labels:
+        - io.rancher.container.start_once: true
+        - io.rancher.container.hostname_override: container_name
+    command: /bin/true
+    net: none
 
 kubernetes:
     labels:
