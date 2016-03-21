@@ -1,6 +1,6 @@
 .catalog:
   name: "GlusterFS"
-  version: "3.7.5-rancher1"
+  version: "3.7.9-rancher1"
   description: "Gluster FS (3x) replicated volume"
   questions:
     - variable: "VOLUME_NAME"
