@@ -1,26 +1,26 @@
 glusterfs-server:
-  image: rancher/glusterfs:v0.2.0
+  image: rancher/glusterfs:v0.2.1
   volumes_from:
     - glusterfs-data
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.sidekicks: glusterfs-daemon,glusterfs-data,glusterfs-volume-create
-  command: /opt/rancher/peerprobe.sh ${network_mode}
+  command: giddyup leader elect --proxy-tcp-port=2160 /opt/rancher/peerprobe.sh ${network_mode}
 glusterfs-daemon:
-  image: rancher/glusterfs:v0.2.0
+  image: rancher/glusterfs:v0.2.1
   net: ${network_mode}
   cap_add:
     - SYS_ADMIN
   volumes_from:
     - glusterfs-data
   labels:
-    io.rancher.container.dns: true
-    io.rancher.container.network: true
+    io.rancher.container.dns: 'true'
+    io.rancher.container.network: 'true'
     io.rancher.container.hostname_override: container_name
     io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/glusterfs-server
-  command: "glusterd -p /var/run/gluster.pid -N"
+  command: glusterd -p /var/run/gluster.pid --no-daemon --log-file=-
 glusterfs-volume-create:
-  image: rancher/glusterfs:v0.2.0
+  image: rancher/glusterfs:v0.2.1
   command: /opt/rancher/replicated_volume_create.sh ${network_mode}
   net: 'container:glusterfs-server'
   volumes_from:
@@ -34,10 +34,13 @@ glusterfs-volume-create:
 # DATA LOSS!!!! CAN OCCURR DURING UPGRADE
 #
 glusterfs-data:
-  image: rancher/glusterfs:v0.1.3
+  image: busybox
   command: /bin/true
+  net: none
   volumes:
     - /var/run
+    - /var/lib/glusterd
   labels:
     io.rancher.container.hostname_override: container_name
     io.rancher.container.start_once: true
+
