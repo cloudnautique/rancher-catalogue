@@ -51,7 +51,7 @@ etcd:
     ETCDCTL_ENDPOINT: http://etcd:2379
   links:
   - etcd-data
-  - etcd-discovery
+  - discovery
   volumes_from:
   - etcd-data
 
@@ -64,18 +64,18 @@ etcd-data:
   labels:
     io.rancher.container.start_once: 'true'
 
-etcd-discovery:
+discovery:
   image: rancher/etcd:v2.3.6
   command: discovery_node
   labels:
     io.rancher.container.start_once: 'true'
-    io.rancher.sidekicks: etcd-bootstrap
+    io.rancher.sidekicks: bootstrap
 
-etcd-bootstrap:
+bootstrap:
   image: rancher/etcd:v2.3.6
   command: bootstrap
   links:
-  - etcd-discovery
+  - discovery
   labels:
     io.rancher.container.start_once: 'true'
   environment:
