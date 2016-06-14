@@ -21,6 +21,7 @@ kubernetes:
     retain_ip: true
 
 etcd:
+    scale: 3
     health_check:
         request_line: GET /health HTTP/1.0
         port: 2379
@@ -28,8 +29,6 @@ etcd:
         response_timeout: 3000
         unhealthy_threshold: 3
         healthy_threshold: 2
-    retain_ip: true
-    scale: 3
 
 rancher-kubernetes-agent:
     health_check:
