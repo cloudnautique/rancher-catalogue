@@ -6,24 +6,26 @@ kubelet:
         io.rancher.scheduler.global: "true"
     command:
         - kubelet
-        - --api_servers=http://master
+        - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
+        - --api_servers=https://kubernetes:6443
         - --allow-privileged=true
         - --register-node=true
         - --cloud-provider=rancher
         - --healthz-bind-address=0.0.0.0
         - --cluster-dns=169.254.169.250
         - --cluster-domain=cluster.local
-    image: rancher/k8s:v1.2.4-rancher2
+    image: rancher/k8s:v1.2.4-rancher3
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
         - /var/run:/host/var/run
         - /var/lib/docker:/var/lib/docker
+        - /dev:/host/dev
     net: host
     pid: host
     ipc: host
     privileged: true
     links:
-        - kubernetes:master
+        - kubernetes
 
 proxy:
     labels:
@@ -35,7 +37,7 @@ proxy:
         - --v=2
         - --healthz-bind-address=0.0.0.0
         - --proxy-mode=userspace
-    image: rancher/k8s:v1.2.4-rancher2
+    image: rancher/k8s:v1.2.4-rancher3
     privileged: true
     net: host
     links:
@@ -66,7 +68,7 @@ etcd-data:
 kubernetes:
     labels:
         io.rancher.container.create_agent: "true"
-        io.rancher.container.agent.role: environment
+        io.rancher.container.agent.role: environmentAdmin
     command: 
         - kube-apiserver
         - --service-cluster-ip-range=10.43.0.0/16
@@ -75,8 +77,11 @@ kubernetes:
         - --insecure-port=80
         - --cloud-provider=rancher
         - --allow_privileged=true
-        - --admission-control=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ResourceQuota
-    image: rancher/k8s:v1.2.4-rancher2
+        - --admission-control=LimitRanger,SecurityContextDeny,ResourceQuota,ServiceAccount
+        - --client-ca-file=/etc/kubernetes/ssl/ca.pem
+        - --tls-cert-file=/etc/kubernetes/ssl/cert.pem
+        - --tls-private-key-file=/etc/kubernetes/ssl/key.pem
+    image: rancher/k8s:v1.2.4-rancher3
     links:
         - etcd
 
@@ -95,22 +100,25 @@ scheduler:
         - kube-scheduler
         - --master=http://master
         - --address=0.0.0.0
-    image: rancher/k8s:v1.2.4-rancher2
+    image: rancher/k8s:v1.2.4-rancher3
     links:
         - kubernetes:master
 
 controller-manager:
     command:
         - kube-controller-manager
-        - --master=http://master
+        - --master=https://kubernetes:6443
         - --cloud-provider=rancher
         - --address=0.0.0.0
-    image: rancher/k8s:v1.2.4-rancher2
+        - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
+        - --root-ca-file=/etc/kubernetes/ssl/ca.pem
+        - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
+    image: rancher/k8s:v1.2.4-rancher3
     labels:
         io.rancher.container.create_agent: "true"
-        io.rancher.container.agent.role: environment
+        io.rancher.container.agent.role: environmentAdmin
     links:
-        - kubernetes:master
+        - kubernetes
 
 rancher-kubernetes-agent:
     labels:
