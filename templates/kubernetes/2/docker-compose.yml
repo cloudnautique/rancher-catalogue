@@ -46,7 +46,7 @@ proxy:
 etcd:
   image: rancher/etcd:v2.3.6
   labels:
-    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.sidekicks: etcd-data
     io.rancher.service.allocate.skip.serialize: 'true'
     io.rancher.container.start_once: 'true'
