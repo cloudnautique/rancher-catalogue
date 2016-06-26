@@ -1,5 +1,5 @@
 name: Kubernetes
 description: |
   Kubernetes service
-version: v1.2.4-rancher6
+version: v1.2.4-rancher6_1
 category: System
