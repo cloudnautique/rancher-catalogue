@@ -44,46 +44,29 @@ proxy:
         - kubernetes:master
 
 etcd:
-  image: rancher/etcd:v2.3.6
+  image: rancher/etcd:v2.3.6-2
   labels:
-    io.rancher.scheduler.affinity:container_label_soft_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    io.rancher.sidekicks: etcd-data
-    io.rancher.service.allocate.skip.serialize: 'true'
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.container.start_once: 'true'
+    io.rancher.sidekicks: data
   environment:
     ETCD_DATA_DIR: /data
     ETCDCTL_ENDPOINT: http://etcd:2379
+    RANCHER_DEBUG: ${DEBUG}
   links:
-  - etcd-data
+  - data
   - discovery
   volumes_from:
-  - etcd-data
+    - data
 
-etcd-data:
+data:
   image: busybox
-  command: /bin/true
+  entrypoint: /bin/true
   net: none
   volumes:
   - /data
   labels:
     io.rancher.container.start_once: 'true'
-
-discovery:
-  image: rancher/etcd:v2.3.6
-  command: discovery_node
-  labels:
-    io.rancher.container.start_once: 'true'
-    io.rancher.sidekicks: bootstrap
-
-bootstrap:
-  image: rancher/etcd:v2.3.6
-  command: bootstrap
-  links:
-  - discovery
-  labels:
-    io.rancher.container.start_once: 'true'
-  environment:
-    ETCDCTL_ENDPOINT: http://etcd:2379
 
 kubernetes:
     labels:
