@@ -55,7 +55,6 @@ etcd:
     RANCHER_DEBUG: ${DEBUG}
   links:
   - data
-  - discovery
   volumes_from:
     - data
 
