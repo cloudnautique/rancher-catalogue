@@ -44,10 +44,9 @@ proxy:
         - kubernetes:master
 
 etcd:
-  image: rancher/etcd:v2.3.6-3
+  image: rancher/etcd:v2.3.6-4
   labels:
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    io.rancher.container.start_once: 'true'
     io.rancher.sidekicks: data
   environment:
     ETCD_DATA_DIR: /data
