@@ -89,7 +89,8 @@ kubernetes:
     labels:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
-    command: 
+        io.rancher.sidekicks: kube-hostname-updater
+    command:
         - kube-apiserver
         - --service-cluster-ip-range=10.43.0.0/16
         - --etcd-servers=http://etcd:2379
@@ -104,6 +105,14 @@ kubernetes:
     image: rancher/k8s:v1.2.4-rancher6
     links:
         - etcd
+
+kube-hostname-updater:
+    net: container:kubernetes
+    command:
+        - etc-host-updater
+    image: rancher/k8s:v1.2.4-rancher6
+    links:
+        - kubernetes:master
 
 kubectld:
     labels:
