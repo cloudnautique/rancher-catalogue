@@ -32,6 +32,9 @@ etcd:
         response_timeout: 3000
         unhealthy_threshold: 3
         healthy_threshold: 2
+        recreate_on_quorum_strategy_config:
+            quorum: 2
+        strategy: recreateOnQuorum
 
 rancher-kubernetes-agent:
     health_check:
