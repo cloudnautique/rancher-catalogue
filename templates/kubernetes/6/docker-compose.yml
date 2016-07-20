@@ -51,7 +51,7 @@ etcd:
   environment:
     ETCD_DATA_DIR: /data
     ETCDCTL_ENDPOINT: http://etcd:2379
-    RANCHER_DEBUG: true
+    RANCHER_DEBUG: 'true'
   links:
   - data
   volumes_from:
