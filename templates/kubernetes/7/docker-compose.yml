@@ -16,7 +16,7 @@ kubelet:
         - --cluster-domain=cluster.local
         - --network-plugin=cni
         - --network-plugin-dir=/etc/cni/net.d
-    image: rancher/k8s:v1.3.0-rancher2
+    image: rancher/k8s:v1.3.0-rancher3
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
         - /var/run:/host/var/run
@@ -39,7 +39,7 @@ proxy:
         - --v=2
         - --healthz-bind-address=0.0.0.0
         - --proxy-mode=userspace
-    image: rancher/k8s:v1.3.0-rancher2
+    image: rancher/k8s:v1.3.0-rancher3
     privileged: true
     net: host
     links:
@@ -85,7 +85,7 @@ kubernetes:
         - --client-ca-file=/etc/kubernetes/ssl/ca.pem
         - --tls-cert-file=/etc/kubernetes/ssl/cert.pem
         - --tls-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.3.0-rancher2
+    image: rancher/k8s:v1.3.0-rancher3
     links:
         - etcd
 
@@ -114,7 +114,7 @@ scheduler:
         - kube-scheduler
         - --master=http://master
         - --address=0.0.0.0
-    image: rancher/k8s:v1.3.0-rancher2
+    image: rancher/k8s:v1.3.0-rancher3
     links:
         - kubernetes:master
 
@@ -127,7 +127,7 @@ controller-manager:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.3.0-rancher2
+    image: rancher/k8s:v1.3.0-rancher3
     labels:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
