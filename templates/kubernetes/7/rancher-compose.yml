@@ -1,8 +1,8 @@
 .catalog:
   name: Kubernetes
-  version: v1.2.4-rancher7.3
+  version: v1.2.4-rancher8
   description: Rancher Kubernetes service
-  minimum_rancher_version: v1.1.1
+  minimum_rancher_version: v1.1.3
 
 kubernetes:
     metadata:
@@ -27,7 +27,8 @@ etcd:
         scale_policy:
             min: 1
     health_check:
-        port: 2379
+        port: 2378
+        request_line: GET /health HTTP/1.0
         interval: 5000
         response_timeout: 3000
         unhealthy_threshold: 3
