@@ -44,7 +44,7 @@ proxy:
         - kubernetes:master
 
 etcd:
-  image: rancher/etcd:v2.3.7-5
+  image: rancher/etcd:v2.3.7-6
   labels:
     io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
     io.rancher.sidekicks: data
