@@ -142,7 +142,7 @@ rancher-kubernetes-agent:
         io.rancher.container.agent_service.labels_provider: "true"
     environment:
         KUBERNETES_URL: http://master
-    image: rancher/kubernetes-agent:v0.2.1
+    image: alena1108/kubernetes-agent:v0.2.2
     privileged: true
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
@@ -150,7 +150,7 @@ rancher-kubernetes-agent:
         - kubernetes:master
 
 rancher-ingress-controller:
-    image: rancher/ingress-controller:v0.1.3
+    image: alena1108/lb-controller:v0.2.2
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
@@ -159,8 +159,8 @@ rancher-ingress-controller:
     environment:
         KUBERNETES_URL: http://master
     command:
-        - ingress-controller
-        - --lb-controller=kubernetes
-        - --lb-provider=rancher
+        - lb-controller
+        - --controller=kubernetes
+        - --provider=rancher
     links:
         - kubernetes:master
