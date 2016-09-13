@@ -17,7 +17,7 @@ kubelet:
         - --cluster-domain=cluster.local
         - --network-plugin=cni
         - --network-plugin-dir=/etc/cni/net.d
-    image: rancher/k8s:v1.3.0-rancher3
+    image: rancher/k8s:v1.4.0-rancher1
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
         - /var/run:/host/var/run
@@ -41,7 +41,7 @@ proxy:
         - --v=2
         - --healthz-bind-address=0.0.0.0
         - --proxy-mode=userspace
-    image: rancher/k8s:v1.3.0-rancher3
+    image: rancher/k8s:v1.4.0-rancher1
     privileged: true
     net: host
     links:
@@ -91,7 +91,7 @@ kubernetes:
         - --client-ca-file=/etc/kubernetes/ssl/ca.pem
         - --tls-cert-file=/etc/kubernetes/ssl/cert.pem
         - --tls-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.3.0-rancher3
+    image: rancher/k8s:v1.4.0-rancher1
     links:
         - etcd
 
@@ -122,7 +122,7 @@ scheduler:
         - kube-scheduler
         - --master=http://master
         - --address=0.0.0.0
-    image: rancher/k8s:v1.3.0-rancher3
+    image: rancher/k8s:v1.4.0-rancher1
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
@@ -138,7 +138,7 @@ controller-manager:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.3.0-rancher3
+    image: rancher/k8s:v1.4.0-rancher1
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
@@ -155,7 +155,7 @@ rancher-kubernetes-agent:
         io.rancher.container.agent_service.labels_provider: "true"
     environment:
         KUBERNETES_URL: http://master
-    image: rancher/kubernetes-agent:v0.3.3
+    image: rancher/kubernetes-agent:v0.3.4
     privileged: true
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
@@ -163,7 +163,7 @@ rancher-kubernetes-agent:
         - kubernetes:master
 
 rancher-ingress-controller:
-    image: rancher/lb-controller:v0.2.1
+    image: rancher/lb-controller:v0.3.0
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
