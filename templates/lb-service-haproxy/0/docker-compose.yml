@@ -1,0 +1,6 @@
+lb:
+    labels:
+        io.rancher.balancer.service: "true"
+        io.rancher.container.create_agent: "true"
+        io.rancher.container.agent.role: environment
+    image: rancher/lb-service-haproxy:v0.3.0
