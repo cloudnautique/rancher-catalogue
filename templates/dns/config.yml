@@ -1,0 +1,5 @@
+name: DNS service
+description: |
+  Rancher DNS service
+version: v0.10.0
+category: Rancher Services

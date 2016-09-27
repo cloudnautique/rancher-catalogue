@@ -1,0 +1,9 @@
+dns:
+  labels:
+    io.rancher.container.create_agent: 'true'
+    io.rancher.scheduler.global: 'true'
+  image: rancher/rancher-dns:v0.10.0
+  net: host
+  command:
+      - rancher-dns
+      - --metadata-server=169.254.169.250
