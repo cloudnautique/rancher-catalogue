@@ -1,0 +1,5 @@
+name: Healthcheck service
+description: |
+  Rancher healthcheck service
+version: v0.1.0
+category: Rancher Services
