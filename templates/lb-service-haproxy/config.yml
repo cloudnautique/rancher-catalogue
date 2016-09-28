@@ -1,0 +1,5 @@
+name: LbServiceHaproxy
+description: |
+  Rancher LB service, haproxy provider
+version: v0.3.0
+category: System
