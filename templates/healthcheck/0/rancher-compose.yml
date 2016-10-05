@@ -1,0 +1,4 @@
+.catalog:
+    name: "Healthcheck service"
+    version: "v0.1.0"
+    description: "Rancher healthcheck service"
