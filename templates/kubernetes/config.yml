@@ -3,5 +3,3 @@ description: |
   Kubernetes service
 version: v1.2.4-rancher10
 category: System
-labels:
-  io.rancher.certified: rancher
