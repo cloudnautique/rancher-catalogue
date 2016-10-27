@@ -1,0 +1,21 @@
+.catalog:
+  name: "Rancher NFS"
+  version: "0.1.1"
+  description: |
+    Docker volume plugin for NFS
+  minimum_rancher_version: "v1.1.999"
+  questions:
+    - variable: "NFS_SERVER"
+      description: "IP or hostname of the NFS Server"
+      label: "NFS Server"
+      required: true
+      type: "string"
+    - variable: "MOUNT_DIR"
+      label: "Mount Directory"
+      description: "The directory on the NFS server to mount"
+      type: "string"
+      required: true
+    - variable: "MOUNT_OPTS"
+      label: "Mount Options"
+      description: "Comma delimited list of mount options, for example: 'nfsvers=4,proto=udp'"
+      type: "string"
