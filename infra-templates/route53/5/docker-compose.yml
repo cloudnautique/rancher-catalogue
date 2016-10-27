@@ -1,0 +1,14 @@
+route53:
+  image: rancher/external-dns:v0.4.0
+  expose: 
+   - 1000
+  environment:
+    AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+    AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+    AWS_REGION: ${AWS_REGION}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    ROUTE53_ZONE_ID: ${ROUTE53_ZONE_ID}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"

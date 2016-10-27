@@ -2,6 +2,7 @@
     name: "Convoy NFS"
     version: "v0.3.0"
     description: "Convoy NFS - Docker volume plugin"
+    maximum_rancher_version: v1.1.99
     questions:
      - variable: "NFS_SERVER"
        description: "IP or hostname of the NFS Server"
