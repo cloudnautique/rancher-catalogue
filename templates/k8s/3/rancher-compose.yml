@@ -3,7 +3,8 @@
   version: v1.2.4-rancher7
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.1.0
-
+  maximum_rancher_version: v1.1.99
+  
 kubernetes:
     metadata:
         sans:
@@ -74,4 +75,3 @@ rancher-ingress-controller:
         response_timeout: 2000
         unhealthy_threshold: 3
         healthy_threshold: 2
-

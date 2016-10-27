@@ -23,7 +23,7 @@
     default: 24h
     type: string
   - variable: CLOUD_PROVIDER
-    label: Cloud Provider 
+    label: Cloud Provider
     description: The cloud provider on which Kubernetes is running
     required: true
     default: rancher
@@ -107,4 +107,3 @@ rancher-ingress-controller:
         response_timeout: 2000
         unhealthy_threshold: 3
         healthy_threshold: 2
-

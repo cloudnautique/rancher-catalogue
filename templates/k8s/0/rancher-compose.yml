@@ -2,6 +2,8 @@
   name: "Kubernetes"
   version: "v0.1.0-rancher1"
   description: "Rancher Kubernetes service"
+  minimum_rancher_version: v1.0.0
+  maximum_rancher_version: v1.1.99
   questions:
       - variable: "api_server_port"
         label: "Kubernetes API port"
@@ -73,4 +75,3 @@ rancher-ingress-controller:
         response_timeout: 2000
         unhealthy_threshold: 3
         healthy_threshold: 2
-
