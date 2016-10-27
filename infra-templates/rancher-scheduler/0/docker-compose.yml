@@ -1,5 +1,5 @@
 scheduler:
-    image: cjellick/scheduler:8c7a029
+    image: rancher/scheduler:v0.1.0
     command: scheduler
     labels:
         io.rancher.container.create_agent: "true"
