@@ -1,5 +1,5 @@
 scheduler:
-    image: rancher/scheduler:v0.1.0
+    image: rancher/scheduler:v0.1.1
     command: scheduler
     labels:
         io.rancher.container.create_agent: "true"
