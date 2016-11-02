@@ -114,7 +114,7 @@ kubectld:
     environment:
         SERVER: http://kubernetes.kubernetes.rancher.internal
         LISTEN: ":8091"
-    image: rancher/kubectld:v0.3.0
+    image: rancher/kubectld:v0.4.0
     links:
         - kubernetes
 
