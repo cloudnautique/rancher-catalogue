@@ -5,14 +5,22 @@
     Docker volume plugin for EFS
   minimum_rancher_version: "v1.1.999"
   questions:
-  - variable: AWS_SECRET_ACCESS_KEY
-    label: AWS Secret Key
-    type: string
-    description: Optional if using IAM Profile
   - variable: AWS_ACCESS_KEY_ID
     label: AWS Access Key
-    type: "password"
+    type: string
     description: Optional if using IAM Profile
+  - variable: AWS_SECRET_ACCESS_KEY
+    label: AWS Secret Key
+    type: password
+    description: Optional if using IAM Profile
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    default: false
+    options:
+    - true
+    - false
+    description: Enable or disable verbose logging
 efs-driver:
   storage_driver:
     name: rancher-efs

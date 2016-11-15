@@ -19,6 +19,14 @@
       label: "Mount Options"
       description: "Comma delimited list of mount options, for example: 'nfsvers=4,proto=udp'"
       type: "string"
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    default: false
+    options:
+    - true
+    - false
+    description: Enable or disable verbose logging
 nfs-driver:
   storage_driver:
     name: rancher-nfs
