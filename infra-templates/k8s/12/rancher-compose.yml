@@ -30,7 +30,6 @@
     type: enum
     options:
      - rancher
-     - aws
 
 kubernetes:
     metadata:
