@@ -1,7 +1,7 @@
 version: '2'
 services:
   metadata:
-    image: rancher/metadata:v0.6.3
+    image: rancher/metadata:v0.6.4
     network_mode: bridge
     volumes:
     - /var/tmp
@@ -19,7 +19,7 @@ services:
   metadata-router:
     cap_add:
     - NET_ADMIN
-    image: rancher/metadata:v0.6.3
+    image: rancher/metadata:v0.6.4
     network_mode: host
     volumes_from:
     - metadata
