@@ -1,7 +1,7 @@
 name: Rancher EBS
 description: |
   Docker volume plugin for EBS
-version: 0.1.1
+version: 0.2.0
 category: Storage
 labels:
   io.rancher.certified: rancher
