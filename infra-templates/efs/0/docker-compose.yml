@@ -1,7 +1,7 @@
 efs-driver:
   privileged: true
   net: host
-  image: llparse/storage-efs:dev
+  image: rancher/storage-efs:v0.2.0
   pid: host
   labels:
     io.rancher.scheduler.global: 'true'

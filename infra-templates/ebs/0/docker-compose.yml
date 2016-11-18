@@ -1,7 +1,7 @@
 ebs-driver:
   privileged: true
   net: host
-  image: llparse/storage-ebs:dev
+  image: rancher/storage-ebs:v0.2.0
   labels:
     io.rancher.scheduler.global: 'true'
     io.rancher.container.create_agent: 'true'

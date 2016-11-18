@@ -1,6 +1,6 @@
 nfs-driver:
   privileged: true
-  image: llparse/storage-nfs:dev
+  image: rancher/storage-nfs:v0.2.0
   pid: host
   labels:
     io.rancher.scheduler.global: 'true'
