@@ -3,6 +3,6 @@ description: >
   A toolkit for orchestrating distributed systems at any scale
 version: v1.12-rancher0
 category: Orchestration
-minimum_rancher_version: 1.1.4
+minimum_rancher_version: 1.1.99
 labels:
   io.rancher.certified: rancher
