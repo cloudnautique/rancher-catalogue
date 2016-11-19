@@ -1,5 +1,6 @@
 .catalog:
   version: v1.12-rancher0
+  minimum_rancher_version: 1.1.4
   questions:
   - variable: MANAGER_SCALE
     label: Number of Managers
@@ -13,11 +14,6 @@
     - 5
     - 7
     - 9
-  - variable: LISTEN_INTERFACE
-    label: Host Interface Name
-    description: "Host interface for overlay network to listen on. Required iff CATTLE_AGENT_IP isn't set to a private IP address on all hosts"
-    required: false
-    type: string
 swarmkit-mon:
   health_check:
     request_line: GET /ping HTTP/1.0

@@ -1,10 +1,9 @@
 version: '2'
 services:
   swarmkit-mon:
-    image: rancher/swarmkit:v1.12-2
+    image: llparse/swarmkit:v1.12-4
     environment:
       MANAGER_SCALE: ${MANAGER_SCALE}
-      LISTEN_INTERFACE: ${LISTEN_INTERFACE}
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: 'true'
@@ -16,6 +15,7 @@ services:
     privileged: true
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
+    - /var/lib/rancher/state:/var/lib/rancher/state
     logging:
       driver: json-file
       options:
