@@ -1,3 +1,5 @@
 name: Internal DNS
 version: v0.0.1
 category: Framework
+labels:
+  io.rancher.certified: rancher

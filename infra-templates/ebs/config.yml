@@ -3,3 +3,6 @@ description: |
   Docker volume plugin for EBS
 version: 0.2.0
 category: Storage
+labels:
+  io.rancher.certified: rancher
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm'

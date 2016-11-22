@@ -3,3 +3,5 @@ description: |
   Rancher Networking plugin using VXLAN overlay.
 version: v0.0.1
 category: Networking
+labels:
+  io.rancher.certified: rancher
