@@ -16,7 +16,7 @@ kubelet:
         - --cluster-dns=169.254.169.250
         - --cluster-domain=cluster.local
         - --network-plugin=cni
-        - --network-plugin-dir=/etc/cni/default.d
+        - --network-plugin-dir=/etc/cni/managed.d
     image: rancher/k8s:v1.4.6-rancher1-1
     volumes:
         - /run:/run
