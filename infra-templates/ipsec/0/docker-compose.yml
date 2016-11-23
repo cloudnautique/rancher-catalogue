@@ -3,7 +3,7 @@ services:
   ipsec:
     cap_add:
     - NET_ADMIN
-    image: rancher/net:v0.7.1
+    image: rancher/net:v0.7.2
     network_mode: ipsec
     ports:
     - 500:500/udp
@@ -23,7 +23,7 @@ services:
         max-file: '2'
   cni-driver:
     privileged: true
-    image: rancher/net:v0.7.1
+    image: rancher/net:v0.7.2
     command: sh -c "touch /var/log/rancher-ipam.log && exec tail ---disable-inotify -F /var/log/rancher-ipam.log"
     network_mode: host
     pid: host
