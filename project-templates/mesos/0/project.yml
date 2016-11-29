@@ -2,7 +2,7 @@ name: Mesos
 description: Default Mesos template
 stacks:
   - name: mesos
-    templateId: 'library:infra*mesos'
+    templateId: 'community:infra*mesos'
   - name: network-services
     templateId: 'library:infra*network-services'
   - name: ipsec

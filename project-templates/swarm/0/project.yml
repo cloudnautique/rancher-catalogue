@@ -2,7 +2,7 @@ name: Swarm
 description: Default Swarm template
 stacks:
   - name: swarm
-    templateId: 'library:infra*swarm'
+    templateId: 'community:infra*swarm'
   - name: network-services
     templateId: 'library:infra*network-services'
   - name: ipsec
