@@ -1,0 +1,9 @@
+.catalog:
+  name: "Rancher IPsec"
+  version: "0.0.1"
+
+ipsec:
+  network_driver:
+    name: Rancher IPsec
+    default_network:
+      name: none
