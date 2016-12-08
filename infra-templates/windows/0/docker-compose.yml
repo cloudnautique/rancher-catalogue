@@ -1,0 +1,10 @@
+version: '2'
+services:
+    transparent:
+        image: rancher/none
+        labels:
+            io.rancher.service.selector.container: experimental-windows-rancher
+    nat:
+        image: rancher/none
+        labels:
+            io.rancher.service.selector.container: experimental-windows-rancher
