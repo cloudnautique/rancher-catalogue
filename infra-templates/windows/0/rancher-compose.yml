@@ -11,9 +11,11 @@ services:
         name: Transparent Networking
         default_network:
           name: transparent
+          kind: transparent
 
     nat:
       network_driver:
         name: NAT Networking
         default_network:
           name: nat
+          kind: nat
