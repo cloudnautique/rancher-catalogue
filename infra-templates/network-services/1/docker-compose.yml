@@ -8,7 +8,7 @@ services:
     command: plugin-manager --metadata-url http://rancher-metadata/2016-07-29
     dns: 169.254.169.250
     environment:
-      DOCKER_BRIDGE: docker0
+      DOCKER_BRIDGE: $DOCKER_BRIDGE
       METADATA_IP: 169.254.169.250
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock

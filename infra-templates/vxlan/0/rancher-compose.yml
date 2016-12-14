@@ -1,7 +1,14 @@
 .catalog:
   name: "Rancher VXLAN"
   version: "v0.0.1"
-
+  questions:
+    - variable: "DOCKER_BRIDGE"
+      label: "Docker Bridge"
+      description: "Name of Docker Bridge. Default is `docker0`"
+      type: "string"
+      default: "docker0"
+      required: true
+      
 vxlan:
   network_driver:
     name: Rancher VXLAN
@@ -18,7 +25,7 @@ vxlan:
       '10-rancher-vxlan.conf':
         name: rancher-cni-network
         type: rancher-bridge
-        bridge: docker0
+        bridge: $DOCKER_BRIDGE
         bridgeSubnet: '10.42.0.0/16'
         isDefaultGateway: true
         hairpinMode": true
@@ -30,4 +37,3 @@ vxlan:
           logToFile: /var/log/rancher-ipam.log
           routes:
             - dst: 169.254.169.250/32
-
