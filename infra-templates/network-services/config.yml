@@ -3,3 +3,4 @@ version: v0.0.6
 category: Framework
 labels:
   io.rancher.certified: rancher
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'
