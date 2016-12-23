@@ -1,0 +1,14 @@
+version: '2'
+.catalog:
+  name: "Windows (Experimental)"
+  version: "v0.0.1"
+  description: Experimental support for running Windows containers on Rancher
+  minimum_rancher_version: "v1.3.0-rc1"
+
+services:
+    nat:
+      network_driver:
+        name: NAT Networking
+        default_network:
+          name: nat
+          kind: nat
