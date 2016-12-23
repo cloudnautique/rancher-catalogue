@@ -8,7 +8,7 @@
       type: "string"
       default: "docker0"
       required: true
-      
+
 vxlan:
   network_driver:
     name: Rancher VXLAN
@@ -35,5 +35,3 @@ vxlan:
         ipam:
           type: rancher-cni-ipam
           logToFile: /var/log/rancher-ipam.log
-          routes:
-            - dst: 169.254.169.250/32
