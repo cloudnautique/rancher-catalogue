@@ -5,8 +5,7 @@ services:
     privileged: true
     network_mode: host
     pid: host
-    command: plugin-manager --metadata-url http://rancher-metadata/2016-07-29
-    dns: 169.254.169.250
+    command: plugin-manager --metadata-url http://169.254.169.250/2016-07-29
     environment:
       DOCKER_BRIDGE: docker0
       METADATA_IP: 169.254.169.250
@@ -20,7 +19,6 @@ services:
     - rancher-cni-driver:/opt/cni
     labels:
       io.rancher.scheduler.global: 'true'
-      io.rancher.container.dns: 'true'
     logging:
       driver: json-file
       options:
@@ -43,12 +41,11 @@ services:
         max-size: 25m
         max-file: '2'
   dns:
-    image: rancher/dns:v0.12.0
+    image: rancher/dns:v0.12.1
     network_mode: container:metadata
     command: rancher-dns --metadata-server=localhost --answers=/etc/rancher-dns/answers.json
     labels:
       io.rancher.scheduler.global: 'true'
-      io.rancher.container.dns: 'false'
     logging:
       driver: json-file
       options:
