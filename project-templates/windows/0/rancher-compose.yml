@@ -1,0 +1,4 @@
+.catalog:
+  name: Windows
+  version: 0.0.1
+  minimum_rancher_version: "v1.3.0-rc1"

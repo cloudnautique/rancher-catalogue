@@ -5,3 +5,4 @@ version: v0.6.1-rancher1
 category: External DNS
 labels:
   io.rancher.certified: rancher
+  io.rancher.orchestration.supported: 'cattle,mesos,swarm,kubernetes'
