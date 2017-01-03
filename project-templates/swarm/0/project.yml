@@ -5,5 +5,3 @@ stacks:
     templateId: 'community:infra*swarm'
   - name: network-services
     templateId: 'library:infra*network-services'
-  - name: healthcheck
-    templateId: 'library:infra*healthcheck'
