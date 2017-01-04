@@ -68,7 +68,7 @@
     - variable: "NO_PROXY"
       default: "169.254.169.250, rancher-metadata"
       type: string
-      required: no
+      required: false
       description: "This needs to be set if you have HTTP proxies set.  Default for Rancher are 169.254.169.250, rancher-metadata"
       label: "NO_PROXY"
 
