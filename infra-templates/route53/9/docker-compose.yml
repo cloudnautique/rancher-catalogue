@@ -11,6 +11,9 @@ route53:
     ROUTE53_ZONE_ID: ${ROUTE53_ZONE_ID}
     NAME_TEMPLATE: ${NAME_TEMPLATE}
     TTL: ${TTL}
+    HTTP_PROXY: ${HTTP_PROXY)
+    HTTPS_PROXY: ${HTTPS_PROXY}
+    NO_PROXY: ${NO_PROXY}
   labels:
     io.rancher.container.create_agent: "true"
     io.rancher.container.agent.role: "external-dns"

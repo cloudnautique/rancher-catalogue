@@ -55,6 +55,22 @@
       max: 60000
       default: 10000
       required: true
+    - variable: "HTTP_PROXY"
+      type: "string"
+      required: false
+      description: "Put your HTTP Proxy here if you are behind corporate firewall"
+      label: "HTTP Proxy"
+    - variable: "HTTPS_PROXY"
+      type: string
+      required: false
+      description: "Put your HTTPS Proxy here if you are behind corporate firewall"
+      label: "HTTPS Proxy"
+    - variable: "NO_PROXY"
+      default: "169.254.169.250, rancher-metadata"
+      type: string
+      required: no
+      description: "This needs to be set if you have HTTP proxies set.  Default for Rancher are 169.254.169.250, rancher-metadata"
+      label: "NO_PROXY"
 
 route53:
   health_check:
