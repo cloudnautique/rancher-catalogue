@@ -1,0 +1,30 @@
+.catalog:
+  version: v0.0.1
+  minimum_rancher_version: v1.3.1
+  questions:
+  - variable: PRIORITY
+    label: Scheduler Priority
+    description: Used to determine precedence when running multiple schedulers.
+    required: true
+    default: 1000
+    type: int
+  - variable: PORT
+    label: Listen Port
+    description: Port to listen on for health and stat requests.
+    required: true
+    default: 31314
+    type: int
+  - variable: DEBUG
+    label: Enable Debug
+    description: Enables logging at the debug level.
+    required: true
+    default: false
+    type: boolean
+scheduler:
+  health_check:
+    request_line: GET /health HTTP/1.0
+    port: ${PORT}
+    interval: 5000
+    response_timeout: 3000
+    unhealthy_threshold: 2
+    healthy_threshold: 1

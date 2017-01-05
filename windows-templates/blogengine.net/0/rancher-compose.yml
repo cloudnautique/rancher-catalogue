@@ -1,0 +1,40 @@
+.catalog:
+  version: 0.0.1
+  questions:
+  - variable: SA_PASSWORD
+    label: Database Password
+    description: Default password is 'Password123'
+    required: true
+    default: Password123
+    type: password
+  - variable: WEB_SCALE
+    label: Application Server Scale
+    description: Initial number of frontend servers to run
+    required: true
+    default: 1
+    type: int
+db:
+  health_check:
+    port: 1433
+    interval: 5000
+    response_timeout: 3000
+    healthy_threshold: 1
+    unhealthy_threshold: 2
+web:
+  scale: ${WEB_SCALE}
+  health_check:
+    port: 80
+    request_line: GET /BlogEngine HTTP/1.0
+    interval: 5000
+    response_timeout: 3000
+    healthy_threshold: 1
+    unhealthy_threshold: 2
+lb:
+  lb_config:
+    certs: []
+    port_rules:
+    - priority: 1
+      protocol: http
+      service: web
+      source_port: 80
+      target_port: 80

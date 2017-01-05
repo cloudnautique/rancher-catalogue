@@ -3,3 +3,9 @@ description: Experimental Windows template
 stacks:
   - name: windows
     templateId: 'library:infra*windows'
+  - name: windows-network-services
+    templateId: 'library:infra*windows-network-services'
+  - name: windows-healthcheck
+    templateId: 'library:infra*windows-healthcheck'
+  - name: windows-scheduler
+    templateId: 'library:infra*windows-scheduler'

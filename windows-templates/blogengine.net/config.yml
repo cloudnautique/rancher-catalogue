@@ -1,0 +1,7 @@
+name: BlogEngine.NET
+description: |
+  An open source ASP.NET powered blogging engine
+version: 0.0.1
+category: Framework
+labels:
+  io.rancher.orchestration.supported: 'windows'

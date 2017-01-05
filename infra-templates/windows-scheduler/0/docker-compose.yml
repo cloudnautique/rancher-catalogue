@@ -1,0 +1,21 @@
+version: '2'
+services:
+  scheduler:
+    image: llparse/windows-scheduler:dev
+    command:
+    - windows-scheduler
+    - -metadata-address=10.41.41.41:41
+    - -listen=:${PORT}
+    - -debug=${DEBUG}
+    labels:
+      io.rancher.container.dns: 'true'
+      io.rancher.container.create_agent: "true"
+      io.rancher.container.agent_service.scheduling: "true"
+      io.rancher.container.agent_service.scheduling.priority: "${PRIORITY}"
+      io.rancher.scheduler.affinity:host_label: io.rancher.host.os=linux
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
+    network_mode: host
