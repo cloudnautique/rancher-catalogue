@@ -17,7 +17,7 @@ kubelet:
         - --cluster-domain=cluster.local
         - --network-plugin=cni
         - --network-plugin-dir=/etc/cni/managed.d
-    image: rancher/k8s:v1.5.1-rancher1-7
+    image: rancher/k8s:v1.5.1-rancher1-9
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -43,7 +43,7 @@ proxy:
         - --master=http://kubernetes.kubernetes.rancher.internal
         - --v=2
         - --healthz-bind-address=0.0.0.0
-    image: rancher/k8s:v1.5.1-rancher1-7
+    image: rancher/k8s:v1.5.1-rancher1-9
     privileged: true
     net: host
     links:
@@ -96,7 +96,7 @@ kubernetes:
         - --runtime-config=batch/v2alpha1
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
-    image: rancher/k8s:v1.5.1-rancher1-7
+    image: rancher/k8s:v1.5.1-rancher1-9
     links:
         - etcd
 
@@ -126,7 +126,7 @@ scheduler:
         - kube-scheduler
         - --master=http://kubernetes.kubernetes.rancher.internal
         - --address=0.0.0.0
-    image: rancher/k8s:v1.5.1-rancher1-7
+    image: rancher/k8s:v1.5.1-rancher1-9
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
     links:
@@ -141,7 +141,7 @@ controller-manager:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.5.1-rancher1-7
+    image: rancher/k8s:v1.5.1-rancher1-9
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.container.create_agent: "true"
@@ -156,7 +156,7 @@ rancher-kubernetes-agent:
         io.rancher.container.agent_service.labels_provider: "true"
     environment:
         KUBERNETES_URL: http://kubernetes.kubernetes.rancher.internal
-    image: rancher/kubernetes-agent:v0.5.1
+    image: rancher/kubernetes-agent:v0.5.2
     privileged: true
     volumes:
         - /var/run/docker.sock:/var/run/docker.sock
@@ -164,7 +164,7 @@ rancher-kubernetes-agent:
         - kubernetes
 
 rancher-ingress-controller:
-    image: rancher/lb-service-rancher:v0.5.0
+    image: rancher/lb-service-rancher:v0.5.2
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.container.create_agent: "true"
@@ -179,7 +179,7 @@ rancher-ingress-controller:
         - kubernetes
 
 addon-starter:
-    image: rancher/k8s:v1.5.1-rancher1-7
+    image: rancher/k8s:v1.5.1-rancher1-9
     labels:
         io.rancher.container.create_agent: 'true'
         io.rancher.container.agent.role: environmentAdmin
