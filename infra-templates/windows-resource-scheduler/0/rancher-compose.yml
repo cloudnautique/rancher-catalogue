@@ -6,7 +6,7 @@
     label: Scheduler Priority
     description: Used to determine precedence when running multiple schedulers.
     required: true
-    default: 1000
+    default: 2000
     type: int
   - variable: PORT
     label: Listen Port

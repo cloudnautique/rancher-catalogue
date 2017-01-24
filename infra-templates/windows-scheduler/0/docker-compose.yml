@@ -4,7 +4,7 @@ services:
     image: llparse/windows-scheduler:dev
     command:
     - windows-scheduler
-    - -metadata-address=10.41.41.41:41
+    - -metadata-address=localhost:41
     - -listen=:${PORT}
     - -debug=${DEBUG}
     labels:

@@ -1,14 +1,15 @@
 version: '2'
+# TODO: sed 169.254.169.250/agent_ip
 services:
   network-manager:
     image: rancher/network-manager:v0.4.0
     privileged: true
     network_mode: host
     pid: host
-    command: plugin-manager -metadata-url=http://10.41.41.41:41/2016-07-29
+    command: plugin-manager -metadata-url=http://localhost:41/2016-07-29
     environment:
       DOCKER_BRIDGE: docker0
-      METADATA_IP: 10.41.41.41
+      METADATA_IP: 169.254.169.250
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - /var/lib/docker:/var/lib/docker
@@ -45,7 +46,12 @@ services:
   dns:
     image: llparse/dns:dev
     network_mode: container:metadata
-    command: rancher-dns -dns-server=10.41.41.41 -metadata-server=localhost:41 -answers=/etc/rancher-dns/answers.json
+    command:
+    - rancher-dns
+    - -metadata-server=localhost:41
+    - -dns-server=169.254.169.250
+    - -metadata-address=169.254.169.250
+    - -answers=/etc/rancher-dns/answers.json
     logging:
       driver: json-file
       options:
