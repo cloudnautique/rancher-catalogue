@@ -26,7 +26,6 @@ services:
     - -controller=rancher
     - -provider=haproxy
     - -metadata-address=rancher-metadata:41
-    network_mode: nat
     labels:
       io.rancher.container.dns: 'true'
       io.rancher.container.agent.role: environmentAdmin
