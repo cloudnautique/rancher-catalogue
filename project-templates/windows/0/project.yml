@@ -5,7 +5,9 @@ stacks:
     templateId: 'library:infra*windows'
   - name: windows-network-services
     templateId: 'library:infra*windows-network-services'
-  - name: windows-healthcheck
-    templateId: 'library:infra*windows-healthcheck'
+  - name: windows-ipsec
+    templateId: 'library:infra*windows-ipsec'
   - name: windows-scheduler
     templateId: 'library:infra*windows-scheduler'
+  - name: windows-healthcheck
+    templateId: 'library:infra*windows-healthcheck'
