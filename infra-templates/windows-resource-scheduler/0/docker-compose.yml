@@ -7,11 +7,12 @@ services:
     - -metadata-address=localhost:41
     - -listen=:${PORT}
     labels:
-        io.rancher.container.create_agent: "true"
-        io.rancher.container.agent_service.scheduling: "true"
-        io.rancher.container.agent_service.scheduling.priority: "${PRIORITY}"
-        io.rancher.scheduler.affinity:host_label: io.rancher.host.os=linux
-        io.rancher.container.dns: true
+      io.rancher.container.agent_service.scheduling: "true"
+      io.rancher.container.agent_service.scheduling.priority: "${PRIORITY}"
+      io.rancher.container.create_agent: "true"
+      io.rancher.container.dns: true
+      io.rancher.container.pull_image: always
+      io.rancher.scheduler.affinity:host_label: io.rancher.host.os=linux
     logging:
       driver: json-file
       options:

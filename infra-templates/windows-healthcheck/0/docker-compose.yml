@@ -4,9 +4,9 @@ services:
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.dns: true
-      io.rancher.scheduler.global: 'true'
       io.rancher.scheduler.affinity:host_label_ne: io.rancher.host.healthcheck.skip=true
-    image: llparse/healthcheck:dev
+      io.rancher.scheduler.global: 'true'
+    image: rancher/healthcheck:v0.2.3
     network_mode: host
     command: healthcheck -metadata-address=localhost:41
     logging:

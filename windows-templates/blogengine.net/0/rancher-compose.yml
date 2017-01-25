@@ -9,7 +9,7 @@
     type: password
   - variable: WEB_SCALE
     label: Application Server Scale
-    description: Initial number of frontend servers to run
+    description: Initial number of frontend servers to run (demo purposes only)
     required: true
     default: 1
     type: int
@@ -38,3 +38,9 @@ lb:
       service: web
       source_port: 80
       target_port: 80
+  health_check:
+    port: 42
+    interval: 5000
+    response_timeout: 3000
+    healthy_threshold: 1
+    unhealthy_threshold: 2

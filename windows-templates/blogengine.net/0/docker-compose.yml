@@ -15,15 +15,23 @@ services:
     environment:
       sa_password: '$SA_PASSWORD'
     network_mode: transparent
+    links:
+    - db
     depends_on:
     - db
   lb:
     image: llparse/lb-service-haproxy:dev
-    command: lb-controller.sh --controller rancher --provider haproxy --metadata-address rancher-metadata:41
-    ports:
-    - 80:80/tcp
+    command: 
+    - lb-controller.sh
+    - -controller=rancher
+    - -provider=haproxy
+    - -metadata-address=rancher-metadata:41
     network_mode: nat
     labels:
       io.rancher.container.dns: 'true'
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.container.create_agent: 'true'
+    links:
+    - web
+    ports:
+    - 80:80/tcp
