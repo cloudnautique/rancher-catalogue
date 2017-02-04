@@ -23,6 +23,7 @@ kubelet:
         - /var/run:/var/run
         - /var/lib/docker:/var/lib/docker
         - /var/lib/kubelet:/var/lib/kubelet:shared
+        - /var/log/containers:/var/log/containers
         - rancher-cni-driver:/etc/cni:ro
         - rancher-cni-driver:/opt/cni:ro
         - /dev:/host/dev
@@ -81,7 +82,7 @@ kubernetes:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
         io.rancher.sidekicks: kube-hostname-updater
-    command: 
+    command:
         - kube-apiserver
         - --service-cluster-ip-range=10.43.0.0/16
         - --etcd-servers=http://etcd.kubernetes.rancher.internal:2379
