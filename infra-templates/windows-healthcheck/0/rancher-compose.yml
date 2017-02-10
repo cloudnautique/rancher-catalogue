@@ -1,7 +1,8 @@
 .catalog:
-    name: "Healthcheck Service"
-    version: "v0.2.0"
-    description: "Rancher healthcheck service"
+  name: "Healthcheck Service"
+  version: "v0.2.0"
+  minimum_rancher_version: v1.5.0-alpha1
+  description: "Rancher healthcheck service"
 healthcheck:
   health_check:
     port: 42

@@ -1,7 +1,7 @@
 version: '2'
 services:
   scheduler:
-    image: llparse/scheduler:dev
+    image: rancher/scheduler:v0.6.3
     command:
     - scheduler
     - -metadata-address=localhost:41

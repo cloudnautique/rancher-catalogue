@@ -30,7 +30,7 @@ services:
   metadata:
     cap_add:
     - NET_ADMIN
-    image: llparse/metadata:dev
+    image: rancher/metadata:v0.8.1
     network_mode: host
     command: start.sh rancher-metadata -subscribe -listen=:41
     labels:
@@ -46,7 +46,7 @@ services:
         max-size: 25m
         max-file: '2'
   dns:
-    image: llparse/dns:dev
+    image: rancher/dns:v0.13.3
     network_mode: container:metadata
     command:
     - rancher-dns

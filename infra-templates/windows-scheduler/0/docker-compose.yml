@@ -1,7 +1,7 @@
 version: '2'
 services:
   scheduler:
-    image: llparse/windows-scheduler:dev
+    image: rancher/windows-scheduler:v0.0.1
     command:
     - windows-scheduler
     - -metadata-address=localhost:41

@@ -1,6 +1,6 @@
 .catalog:
   version: v0.0.1
-  minimum_rancher_version: v1.3.1
+  minimum_rancher_version: v1.5.0-alpha1
   questions:
   - variable: PRIORITY
     label: Scheduler Priority
