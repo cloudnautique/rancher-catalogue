@@ -46,6 +46,18 @@
     required: false
     default: "gcr.io/google_containers/pause-amd64:3.0"
     type: string
+  - variable: ETCD_HEARTBEAT_INTERVAL
+    label: Etcd Heartbeat Interval
+    description: Time (in milliseconds) of a heartbeat interval.
+    required: true
+    default: 500
+    type: int
+  - variable: ETCD_ELECTION_TIMEOUT
+    label: Etcd Election Timeout
+    description: Time (in milliseconds) for an election to timeout.
+    required: true
+    default: 5000
+    type: int
 
 kubernetes:
     metadata:

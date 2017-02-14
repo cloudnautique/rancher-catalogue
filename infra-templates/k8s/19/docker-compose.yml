@@ -62,6 +62,8 @@ etcd:
         EMBEDDED_BACKUPS: '${EMBEDDED_BACKUPS}'
         BACKUP_PERIOD: '${BACKUP_PERIOD}'
         BACKUP_RETENTION: '${BACKUP_RETENTION}'
+        ETCD_HEARTBEAT_INTERVAL: '${ETCD_HEARTBEAT_INTERVAL}'
+        ETCD_ELECTION_TIMEOUT: '${ETCD_ELECTION_TIMEOUT}'
     volumes:
     - etcd:/pdata
     - /var/etcd/backups:/data-backup

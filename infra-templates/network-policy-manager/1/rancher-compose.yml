@@ -1,0 +1,4 @@
+.catalog:
+  name: Network Policy Manager
+  version: v0.0.2
+  minimum_rancher_version: v1.4.0
