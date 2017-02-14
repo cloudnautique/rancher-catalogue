@@ -183,6 +183,7 @@ rancher-ingress-controller:
 addon-starter:
     image: rancher/k8s:v1.5.2-rancher1-2
     labels:
+        io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.container.create_agent: 'true'
         io.rancher.container.agent.role: environmentAdmin
     environment:
