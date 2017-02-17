@@ -1,5 +1,5 @@
 name: Windows Scheduler
-version: v0.0.1
+version: v0.0.2
 category: Framework
 description: Windows scheduler plugin for Rancher.
 projectURL: https://github.com/llparse/windows-scheduler
