@@ -168,7 +168,7 @@ rancher-kubernetes-agent:
         - kubernetes
 
 rancher-ingress-controller:
-    image: rancher/lb-service-rancher:v0.5.9
+    image: rancher/lb-service-rancher:v0.6.1
     labels:
         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
         io.rancher.container.create_agent: "true"
