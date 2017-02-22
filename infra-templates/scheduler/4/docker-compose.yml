@@ -1,7 +1,7 @@
 version: '2'
 services:
   scheduler:
-    image: rancher/scheduler:v0.7.1
+    image: rancher/scheduler:v0.7.2
     command: scheduler
     environment:
         RANCHER_DEBUG: '${RANCHER_DEBUG}'
