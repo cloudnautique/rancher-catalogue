@@ -1,0 +1,84 @@
+.catalog:
+  name: "nDVP"
+  version: "1.3.3"
+  description: "NetApp Docker Volume Plugin (nDVP)"
+  questions:
+    # Common settings
+    - variable: "STORAGE_PREFIX"
+      description: "Prefix for created storage objects"
+      label: "Storage Prefix"
+      required: false
+      default: "netappdvp_"
+      type: "string"
+
+    - variable: "DEBUG_ENABLED"
+      description: "Enable debugging output in logs"
+      label: "Debug Logging"
+      required: false
+      default: false
+      type: "boolean"
+
+    # ONTAP-NAS settings
+    - variable: "MANAGEMENT_LIF"
+      description: "IP address of clustered Data ONTAP management LIF"
+      label: "Management LIF"
+      required: true
+      type: "string"
+
+    - variable: "DATA_LIF"
+      description: "IP address of protocol LIF; will be derived if not specified"
+      label: "Data LIF"
+      required: false
+      type: "string"
+
+    - variable: "SVM"
+      description: "Storage Virtual Machine to use for provisioning"
+      label: "SVM"
+      required: true
+      type: "string"
+
+    - variable: "AGGREGATE"
+      description: "Default aggregate for creating ontap storage objects"
+      label: "Aggregate"
+      required: true
+      type: "string"
+
+    - variable: "USER_NAME"
+      description: "Username for connecting to your storage system"
+      label: "User Name"
+      required: true
+      default: "vsadmin"
+      type: "string"
+    - variable: "USER_PASSWORD"
+      description: "Password for connecting to your storage system"
+      label: "Password"
+      required: true
+      type: "password"
+
+    - variable: "VOLUME_DRIVER_NAME"
+      description: "Name to use for this plugin instance with Docker:  docker volume create -d <volume driver name>"
+      label: "Volume Driver Name"
+      required: true
+      default: "netapp"
+      type: "string"
+
+netapp-ontap-san:
+  labels:
+    io.rancher.scheduler.global: 'true'
+  metadata:
+    version: 1
+    storageDriverName: "ontap-san"
+    debug: true
+    storagePrefix: "${STORAGE_PREFIX}"
+    managementLIF: "${MANAGEMENT_LIF}"
+    dataLIF: "${DATA_LIF}"
+    svm: "${SVM}"
+    username: "${USER_NAME}"
+    password: "${USER_PASSWORD}"
+    aggregate: "${AGGREGATE}"
+    volumeDriverName: "${VOLUME_DRIVER_NAME}"
+  storage_driver:
+    name: "${VOLUME_DRIVER_NAME}"
+    scope: environment
+    volume_access_mode: singleHostRW
+
