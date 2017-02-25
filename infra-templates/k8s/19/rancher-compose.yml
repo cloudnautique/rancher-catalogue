@@ -2,7 +2,7 @@
   name: Kubernetes
   version: v1.5.2-rancher1-3
   description: Rancher Kubernetes service
-  minimum_rancher_version: v1.4.0-rc1
+  minimum_rancher_version: v1.5.0-rc1
   questions:
   - variable: EMBEDDED_BACKUPS
     label: Enable Backups
@@ -64,6 +64,12 @@
     required: true
     default: 5000
     type: int
+  - variable: DEDICATED_HOSTS
+    label: Dedicated hosts
+    description:  Run the Kubernetes control plane and etcd on dedicated hosts
+    required: true
+    default: false
+    type: boolean
 kubernetes:
     metadata:
         sans:
