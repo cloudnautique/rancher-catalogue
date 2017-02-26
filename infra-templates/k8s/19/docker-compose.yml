@@ -4,7 +4,11 @@ kubelet:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
         io.rancher.scheduler.global: "true"
+        {{- if eq .Values.CONSTRAINT_TYPE "best-effort" }}
         io.rancher.scheduler.affinity:host_label_ne: etcd=true,orchestration=true
+        {{- else }}
+        io.rancher.scheduler.affinity:host_label: compute=true
+        {{- end }}
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
@@ -39,7 +43,11 @@ proxy:
     labels:
         io.rancher.container.dns: "true"
         io.rancher.scheduler.global: "true"
+        {{- if eq .Values.CONSTRAINT_TYPE "best-effort" }}
         io.rancher.scheduler.affinity:host_label_ne: etcd=true,orchestration=true
+        {{- else }}
+        io.rancher.scheduler.affinity:host_label: compute=true
+        {{- end }}
     command:
         - kube-proxy
         - --master=http://kubernetes.kubernetes.rancher.internal
