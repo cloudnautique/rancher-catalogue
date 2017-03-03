@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 
 cd $(dirname $0)/..
 
@@ -22,7 +22,7 @@ fi
 pushd /scratch/integration
 
 # Start rancher-catalog-service and wait for it to start.
-/usr/bin/rancher-catalog-service -catalogUrl ../ -refreshInterval 7200 > /dev/null 2>&1 &
+/usr/bin/rancher-catalog-service --config ../scripts/repo.json --refresh-interval 7200 --sqlite > /dev/null 2>&1 &
 sleep 10
 tox -e flake8,py27
 popd
