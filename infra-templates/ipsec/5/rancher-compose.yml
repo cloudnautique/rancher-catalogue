@@ -1,6 +1,6 @@
 .catalog:
   name: "Rancher IPsec"
-  version: "0.0.5"
+  version: "0.1.0"
   minimum_rancher_version: v1.5.0-rc1
   questions:
     - variable: "DOCKER_BRIDGE"
