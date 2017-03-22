@@ -1,6 +1,8 @@
 name: Swarm
 description: Default Swarm template
 stacks:
+  - name: portainer
+    templateId: 'community:infra*portainer'
   - name: swarm
     templateId: 'community:infra*swarm'
   - name: network-services

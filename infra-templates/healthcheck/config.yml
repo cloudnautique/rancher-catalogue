@@ -1,6 +1,6 @@
 name: Healthcheck Service
 description: Rancher healthcheck service
-version: v0.2.0
+version: v0.2.3
 category: Framework
 projectURL: https://github.com/rancher/healthcheck
 labels:

@@ -1,8 +1,8 @@
 name: Rancher EBS
 description: |
   Docker volume plugin for Amazon EBS
-version: 0.2.1
+version: 0.2.2
 category: Storage
 labels:
-  io.rancher.certified: rancher
+  io.rancher.certified: Experimental
   io.rancher.orchestration.supported: 'cattle,mesos,swarm'

@@ -1,0 +1,17 @@
+netapp-ontap-san:
+  image: netapp/ndvp:1.3.3
+  privileged: true
+  ipc: host
+  net: host
+  tty: true
+  cap_add:
+    - SYS_ADMIN
+  volumes:
+    - /:/host:shared 
+    - /run:/run:shared 
+  labels:
+    io.rancher.scheduler.global: 'true'
+    io.rancher.container.dns: 'true'
+    io.rancher.container.hostname_override: container_name
+  command: /netapp/container-launch.sh --config=http://169.254.169.250/latest/services/netapp-ontap-san/metadata
+

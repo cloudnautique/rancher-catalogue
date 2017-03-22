@@ -5,6 +5,8 @@ services:
     - NET_ADMIN
     image: rancher/net:v0.8.0
     network_mode: vxlan
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
     command: start-vxlan.sh
     ports:
     - 4789:4789/udp

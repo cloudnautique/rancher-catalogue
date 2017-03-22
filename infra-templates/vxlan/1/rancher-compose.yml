@@ -1,6 +1,8 @@
 .catalog:
   name: "Rancher VXLAN"
   version: "v0.0.2"
+  minimum_rancher_version: v1.1.99
+  maximum_rancher_version: v1.3.99
   questions:
     - variable: "DOCKER_BRIDGE"
       label: "Docker Bridge"
@@ -13,6 +15,12 @@
       description: "The subnet to use for the managed network."
       type: "string"
       default: '10.42.0.0/16'
+      required: true
+    - variable: "RANCHER_DEBUG"
+      label: "Enable Debug Logs"
+      description: "This will enable very verbose debug logs."
+      type: "boolean"
+      default: "false"
       required: true
 
 vxlan:

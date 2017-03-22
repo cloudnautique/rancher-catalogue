@@ -3,6 +3,7 @@
   version: v1.5.1-rancher1-7
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.3.0-rc1
+  maximum_rancher_version: v1.3.0-rc1
   questions:
   - variable: EMBEDDED_BACKUPS
     label: Enable Backups

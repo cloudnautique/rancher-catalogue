@@ -1,0 +1,42 @@
+version: '2'
+services:
+  vxlan:
+    cap_add:
+      - NET_ADMIN
+    image: rancher/net:v0.9.4
+    network_mode: vxlan
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    command: start-vxlan.sh
+    ports:
+      - 4789:4789/udp
+    # Force cni-driver to start first
+    volumes_from:
+      - cni-driver
+    labels:
+      io.rancher.sidekicks: cni-driver
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent_service.vxlan: 'true'
+      io.rancher.cni.link_mtu_overhead: '0'
+      io.rancher.internal.service.vxlan: 'true'
+      io.rancher.service.selector.link: io.rancher.internal.service.vxlan=true
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
+  cni-driver:
+    privileged: true
+    image: rancher/net:v0.9.4
+    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
+    network_mode: host
+    pid: host
+    labels:
+      io.rancher.network.cni.binary: 'rancher-bridge'
+      io.rancher.container.dns: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'

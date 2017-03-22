@@ -1,0 +1,61 @@
+.catalog:
+  name: "Rancher VXLAN"
+  version: "v0.0.3"
+  minimum_rancher_version: v1.4.0-rc1
+  maximum_rancher_version: v1.4.0-rc1
+  questions:
+    - variable: "DOCKER_BRIDGE"
+      label: "Docker Bridge"
+      description: "Name of Docker Bridge. Default is `docker0`"
+      type: "string"
+      default: "docker0"
+      required: true
+    - variable: MTU
+      label: "MTU for the network"
+      description: "Adjust the MTU for the network, according to your needs. Ex: GCE(1460), AWS(1500), etc"
+      required: true
+      default: 1500
+      type: int
+    - variable: "SUBNET"
+      label: "Subnet"
+      description: "The subnet to use for the managed network."
+      type: "string"
+      default: '10.42.0.0/16'
+      required: true
+    - variable: "RANCHER_DEBUG"
+      label: "Enable Debug Logs"
+      description: "This will enable very verbose debug logs."
+      type: "boolean"
+      default: "false"
+      required: true
+
+vxlan:
+  network_driver:
+    name: Rancher VXLAN
+    default_network:
+      name: vxlan
+      host_ports: true
+      subnets:
+      - network_address: $SUBNET
+      dns:
+      - 169.254.169.250
+      dns_search:
+      - rancher.internal
+    cni_config:
+      '10-rancher-vxlan.conf':
+        name: rancher-cni-network
+        type: rancher-bridge
+        bridge: $DOCKER_BRIDGE
+        bridgeSubnet: $SUBNET
+        logToFile: /var/log/rancher-cni.log
+        isDefaultGateway: true
+        hairpinMode: true
+        hostNat: true
+        hairpinMode: true
+        mtu: ${MTU}
+        linkMTUOverhead: 50
+        ipam:
+          type: rancher-cni-ipam
+          logToFile: /var/log/rancher-cni.log
+          routes:
+            - dst: 169.254.169.250/32
