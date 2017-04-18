@@ -1,3 +1,35 @@
+# TODO the etcd-operator should be part of a separate 'operator' infra stack
+etcd-operator:
+    image: llparse/etcd-operator:dev-stable
+    command:
+    - --color=true
+    - rancher
+    - operator
+    - --analytics=false
+    - --gc-interval=10m
+    net: host
+    labels:
+        io.rancher.container.agent.role: environmentAdmin
+        io.rancher.container.create_agent: "true"
+        io.rancher.container.dns: 'true'
+        io.rancher.container.pull_image: always
+
+etcd:
+    image: rancher/none
+    net: none
+    labels:
+        io.rancher.operator: etcd
+        io.rancher.operator.etcd.size: '${ETCD_SIZE}'
+        io.rancher.operator.etcd.version: 3.1.5
+        io.rancher.operator.etcd.paused: 'false'
+        io.rancher.operator.etcd.antiaffinity: 'true'
+        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
+        io.rancher.operator.etcd.nodeselector: etcd=true
+        {{- end }}
+        io.rancher.operator.etcd.selfhosted: 'false'
+        io.rancher.operator.etcd.network: 'host'
+        io.rancher.service.selector.container: thisistherealselector=nottt
+
 kubelet:
     labels:
         io.rancher.container.dns: "true"
@@ -59,36 +91,6 @@ proxy:
     net: host
     links:
         - kubernetes
-
-etcd:
-    image: rancher/etcd:v2.3.7-11
-    labels:
-        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
-        io.rancher.scheduler.affinity:host_label: etcd=true
-        {{- end }}
-        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-        io.rancher.sidekicks: data
-    environment:
-        RANCHER_DEBUG: 'true'
-        EMBEDDED_BACKUPS: '${EMBEDDED_BACKUPS}'
-        BACKUP_PERIOD: '${BACKUP_PERIOD}'
-        BACKUP_RETENTION: '${BACKUP_RETENTION}'
-        ETCD_HEARTBEAT_INTERVAL: '${ETCD_HEARTBEAT_INTERVAL}'
-        ETCD_ELECTION_TIMEOUT: '${ETCD_ELECTION_TIMEOUT}'
-    volumes:
-    - etcd:/pdata
-    - /var/etcd/backups:/data-backup
-    volumes_from:
-    - data
-
-data:
-    image: busybox
-    entrypoint: /bin/true
-    net: none
-    volumes:
-    - /data
-    labels:
-        io.rancher.container.start_once: 'true'
 
 kubernetes:
     labels:

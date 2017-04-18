@@ -1,6 +1,6 @@
 .catalog:
   name: Kubernetes
-  version: v1.5.4-rancher1-1
+  version: v1.5.4-rancher1-2
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.5.0-rc1
   questions:
@@ -43,36 +43,42 @@
     required: false
     default: "gcr.io/google_containers/pause-amd64:3.0"
     type: string
-  - variable: EMBEDDED_BACKUPS
-    label: Enable Backups
-    description: "Periodically backup state to /var/etcd/backups. Mount network storage here on all hosts before continuing"
+  # - variable: EMBEDDED_BACKUPS
+  #   label: Enable Backups
+  #   description: "Periodically backup state to /var/etcd/backups. Mount network storage here on all hosts before continuing"
+  #   required: true
+  #   default: true
+  #   type: boolean
+  # - variable: BACKUP_PERIOD
+  #   label: Backup Creation Period
+  #   description: Create a backup after this amount of time passes. Must conform to duration format
+  #   required: true
+  #   default: 15m0s
+  #   type: string
+  # - variable: BACKUP_RETENTION
+  #   label: Backup Retention Period
+  #   description: Expire a backup after this amount of time passes. Must conform to duration format
+  #   required: true
+  #   default: 24h
+  #   type: string
+  - variable: ETCD_SIZE
+    label: Etcd Cluster Size
+    description: Number of Etcd members to create
     required: true
-    default: true
-    type: boolean
-  - variable: BACKUP_PERIOD
-    label: Backup Creation Period
-    description: Create a backup after this amount of time passes. Must conform to duration format
-    required: true
-    default: 15m0s
-    type: string
-  - variable: BACKUP_RETENTION
-    label: Backup Retention Period
-    description: Expire a backup after this amount of time passes. Must conform to duration format
-    required: true
-    default: 24h
-    type: string
-  - variable: ETCD_HEARTBEAT_INTERVAL
-    label: Etcd Heartbeat Interval
-    description: Time (in milliseconds) of a heartbeat interval.
-    required: true
-    default: 500
+    default: 3
     type: int
-  - variable: ETCD_ELECTION_TIMEOUT
-    label: Etcd Election Timeout
-    description: Time (in milliseconds) for an election to timeout.
-    required: true
-    default: 5000
-    type: int
+  # - variable: ETCD_HEARTBEAT_INTERVAL
+  #   label: Etcd Heartbeat Interval
+  #   description: Time (in milliseconds) of a heartbeat interval.
+  #   required: true
+  #   default: 500
+  #   type: int
+  # - variable: ETCD_ELECTION_TIMEOUT
+  #   label: Etcd Election Timeout
+  #   description: Time (in milliseconds) for an election to timeout.
+  #   required: true
+  #   default: 5000
+  #   type: int
 kubernetes:
     metadata:
         sans:
@@ -87,25 +93,6 @@ kubernetes:
         initializing_timeout: 60000
         reinitializing_timeout: 60000
     retain_ip: true
-
-etcd:
-    retain_ip: true
-    scale_policy:
-        increment: 1
-        max: 3
-        min: 1
-    health_check:
-        port: 2378
-        request_line: GET /health HTTP/1.0
-        interval: 5000
-        response_timeout: 3000
-        unhealthy_threshold: 3
-        healthy_threshold: 2
-        initializing_timeout: 60000
-        reinitializing_timeout: 60000
-        recreate_on_quorum_strategy_config:
-            quorum: 2
-        strategy: recreateOnQuorum
 
 rancher-kubernetes-agent:
     health_check:
