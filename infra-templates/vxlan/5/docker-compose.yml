@@ -10,9 +10,6 @@ services:
     command: start-vxlan.sh
     ports:
       - 4789:4789/udp
-    # Force cni-driver to start first
-    volumes_from:
-      - cni-driver
     labels:
       io.rancher.sidekicks: cni-driver
       io.rancher.scheduler.global: 'true'
