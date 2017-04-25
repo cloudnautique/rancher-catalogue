@@ -1,6 +1,6 @@
 .catalog:
   name: Kubernetes
-  version: v1.5.4-rancher1-2
+  version: v1.5.4-rancher1-3
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.5.0-rc1
   questions:
@@ -73,6 +73,7 @@
     required: true
     default: 5000
     type: int
+
 kubernetes:
     metadata:
         sans:
@@ -149,7 +150,6 @@ kubectld:
         healthy_threshold: 2
         initializing_timeout: 60000
         reinitializing_timeout: 60000
-
 
 rancher-ingress-controller:
     health_check:
