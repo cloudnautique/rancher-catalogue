@@ -1,0 +1,338 @@
+.catalog:
+  name: "Spinnaker"
+  version: "0.14.0-rancher1"
+  description: "Spinnaker, continuous delivery"
+  uuid: spinnaker-0
+  questions:
+    - variable: "cassandra_target_link"
+      label: "Cassandra Target Link"
+      type: "service"
+      required: true
+      description: |
+        Name of the Cassandra stack/service to use for database storage
+    - variable: "api_domain"
+      label: "API Domain name"
+      type: "string"
+      required: true
+      description: |
+        The DNS value that will resolve to the Gate API service
+    - variable: "AWS_ACCESS_KEY"
+      label: "AWS access key"
+      description: "Access key to your AWS account"
+      type: "string"
+      required: true
+    - variable: "AWS_SECRET_KEY"
+      label: "AWS secret key"
+      description: "Secret key to your AWS account"
+      type: "string"
+      required: true
+    - variable: "AWS_REGION"
+      label: "AWS region"
+      description: "AWS region name"
+      type: "string"
+      default: "us-west-2"
+      required: true
+clouddriver-config:
+  scale: 1
+  metadata: &id002
+    aws: &id001
+      credentials: |
+        [default]
+        aws_access_key_id=${AWS_ACCESS_KEY}
+        aws_secret_access_key=${AWS_SECRET_KEY}
+      config: |
+        [default]
+        region=${AWS_REGION}
+        output=json
+    spinnaker: |
+      server:
+        port: 80
+        address: 0.0.0.0
+      services:
+        front50:
+          baseUrl: http://front50-app
+      redis:
+        connection: redis://redis-db:6379
+
+      default:
+        account:
+          env: default
+      aws:
+        enabled: true
+        defaultRegions:
+          - name: ${AWS_REGION}
+        defaultKeyPairTemplate: '{{name}}-keypair'
+        defaults:
+          iamRole: default
+          instanceClassBlockDevices:
+            - instanceClass: t2
+        defaultFront50Template: http://front50-app
+        accounts: []
+
+      google:
+        enabled: false
+
+        accounts:
+          - name:
+            project:
+            jsonPath:
+clouddriver-app:
+  scale: 1
+  metadata: *id002
+
+echo-config:
+  scale: 1
+  metadata: &id003
+    aws: *id001
+    spinnaker: |
+      server:
+        port: 80
+        address: 0.0.0.0
+
+      cassandra:
+        embedded: false
+        host: cassandra-db
+
+      spinnaker:
+        cassandra:
+          cluster: spinnaker
+          keyspace: echo
+
+      front50:
+        baseUrl: http://front50-app
+
+      orca:
+        baseUrl: http://orca-app
+
+      endpoints.health.sensitive: false
+
+      mail:
+        enabled: false
+        host:
+        from:
+
+      hipchat:
+        enabled: false
+        baseUrl:
+        token:
+
+      twilio:
+        enabled: false
+        baseUrl: https://api.twilio.com/
+        account:
+        token:
+        from:
+
+      scheduler:
+        enabled: true
+        threadPoolSize: 20
+        triggeringEnabled: true
+        pipelineConfigsPoller:
+          enabled: true
+          pollingIntervalMs: 30000
+echo-app:
+  scale: 1
+  metadata: *id003
+
+front50-config:
+  scale: 1
+  metadata: &id004
+    aws: *id001
+    spinnaker: |
+      server:
+        port: 80
+        address: 0.0.0.0
+
+      cassandra:
+        embedded: false
+        host: cassandra-db
+
+      spinnaker:
+        cassandra:
+          cluster: spinnaker
+          keyspace: front50
+
+      aws:
+        simpleDBEnabled: false
+        defaultSimpleDBDomain:
+
+front50-app:
+  scale: 1
+  metadata: *id004
+
+deck-ui:
+  scale: 1
+
+gate-config:
+  scale: 1
+  metadata: &id005
+    aws: *id001
+    spinnaker: |
+      server:
+        port: 80
+        address: 0.0.0.0
+      services:
+        oort:
+          baseUrl: http://clouddriver-app
+        orca:
+          baseUrl: http://orca-app
+        front50:
+          baseUrl: http://front50-app
+        mort:
+          baseUrl: http://clouddriver-app
+        kato:
+          baseUrl: http://clouddriver-app
+      #optional services:
+        echo:
+          enabled: false
+          baseUrl: http://echo-app
+        flapjack:
+          enabled: false
+        igor:
+          enabled: false
+          baseUrl: http://igor-app
+      redis:
+        connection: redis://redis-db:6379
+gate-app:
+  scale: 1
+  metadata: *id005
+
+igor-config:
+  scale: 1
+  metadata: &id006
+    aws: *id001
+    spinnaker: |
+      server:
+        port: 80
+        address: 0.0.0.0
+      redis:
+        connection: redis://redis-db:6379
+
+      jenkins:
+        masters:
+          - name:
+            address:
+            username:
+            password:
+      services:
+        echo:
+          baseUrl: http://echo-app
+igor-app:
+  scale: 1
+  metadata: *id006
+
+orca-config:
+  scale: 1
+  metadata: &id007
+    aws: *id001
+    spinnaker: |
+      server:
+          port: 80
+          address: 0.0.0.0
+
+      oort:
+          enabled: true
+          baseUrl: http://orca-app
+      front50:
+          baseUrl: http://front50-app
+      mort:
+          baseUrl: http://clouddriver-app
+      kato:
+          baseUrl: http://clouddriver-app
+      rush:
+          baseUrl: http://rush-app
+      bakery:
+          baseUrl: http://rosco-app
+          extractBuildDetails: true
+          propagateCloudProviderType: true
+      echo:
+          enabled: false
+          baseUrl: http://echo-app
+
+      igor:
+          baseUrl: http://igor-app
+
+      # TODO(duftler): Remove this once flex is conditionally-enabled in orca.
+      flex:
+        baseUrl: http://not-a-host
+
+      default:
+        bake:
+          account: dev
+        securityGroups:
+        vpc:
+          securityGroups:
+
+      redis:
+        connection: redis://redis-db:6379
+orca-app:
+  scale: 1
+  metadata: *id007
+
+rosco-config:
+  scale: 1
+  metadata: &id008
+    aws: *id001
+    spinnaker: |
+      server:
+        port: 80
+        address: 0.0.0.0
+
+      redis:
+        host: redis-db
+        connection: redis://redis-db:6379
+
+      aws:
+        enabled: false
+        bakeryDefaults:
+          awsAccessKey:
+          awsSecretKey:
+
+      docker:
+        enabled: false
+        bakeryDefaults:
+          targetRepository:
+
+      google:
+        enabled: false
+        accounts:
+          - name:
+            project:
+            jsonPath:
+
+      rush:
+        baseUrl: http://rush-app
+        configDir: /opt/rosco/config/packer
+rosco-app:
+  scale: 1
+  metadata: *id008
+
+rush-config:
+  scale: 1
+  metadata: &id009
+    aws: *id001
+    spinnaker: |
+      server:
+          port: 80
+          address: 0.0.0.0
+
+      cassandra:
+        embedded: false
+        host: cassandra-db
+
+      spinnaker:
+        cassandra:
+          cluster: spinnaker
+          keyspace: rush
+
+      docker:
+        accounts:
+          - name:
+            url:
+            registry:
+rush-app:
+  scale: 1
+  metadata: *id009
+
+redis-db:
+  scale: 1

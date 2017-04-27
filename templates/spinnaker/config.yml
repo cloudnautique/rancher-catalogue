@@ -1,0 +1,5 @@
+name: Spinnaker
+description: |
+  Multi-cloud continuous delivery platform
+version: 0.14.0-rancher1
+category: "Continuous Delivery"

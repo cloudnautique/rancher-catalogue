@@ -1,0 +1,154 @@
+redis-db:
+  restart: always
+  command: redis-server --appendonly yes
+  labels:
+    io.rancher.container.hostname_override: container_name
+  tty: true
+  image: redis:3.0.5
+  stdin_open: true
+
+clouddriver-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+clouddriver-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: clouddriver-config
+    io.rancher.container.hostname_override: container_name
+  image: quay.io/spinnaker/clouddriver:v1.37.0
+  links:
+    - redis-db
+  volumes_from:
+    - clouddriver-config
+
+front50-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+front50-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: front50-config
+    io.rancher.container.hostname_override: container_name
+  environment:
+    JAVA_OPTS: -javaagent:/opt/front50/lib/jamm-0.2.5.jar
+  image: quay.io/spinnaker/front50:v1.8.0
+  external_links:
+  - ${cassandra_target_link}:cassandra-db
+  volumes_from:
+    - front50-config
+
+igor-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+igor-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: igor-config
+    io.rancher.container.hostname_override: container_name
+  image: quay.io/spinnaker/igor:v1.12.0
+  links:
+    - redis-db
+    - echo-app
+  volumes_from:
+    - igor-config
+
+echo-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+echo-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: echo-config
+    io.rancher.container.hostname_override: container_name
+  environment:
+    JAVA_OPTS: -javaagent:/opt/echo/lib/jamm-0.2.5.jar
+  image: spinnaker/echo:v1.74.0
+  volumes_from:
+    - echo-config
+  external_links:
+  - ${cassandra_target_link}:cassandra-db
+  links:
+    - orca-app
+    - front50-app
+
+deck-ui:
+  restart: always
+  labels:
+    io.rancher.container.hostname_override: container_name
+  environment:
+    API_HOST: ${api_domain}
+    DECK_HOST: 0.0.0.0
+    DECK_PORT: 9000
+    PROTOCOL: http
+    AUTH: false
+  image: quay.io/spinnaker/deck:v2.462.0
+  links:
+    - gate-app
+
+gate-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+gate-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: gate-config
+    io.rancher.container.hostname_override: container_name
+  image: quay.io/spinnaker/gate:v2.28.0
+  links:
+    - redis-db
+    - clouddriver-app
+    - echo-app
+    - front50-app
+    - igor-app
+    - orca-app
+  volumes_from:
+    - gate-config
+
+orca-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+orca-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: orca-config
+    io.rancher.container.hostname_override: container_name
+  image: quay.io/spinnaker/orca:v1.45.0
+  links:
+    - redis-db
+    - clouddriver-app
+    - echo-app
+    - front50-app
+    - igor-app
+  volumes_from:
+    - orca-config
+
+rosco-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+rosco-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: rosco-config
+    io.rancher.container.hostname_override: container_name
+  image: quay.io/spinnaker/rosco:v0.15.0
+  volumes_from:
+    - rosco-config
+  links:
+    - redis-db
+    - rush-app
+
+rush-config:
+  image: objectpartners/spinnaker-config:latest
+  restart: always
+rush-app:
+  restart: always
+  labels:
+    io.rancher.sidekicks: rush-config
+    io.rancher.container.hostname_override: container_name
+  environment:
+    JAVA_OPTS: -javaagent:/opt/rush/lib/jamm-0.2.5.jar
+  image: quay.io/spinnaker/rush:v1.21.0
+  external_links:
+  - ${cassandra_target_link}:cassandra-db
+  volumes_from:
+    - rush-config
