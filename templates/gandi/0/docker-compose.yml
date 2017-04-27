@@ -1,0 +1,13 @@
+gandi:
+  image: rancher/external-dns:v0.3.0
+  command: -provider=gandi
+  expose: 
+   - 1000
+  environment:
+    GANDI_APIKEY: ${GANDI_APIKEY}
+    GANDI_TESTING: ${GANDI_TESTING}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    TTL: ${TTL}
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.agent.role: "external-dns"

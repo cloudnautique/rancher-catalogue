@@ -1,0 +1,37 @@
+.catalog:
+  name: "Gandi DNS"
+  version: "v0.3.0-rancher1"
+  description: "Rancher External DNS service powered by Gandi. Requires Rancher version 0.44.0"
+  uuid: gandi-0
+  minimum_rancher_version: v0.44.0
+  questions:
+    - variable: "GANDI_APIKEY"
+      label: "Gandi API key"
+      description: "API key Gandi account"
+      type: "string"
+      required: true
+    - variable: "GANDI_TESTING"
+      label: "Testing environment"
+      description: "Whether use the test platform (OT&E)"
+      type: "string"
+      required: false
+    - variable: "ROOT_DOMAIN"
+      label: "Hosted zone"
+      description: "Gandi hosted zone name. DNS entries will be created for <service>.<stack>.<environment>.<hosted zone>"
+      type: "string"
+      required: true
+    - variable: "TTL"
+      label: "TTL"
+      description: "The resource record cache time to live (TTL), in seconds"
+      type: "int"
+      default: 300
+      required: false
+
+gandi:
+  health_check:
+    port: 1000
+    interval: 2000
+    unhealthy_threshold: 3
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 2000
