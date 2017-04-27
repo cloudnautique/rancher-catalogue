@@ -75,9 +75,16 @@
     type: int
   - variable: INFLUXDB_HOST_PATH
     label: InfluxDB Host Path
-    description: Persist container resource usage (InfluxDB data) to a path on the host (path may be network-attached storage)
+    description: Write Heapster metrics to an absolute path on the host (may be network-attached storage)
     required: false
     type: string
+  - variable: INFLUXDB_RETENTION_PERIOD
+    label: InfluxDB Retention Period
+    description: Period of time to retain Heapster InfluxDB metrics (ex: 12h). Only applicable if add-ons are enabled.
+    required: true
+    default: 7d
+    type: string
+
 kubernetes:
     metadata:
         sans:

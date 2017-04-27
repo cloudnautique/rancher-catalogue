@@ -218,6 +218,7 @@ addon-starter:
         DISABLE_ADDONS: ${DISABLE_ADDONS}
         REGISTRY: ${REGISTRY}
         INFLUXDB_HOST_PATH: ${INFLUXDB_HOST_PATH}
+        INFLUXDB_RETENTION_PERIOD: ${INFLUXDB_RETENTION_PERIOD}
     command:
         - addons-update.sh
     links:
