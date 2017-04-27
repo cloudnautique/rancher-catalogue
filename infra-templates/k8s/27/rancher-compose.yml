@@ -1,6 +1,6 @@
 .catalog:
   name: Kubernetes
-  version: v1.5.4-rancher1-2
+  version: v1.5.4-rancher1-3
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.5.0-rc1
   questions:
@@ -73,6 +73,20 @@
     required: true
     default: 5000
     type: int
+  - variable: INFLUXDB_HOST_PATH
+    label: InfluxDB Host Path
+    description: "Write Heapster metrics to an absolute path on the host (may be network-attached storage)"
+    required: false
+    type: string
+  # https://github.com/kubernetes/heapster/issues/1579
+  # https://github.com/kubernetes/heapster/pull/1581
+  # - variable: INFLUXDB_RETENTION
+  #   label: InfluxDB Retention Period
+  #   description: "Period of time to retain Heapster InfluxDB metrics (ex: 12h). Only applicable if add-ons are enabled. Default is infinite (0s)."
+  #   required: true
+  #   default: 0s
+  #   type: string
+
 kubernetes:
     metadata:
         sans:
