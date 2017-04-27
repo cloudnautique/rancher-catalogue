@@ -188,6 +188,23 @@ rancher-kubernetes-agent:
     links:
         - kubernetes
 
+rancher-ingress-controller:
+    image: rancher/lb-service-rancher:v0.6.1
+    labels:
+        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
+        io.rancher.scheduler.affinity:host_label: orchestration=true
+        {{- end }}
+        io.rancher.container.create_agent: "true"
+        io.rancher.container.agent.role: environment
+    environment:
+        KUBERNETES_URL: http://kubernetes.kubernetes.rancher.internal
+    command:
+        - lb-controller
+        - --controller=kubernetes
+        - --provider=rancher
+    links:
+        - kubernetes
+
 addon-starter:
     image: llparse/k8s:dev
     labels:
@@ -200,6 +217,7 @@ addon-starter:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
         DISABLE_ADDONS: ${DISABLE_ADDONS}
         REGISTRY: ${REGISTRY}
+        INFLUXDB_HOST_PATH: ${INFLUXDB_HOST_PATH}
     command:
         - addons-update.sh
     links:

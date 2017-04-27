@@ -73,6 +73,11 @@
     required: true
     default: 5000
     type: int
+  - variable: INFLUXDB_HOST_PATH
+    label: InfluxDB Host Path
+    description: Persist container resource usage (InfluxDB data) to a path on the host (path may be network-attached storage)
+    required: false
+    type: string
 kubernetes:
     metadata:
         sans:
@@ -143,6 +148,17 @@ controller-manager:
 kubectld:
     health_check:
         port: 8091
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+
+rancher-ingress-controller:
+    health_check:
+        request_line: GET /healthz HTTP/1.0
+        port: 10241
         interval: 2000
         response_timeout: 2000
         unhealthy_threshold: 3
