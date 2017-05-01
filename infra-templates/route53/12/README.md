@@ -4,10 +4,12 @@ Rancher External DNS service powered by Amazon Route53
 
 #### Changelog
 
-##### v0.6.2
+##### v0.6.4
 
-* Adds support for disabling/enforcing external DNS on the host and service level using labels
-* Fixes an issue with lingering TCP keep-alive connections to the Rancher Metadata service
+* Support for Rancher server instances with self-signed certs (using `/var/lib/rancher/etc/ssl/ca.crt` from the host) 
+* Support for EC2 IAM role credentials for authenticating to Route 53 API
+* Support for using service specific name template with label `io.rancher.service.external_dns_name_template`
+* Depricated AWS Region setting (Route 53 API is not regionalized)
 
 #### Usage
 
@@ -34,6 +36,9 @@ Accepts 'always', 'never' or 'auto' (default)
 - `always`: Always create DNS records for this service
 - `never`: Never create DNS records for this service
 - `auto`: Create DNS records for this service if it exposes ports on the host
+
+`io.rancher.service.external_dns_name_template`
+Override the DNS name template for specific services (see below)
      
 ##### Custom DNS name template
 
