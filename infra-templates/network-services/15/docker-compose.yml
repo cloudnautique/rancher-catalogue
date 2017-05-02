@@ -44,7 +44,7 @@ services:
   dns:
     image: rancher/dns:v0.14.1
     network_mode: container:metadata
-    command: rancher-dns --metadata-server=localhost --answers=/etc/rancher-dns/answers.json
+    command: rancher-dns --metadata-server=localhost --answers=/etc/rancher-dns/answers.json -ttl 1
     labels:
       io.rancher.scheduler.global: 'true'
     logging:
