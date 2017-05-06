@@ -1,0 +1,12 @@
+.catalog:
+  name: "Ingress Controller"
+  version: "v0.4.0"
+
+rancher-ingress-controller:
+    health_check:
+        request_line: GET /healthz HTTP/1.0
+        port: 10241
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2

@@ -81,7 +81,7 @@ kubernetes:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: environmentAdmin
         io.rancher.sidekicks: kube-hostname-updater
-    command: 
+    command:
         - kube-apiserver
         - --service-cluster-ip-range=10.43.0.0/16
         - --etcd-servers=http://etcd.kubernetes.rancher.internal:2379
@@ -163,17 +163,17 @@ rancher-kubernetes-agent:
     links:
         - kubernetes
 
-rancher-ingress-controller:
-    image: rancher/lb-service-rancher:v0.4.0
-    labels:
-        io.rancher.scheduler.affinity:host_label_soft: orchestration=true
-        io.rancher.container.create_agent: "true"
-        io.rancher.container.agent.role: environment
-    environment:
-        KUBERNETES_URL: http://kubernetes.kubernetes.rancher.internal
-    command:
-        - lb-controller
-        - --controller=kubernetes
-        - --provider=rancher
-    links:
-        - kubernetes
+# rancher-ingress-controller:
+#     image: rancher/lb-service-rancher:v0.4.0
+#     labels:
+#         io.rancher.scheduler.affinity:host_label_soft: orchestration=true
+#         io.rancher.container.create_agent: "true"
+#         io.rancher.container.agent.role: environment
+#     environment:
+#         KUBERNETES_URL: http://kubernetes.kubernetes.rancher.internal
+#     command:
+#         - lb-controller
+#         - --controller=kubernetes
+#         - --provider=rancher
+#     links:
+#         - kubernetes
