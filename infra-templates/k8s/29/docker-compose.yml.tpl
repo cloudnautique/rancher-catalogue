@@ -1,21 +1,3 @@
-etcd-operator:
-    image: llparse/etcd-operator:dev
-    command:
-    - --debug=false
-    - rancher
-    - operator
-    - --analytics=true
-    - --gc-interval=15m
-    - --chaos-level=0
-    labels:
-        io.rancher.container.agent.role: environmentAdmin
-        io.rancher.container.create_agent: "true"
-        io.rancher.container.dns: 'true'
-        io.rancher.container.pull_image: always
-    net: host
-    stdin_open: true
-    tty: true
-
 etcd:
     image: rancher/none
     net: none
