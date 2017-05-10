@@ -36,6 +36,12 @@
     required: false
     default: ""
     type: string
+  - variable: ENABLE_RANCHER_INGRESS_CONTROLLER
+    description: Deploy the Rancher ingress controller which automatically provisions Rancher load balancers in response to Kubernetes ingress creation events.
+    label: Enable Rancher Ingress Controller
+    required: true
+    default: true
+    type: boolean
   - variable: ENABLE_ADDONS
     label: Enable Kubernetes Add-ons
     description: Setting this to `false` will disable Dashboard, Helm, SkyDNS, and other Kubernetes add-on services. This is meant for advanced users who want to deploy custom versions of these add-ons.

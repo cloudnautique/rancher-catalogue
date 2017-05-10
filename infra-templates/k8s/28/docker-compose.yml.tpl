@@ -229,6 +229,7 @@ rancher-kubernetes-agent:
     links:
         - kubernetes
 
+{{- if eq .Values.ENABLE_RANCHER_INGRESS_CONTROLLER "true" }}
 rancher-ingress-controller:
     image: rancher/lb-service-rancher:v0.6.1
     labels:
@@ -245,6 +246,7 @@ rancher-ingress-controller:
         - --provider=rancher
     links:
         - kubernetes
+{{- end }}
 
 rancher-kubernetes-auth:
     image: rancher/kubernetes-auth:v0.0.1
