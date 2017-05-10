@@ -1,3 +1,45 @@
+etcd-operator:
+    image: llparse/etcd-operator:dev
+    command:
+    - --debug=false
+    - rancher
+    - operator
+    - --analytics=true
+    - --gc-interval=15m
+    - --chaos-level=0
+    labels:
+        io.rancher.container.agent.role: environmentAdmin
+        io.rancher.container.create_agent: "true"
+        io.rancher.container.dns: 'true'
+        io.rancher.container.pull_image: always
+    net: host
+    stdin_open: true
+    tty: true
+
+etcd:
+    image: rancher/none
+    net: none
+    environment:
+        ETCD_HEARTBEAT_INTERVAL: '${ETCD_HEARTBEAT_INTERVAL}'
+        ETCD_ELECTION_TIMEOUT: '${ETCD_ELECTION_TIMEOUT}'
+    labels:
+        io.rancher.operator: etcd
+        io.rancher.operator.etcd.size: '${ETCD_SCALE}'
+        io.rancher.operator.etcd.version: '3.1.7'
+        io.rancher.operator.etcd.paused: 'false'
+        io.rancher.operator.etcd.antiaffinity: 'true'
+        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
+        io.rancher.operator.etcd.nodeselector: etcd=true
+        {{- end }}
+        io.rancher.operator.etcd.network: ipsec
+        io.rancher.operator.etcd.backup: '${ENABLE_BACKUPS}'
+        io.rancher.operator.etcd.backup.count: '${BACKUP_COUNT}'
+        io.rancher.operator.etcd.backup.delete: 'false'
+        io.rancher.operator.etcd.backup.interval: '${BACKUP_INTERVAL}'
+        io.rancher.operator.etcd.backup.storage.driver: '${STORAGE_DRIVER}'
+        io.rancher.operator.etcd.restore.from: '${RESTORE_FROM}'
+        io.rancher.service.selector.container: thisis=overwritten
+
 kubelet:
     labels:
         io.rancher.container.dns: "true"
@@ -105,24 +147,6 @@ proxy:
     links:
         - kubernetes
 
-etcd:
-    image: rancher/etcd:v2.3.7-11
-    labels:
-        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
-        io.rancher.scheduler.affinity:host_label: etcd=true
-        {{- end }}
-        io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    environment:
-        RANCHER_DEBUG: 'true'
-        EMBEDDED_BACKUPS: '${EMBEDDED_BACKUPS}'
-        BACKUP_PERIOD: '${BACKUP_PERIOD}'
-        BACKUP_RETENTION: '${BACKUP_RETENTION}'
-        ETCD_HEARTBEAT_INTERVAL: '${ETCD_HEARTBEAT_INTERVAL}'
-        ETCD_ELECTION_TIMEOUT: '${ETCD_ELECTION_TIMEOUT}'
-    volumes:
-    - etcd:/pdata:z
-    - /var/etcd/backups:/data-backup:z
-
 kubernetes:
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
@@ -133,7 +157,7 @@ kubernetes:
         io.rancher.sidekicks: kube-hostname-updater
     command:
         - kube-apiserver
-        - --storage-backend=etcd2
+        - --storage-backend=etcd3
         - --service-cluster-ip-range=10.43.0.0/16
         - --etcd-servers=http://etcd.kubernetes.rancher.internal:2379
         - --insecure-bind-address=0.0.0.0
