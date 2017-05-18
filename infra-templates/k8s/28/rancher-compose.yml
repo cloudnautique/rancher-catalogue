@@ -3,6 +3,7 @@
   version: v1.6.2-rancher2-1
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.0-alpha1
+  upgrade_from: "v1.5.4-rancher1-4,v1.5.2-rancher1-6"
   questions:
   - variable: CONSTRAINT_TYPE
     label: Plane Isolation
