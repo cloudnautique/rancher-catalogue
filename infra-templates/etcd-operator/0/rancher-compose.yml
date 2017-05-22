@@ -1,0 +1,47 @@
+.catalog:
+  version: v0.2.4-rancher
+  minimum_rancher_version: v1.5.0
+  questions:
+  - variable: CATTLE_URL
+    label: Rancher URL
+    description: Rancher account or environment API Endpoint URL 
+    required: false
+    type: string
+  - variable: CATTLE_ACCESS_KEY
+    label: Rancher Access Key
+    description: Rancher account or environment access key
+    required: false
+    type: string
+  - variable: CATTLE_SECRET_KEY
+    label: Rancher Secret Key
+    description: Rancher account or environment access key
+    required: false
+    type: password
+  - variable: ANALYTICS
+    label: Google Analytics
+    description: Send analytical events to Google
+    required: true
+    default: true
+    type: boolean
+  - variable: GC_INTERVAL
+    label: GC Period
+    description: Period of time between major garbage collection events
+    required: true
+    default: 10m0s
+    type: string
+  - variable: DEBUG
+    label: Debug Mode
+    description: Enable debug level logging
+    required: true
+    default: false
+    type: boolean
+  - variable: CHAOS_LEVEL
+    label: Chaos Level
+    description: DO NOT USE IN PRODUCTION. Level of chaos injected into the managed etcd clusters.
+    required: true
+    default: "0"
+    type: enum
+    options:
+    - "0"
+    - "1"
+    - "2"

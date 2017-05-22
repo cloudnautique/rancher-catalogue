@@ -9,3 +9,5 @@ stacks:
     templateId: 'library:infra*ipsec'
   - name: healthcheck
     templateId: 'library:infra*healthcheck'
+  - name: etcd-operator
+    templateId: 'library:infra*etcd-operator'
