@@ -1,0 +1,135 @@
+.catalog:
+  version: v0.1.0
+  minimum_rancher_version: v1.5.0
+  questions:
+  - variable: ANALYTICS
+    label: Google Analytics
+    description: Send analytical events to Google
+    required: true
+    default: true
+    type: boolean
+  - variable: GC_INTERVAL
+    label: GC Period
+    description: Period of time between major garbage collection events
+    required: true
+    default: 10m0s
+    type: string
+  - variable: DEBUG
+    label: Debug Mode
+    description: Enable debug level logging for operator process
+    required: true
+    default: false
+    type: boolean
+  - variable: SIZE
+    label: Size
+    description: Number of Etcd members to create
+    required: true
+    default: 3
+    type: int
+  - variable: VERSION
+    label: Version
+    description: Etcd binary version to run
+    required: true
+    default: 3.1.8
+    type: enum
+    options:
+    - 3.1.8
+    - 3.1.7
+    - 3.1.6
+    - 3.1.5
+    - 3.1.4
+    - 3.1.3
+    - 3.1.2
+    - 3.1.1
+    - 3.1.0
+    - 3.0.17
+    - 3.0.16
+    - 3.0.15
+    - 3.0.14
+    - 3.0.13
+    - 3.0.12
+    - 3.0.11
+    - 3.0.10
+    - 3.0.9
+    - 3.0.8
+    - 3.0.7
+    - 3.0.6
+    - 3.0.5
+    - 3.0.4
+    - 3.0.3
+    - 3.0.2
+    - 3.0.1
+    - 3.0.0
+  - variable: PAUSED
+    label: Paused
+    description: Pause operator reconciliation (this may be toggled via service upgrade)
+    default: false
+    type: boolean
+  - variable: ANTI_AFFINITY
+    label: Enforce Anti-Affinity
+    description: Prevent any two members of this cluster from being scheduled on a single host
+    default: true
+    type: boolean
+  - variable: NODE_SELECTOR
+    label: Node Selector
+    description: A comma-delimited list of label k-v pairs that a candidate node/host must have
+    required: false
+    type: string
+  - variable: NETWORK
+    label: Network Mode
+    description: The Docker Network to connect containers to (host, ipsec, bridge, etc.)
+    required: true
+    default: ipsec
+    type: enum
+    options:
+    - host
+    - ipsec
+    - vxlan
+  - variable: ENABLE_BACKUPS
+    label: Enable Backups
+    description: Periodically create backups. Enables automatic disaster recovery except for self-hosted clusters.
+    default: true
+    type: boolean
+  - variable: STORAGE_DRIVER
+    label: Storage Driver
+    description: If using PersistentVolume storage type, specify the driver to use.
+    required: false
+    default: rancher-nfs
+    type: enum
+    options:
+    - rancher-efs
+    - rancher-nfs
+  - variable: BACKUP_INTERVAL
+    label: Backup Interval
+    description: The interval between two backups.
+    required: true
+    default: 45m0s
+    type: string
+  - variable: BACKUP_COUNT
+    label: Backup Count
+    description: Maximum number of backups to retain. Setting to 0 disables backups and will be unable to recover from majority loss.
+    required: true
+    default: 32
+    type: int
+  - variable: CLEANUP_BACKUPS_ON_DELETE
+    label: Cleanup Backups
+    description: Delete backups when the cluster is deleted.
+    default: false
+    type: boolean
+  - variable: RESTORE_FROM
+    label: Restore Cluster
+    description: "Restore a cluster by service name or id. Example: etcd-1s42"
+    required: false
+    type: string
+  - variable: ETCD_HEARTBEAT_INTERVAL
+    label: Etcd Heartbeat Interval
+    description: Time (in milliseconds) of a heartbeat interval.
+    required: true
+    default: 500
+    type: int
+  - variable: ETCD_ELECTION_TIMEOUT
+    label: Etcd Election Timeout
+    description: Time (in milliseconds) for an election to timeout.
+    required: true
+    default: 5000
+    type: int

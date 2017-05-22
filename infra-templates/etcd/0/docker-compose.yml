@@ -1,0 +1,38 @@
+version: '2'
+services:
+  etcd-operator:
+    image: llparse/etcd-operator:dev
+    command:
+    - --debug=${DEBUG}
+    - rancher
+    - operator
+    - --analytics=${ANALYTICS}
+    - --gc-interval=${GC_INTERVAL}
+    labels:
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.container.create_agent: "true"
+      io.rancher.container.dns: 'true'
+      io.rancher.container.pull_image: always
+    network_mode: host
+    stdin_open: true
+    tty: true
+  etcd:
+    image: rancher/none
+    environment:
+      ETCD_HEARTBEAT_INTERVAL: '${ETCD_HEARTBEAT_INTERVAL}'
+      ETCD_ELECTION_TIMEOUT: '${ETCD_ELECTION_TIMEOUT}'
+    labels:
+      io.rancher.operator: etcd
+      io.rancher.operator.etcd.size: '${SIZE}'
+      io.rancher.operator.etcd.version: '${VERSION}'
+      io.rancher.operator.etcd.paused: '${PAUSED}'
+      io.rancher.operator.etcd.antiaffinity: '${ANTI_AFFINITY}'
+      io.rancher.operator.etcd.nodeselector: '${NODE_SELECTOR}'
+      io.rancher.operator.etcd.network: '${NETWORK}'
+      io.rancher.operator.etcd.backup: '${ENABLE_BACKUPS}'
+      io.rancher.operator.etcd.backup.interval: '${BACKUP_INTERVAL}'
+      io.rancher.operator.etcd.backup.count: '${BACKUP_COUNT}'
+      io.rancher.operator.etcd.backup.delete: '${CLEANUP_BACKUPS_ON_DELETE}'
+      io.rancher.operator.etcd.backup.storage.driver: '${STORAGE_DRIVER}'
+      io.rancher.operator.etcd.restore.from: '${RESTORE_FROM}'
+      io.rancher.service.selector.container: noop
