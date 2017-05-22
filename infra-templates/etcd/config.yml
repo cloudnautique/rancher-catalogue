@@ -1,0 +1,5 @@
+name: Etcd
+description: >
+  Configure and manage etcd clusters using declarative configuration
+version: v0.1.0
+category: Coordination
