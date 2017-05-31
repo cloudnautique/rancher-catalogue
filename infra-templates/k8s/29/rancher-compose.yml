@@ -57,19 +57,12 @@
     description: "Write Heapster metrics to an absolute path on the host. This may be network-attached storage."
     required: false
     type: string
-
   - variable: ANALYTICS
     label: Google Analytics
     description: Send analytical events to Google
     required: true
     default: true
     type: boolean
-  - variable: SIZE
-    label: Size
-    description: Number of Etcd members to create
-    required: true
-    default: 3
-    type: int
   - variable: ENABLE_BACKUPS
     label: Enable Backups
     description: Periodically create backups. Enables automatic disaster recovery except for self-hosted clusters.
@@ -77,24 +70,25 @@
     type: boolean
   - variable: STORAGE_DRIVER
     label: Storage Driver
-    description: If using PersistentVolume storage type, specify the driver to use.
-    required: false
-    default: rancher-nfs
+    description: Specify the storage driver to use for backups. Drivers other than local are more resilient but require extra setup.
+    required: true
+    default: local
     type: enum
     options:
+    - local
     - rancher-efs
     - rancher-nfs
   - variable: BACKUP_INTERVAL
     label: Backup Interval
     description: The interval between two backups.
     required: true
-    default: 45m0s
+    default: 15m
     type: string
   - variable: BACKUP_COUNT
     label: Backup Count
     description: Maximum number of backups to retain. Setting to 0 disables backups and will be unable to recover from majority loss.
     required: true
-    default: 32
+    default: 16
     type: int
   - variable: CLEANUP_BACKUPS_ON_DELETE
     label: Cleanup Backups

@@ -21,7 +21,7 @@ etcd:
         ETCD_ELECTION_TIMEOUT: '${ETCD_ELECTION_TIMEOUT}'
     labels:
         io.rancher.operator: etcd
-        io.rancher.operator.etcd.size: '${SIZE}'
+        io.rancher.operator.etcd.size: '-1'
         io.rancher.operator.etcd.version: '3.1.8'
         io.rancher.operator.etcd.paused: 'false'
         io.rancher.operator.etcd.antiaffinity: 'true'
