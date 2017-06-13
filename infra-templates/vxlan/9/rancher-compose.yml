@@ -1,8 +1,7 @@
 .catalog:
   name: "Rancher VXLAN"
-  version: "v0.0.5-a"
-  minimum_rancher_version: v1.4.0-rc1
-  maximum_rancher_version: v1.4.99
+  version: "v0.1.1"
+  minimum_rancher_version: v1.6.0-alpha1
   questions:
     - variable: "DOCKER_BRIDGE"
       label: "Docker Bridge"
@@ -21,6 +20,7 @@
       description: "The subnet to use for the managed network."
       type: "string"
       default: '10.42.0.0/16'
+      required: true
     - variable: "SUBNET_PREFIX"
       label: "Subnet Prefix"
       description: "The Subnet prefix to use for the managed network."

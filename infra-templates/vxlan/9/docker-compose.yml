@@ -19,6 +19,8 @@ services:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.vxlan: 'true'
       io.rancher.cni.link_mtu_overhead: '0'
+      io.rancher.internal.service.vxlan: 'true'
+      io.rancher.service.selector.link: io.rancher.internal.service.vxlan=true
       io.rancher.network.macsync: 'true'
       io.rancher.network.arpsync: 'true'
     logging:

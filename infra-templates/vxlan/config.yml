@@ -1,7 +1,7 @@
 name: Rancher VXLAN
 description: |
   Rancher Networking plugin using VXLAN overlay.
-version: v0.1.0
+version: v0.1.1
 category: Networking
 labels:
   io.rancher.certified: rancher
