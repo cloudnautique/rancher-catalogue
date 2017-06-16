@@ -18,7 +18,7 @@ services:
       name: Rancher IPsec
       default_network:
         name: ipsec
-        host_ports: true
+        host_ports: {{ .Values.HOST_PORTS }}
         subnets:
         - network_address: $SUBNET
         dns:

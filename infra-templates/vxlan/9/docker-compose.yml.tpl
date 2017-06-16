@@ -29,7 +29,7 @@ services:
       name: Rancher VXLAN
       default_network:
         name: vxlan
-        host_ports: true
+        host_ports: {{ .Values.HOST_PORTS }}
         subnets:
         - network_address: $SUBNET
         dns:
