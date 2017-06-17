@@ -235,6 +235,7 @@ rancher-kubernetes-agent:
         io.rancher.container.create_agent: "true"
         io.rancher.container.agent.role: agent,environmentAdmin
         io.rancher.container.agent_service.labels_provider: "true"
+        io.rancher.k8s.agent: "true"
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
     image: rancher/kubernetes-agent:v0.6.2
@@ -243,6 +244,16 @@ rancher-kubernetes-agent:
         - /var/run/docker.sock:/var/run/docker.sock
     links:
         - kubernetes
+
+rancher-kubernetes-agent-upgrader:
+    image: joshwget/up
+    labels:
+        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
+        io.rancher.scheduler.affinity:host_label: orchestration=true
+        {{- end }}
+        io.rancher.container.create_agent: 'true'
+        io.rancher.container.agent.role: environmentAdmin
+        io.rancher.container.start_once: 'true'
 
 {{- if eq .Values.ENABLE_RANCHER_INGRESS_CONTROLLER "true" }}
 rancher-ingress-controller:
