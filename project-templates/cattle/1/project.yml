@@ -1,0 +1,11 @@
+name: Cattle
+description: Default Cattle template
+stacks:
+  - name: network-services
+    templateId: 'library:infra*network-services'
+  - name: ipsec
+    templateId: 'library:infra*ipsec'
+  - name: scheduler
+    templateId: 'library:infra*scheduler'
+  - name: healthcheck
+    templateId: 'library:infra*healthcheck'
