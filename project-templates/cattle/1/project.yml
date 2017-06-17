@@ -9,3 +9,5 @@ stacks:
     templateId: 'library:infra*scheduler'
   - name: healthcheck
     templateId: 'library:infra*healthcheck'
+  - name: network-diagnostics
+    templateId: 'library:infra*network-diagnostics'
