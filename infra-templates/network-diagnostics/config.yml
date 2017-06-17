@@ -1,0 +1,6 @@
+name: Network Support
+version: 0.0.1
+category: Networking
+labels:
+  io.rancher.certified: rancher
+  io.rancher.orchestration.supported: 'cattle,kubernetes'
