@@ -45,3 +45,15 @@
       type: "boolean"
       default: "true"
       required: true
+    - variable: "INFO_COLLECTION_INTERVAL"
+      label: "Log collection interval (in milliseconds)"
+      description: "How often should the logs be collected on every host?"
+      required: true
+      default: 600000
+      type: int
+    - variable: "INFO_HISTORY_LENGTH"
+      label: "Log History Length"
+      description: "How many log snapshots to keep?"
+      required: true
+      default: 1000
+      type: int
