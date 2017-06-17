@@ -1,0 +1,11 @@
+name: Kubernetes
+description: Default Kubernetes template
+stacks:
+  - name: kubernetes
+    templateId: 'library:infra*k8s'
+  - name: network-services
+    templateId: 'library:infra*network-services'
+  - name: ipsec
+    templateId: 'library:infra*ipsec'
+  - name: healthcheck
+    templateId: 'library:infra*healthcheck'
