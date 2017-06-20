@@ -1,6 +1,6 @@
 .catalog:
-  name: "Rancher VXLAN"
-  version: "v0.1.1"
+  name: "Rancher IPsec"
+  version: "0.1.1"
   minimum_rancher_version: v1.6.0-alpha1
   questions:
     - variable: "DOCKER_BRIDGE"
@@ -17,7 +17,7 @@
       type: int
     - variable: "SUBNET"
       label: "Subnet"
-      description: "The subnet to use for the managed network."
+      description: "The subnet to use for the managed IPSEC network."
       type: "string"
       default: '10.42.0.0/16'
       required: true
@@ -26,6 +26,7 @@
       description: "The Subnet prefix to use for the managed network. For most users this is same as the bridge subnet prefix. Ex: 16 if using 10.42.0.1/16 for bridge subnet."
       type: int
       default: 16
+      required: true
     - variable: "RANCHER_DEBUG"
       label: "Enable Debug Logs"
       description: "This will enable very verbose debug logs."
@@ -33,11 +34,11 @@
       default: "false"
       required: true
 
-vxlan:
+ipsec:
   network_driver:
-    name: Rancher VXLAN
+    name: Rancher IPsec
     default_network:
-      name: vxlan
+      name: ipsec
       host_ports: true
       subnets:
       - network_address: $SUBNET
@@ -46,7 +47,7 @@ vxlan:
       dns_search:
       - rancher.internal
     cni_config:
-      '10-rancher-vxlan.conf':
+      '10-rancher.conf':
         name: rancher-cni-network
         type: rancher-bridge
         bridge: $DOCKER_BRIDGE
@@ -54,15 +55,14 @@ vxlan:
         logToFile: /var/log/rancher-cni.log
         isDebugLevel: ${RANCHER_DEBUG}
         isDefaultGateway: true
-        hairpinMode: true
         hostNat: true
         hairpinMode: true
         mtu: ${MTU}
-        linkMTUOverhead: 50
+        linkMTUOverhead: 98
         ipam:
           type: rancher-cni-ipam
           subnetPrefixSize: /${SUBNET_PREFIX}
           logToFile: /var/log/rancher-cni.log
           isDebugLevel: ${RANCHER_DEBUG}
           routes:
-            - dst: 169.254.169.250/32
+          - dst: 169.254.169.250/32
