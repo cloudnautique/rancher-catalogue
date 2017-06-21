@@ -7,6 +7,10 @@ kubelet:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: compute=true
         {{- end }}
+    {{- if eq .Values.KUBELET_HOST_NAMESPACE "true" }}
+    environment:
+        KUBELET_HOST_NAMESPACE: "true"
+    {{- end }}
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
@@ -50,6 +54,10 @@ kubelet-unschedulable:
         io.rancher.container.agent.role: environmentAdmin
         io.rancher.scheduler.global: "true"
         io.rancher.scheduler.affinity:host_label_ne: compute=true
+    {{- if eq .Values.KUBELET_HOST_NAMESPACE "true" }}
+    environment:
+        KUBELET_HOST_NAMESPACE: "true"
+    {{- end }}
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig

@@ -52,6 +52,12 @@
     required: false
     default: "gcr.io/google_containers/pause-amd64:3.0"
     type: string
+  - variable: KUBELET_HOST_NAMESPACE
+    label: Run Kubelet in Host Namespace
+    description: Run kubelet within the host namespace rather than in a container.
+    required: true
+    default: false
+    type: boolean
   - variable: INFLUXDB_HOST_PATH
     label: InfluxDB Host Path
     description: "Write Heapster metrics to an absolute path on the host. This may be network-attached storage."
