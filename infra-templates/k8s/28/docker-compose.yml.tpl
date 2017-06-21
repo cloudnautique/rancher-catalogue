@@ -18,6 +18,9 @@ kubelet:
         - --cluster-dns=10.43.0.10
         - --cluster-domain=cluster.local
         - --network-plugin=cni
+        - --enable-cri=false
+        - --cgroups-per-qos=false
+        - --enforce-node-allocatable=
         - --cni-conf-dir=/etc/cni/managed.d
         {{- if and (ne .Values.REGISTRY "") (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
         - --pod-infra-container-image=${REGISTRY}/${POD_INFRA_CONTAINER_IMAGE}
@@ -61,6 +64,9 @@ kubelet-unschedulable:
         - --cluster-dns=10.43.0.10
         - --cluster-domain=cluster.local
         - --network-plugin=cni
+        - --enable-cri=false
+        - --cgroups-per-qos=false
+        - --enforce-node-allocatable=
         - --cni-conf-dir=/etc/cni/managed.d
         {{- if and (ne .Values.REGISTRY "") (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
         - --pod-infra-container-image=${REGISTRY}/${POD_INFRA_CONTAINER_IMAGE}
