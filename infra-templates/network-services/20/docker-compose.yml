@@ -14,7 +14,7 @@ services:
     - /var/lib/docker:/var/lib/docker
     - /var/lib/rancher/state:/var/lib/rancher/state
     - /lib/modules:/lib/modules:ro
-    - /run:/run:ro
+    - /run:/run
     - /var/run:/var/run:ro
     - rancher-cni-driver:/etc/cni
     - rancher-cni-driver:/opt/cni
