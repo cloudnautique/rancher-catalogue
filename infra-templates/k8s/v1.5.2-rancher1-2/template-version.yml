@@ -1,0 +1,53 @@
+name: Kubernetes
+version: v1.5.2-rancher1-2
+description: Rancher Kubernetes service
+minimum_rancher_version: v1.4.0-rc1
+maximum_rancher_version: v1.4.0-rc1
+questions:
+- variable: EMBEDDED_BACKUPS
+  label: Enable Backups
+  description: Periodically backup state to /var/etcd/backups. Mount network storage
+    here on all hosts before continuing
+  type: boolean
+  required: true
+  default: "true"
+- variable: BACKUP_PERIOD
+  label: Backup Creation Period
+  description: Create a backup after this amount of time passes. Must conform to duration
+    format
+  type: string
+  required: true
+  default: 15m0s
+- variable: BACKUP_RETENTION
+  label: Backup Retention Period
+  description: Expire a backup after this amount of time passes. Must conform to duration
+    format
+  type: string
+  required: true
+  default: 24h
+- variable: CLOUD_PROVIDER
+  label: Cloud Provider
+  description: The cloud provider on which Kubernetes is running
+  type: enum
+  required: true
+  default: rancher
+  options:
+  - rancher
+  - aws
+- variable: DISABLE_ADDONS
+  label: Disable rancher addons
+  description: Warning, Setting this to true will disable SkyDNS, dashboard, helm
+    and other k8s services. This is meant for advanced users who want to implement
+    their own DNS, UI and other addons.
+  type: enum
+  required: true
+  default: "false"
+  options:
+  - "true"
+  - "false"
+- variable: POD_INFRA_CONTAINER_IMAGE
+  label: Pod Infra Container Image
+  description: The image whose network/ipc namespaces containers in each pod will
+    use. (It uses kubelet default if left empty)
+  type: string
+  default: gcr.io/google_containers/pause-amd64:3.0

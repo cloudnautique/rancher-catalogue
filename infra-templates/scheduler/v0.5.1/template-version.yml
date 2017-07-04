@@ -1,0 +1,11 @@
+name: Scheduler
+version: v0.5.1
+description: A resource based scheduler plugin for Rancher.
+minimum_rancher_version: v1.5.0-rc1
+questions:
+- variable: RANCHER_DEBUG
+  label: Enable Debug Logs
+  description: This will enable very verbose debug logs.
+  type: boolean
+  required: true
+  default: "false"

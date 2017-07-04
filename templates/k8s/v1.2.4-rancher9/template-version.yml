@@ -1,0 +1,5 @@
+name: Kubernetes
+version: v1.2.4-rancher9
+description: Rancher Kubernetes service
+minimum_rancher_version: v1.1.1
+maximum_rancher_version: v1.1.99

@@ -1,0 +1,81 @@
+name: Kubernetes
+version: v1.5.2-rancher1-3
+description: Rancher Kubernetes service
+minimum_rancher_version: v1.5.0-rc1
+maximum_rancher_version: v1.5.0-rc1
+questions:
+- variable: CONSTRAINT_TYPE
+  label: Plane Isolation
+  description: Isolate the data, orchestration and compute planes via host labels.
+    Set to required when running in production.
+  type: enum
+  required: true
+  default: none
+  options:
+  - none
+  - required
+- variable: CLOUD_PROVIDER
+  label: Cloud Provider
+  description: The cloud provider on which Kubernetes is running
+  type: enum
+  required: true
+  default: rancher
+  options:
+  - rancher
+  - aws
+- variable: DISABLE_ADDONS
+  label: Disable Rancher Add-ons
+  description: Warning - setting this to `true` will disable SkyDNS, dashboard, helm
+    and other k8s services. This is meant for advanced users who want to implement
+    their own DNS, UI and other addons.
+  type: enum
+  required: true
+  default: "false"
+  options:
+  - "true"
+  - "false"
+- variable: POD_INFRA_CONTAINER_IMAGE
+  label: Pod Infra Container Image
+  description: The image whose network/ipc namespaces containers in each pod will
+    use. (It uses kubelet default if left empty)
+  type: string
+  default: gcr.io/google_containers/pause-amd64:3.0
+- variable: REGISTRY
+  label: Private Registry for Add-Ons
+  description: The registry to pull addon images from. This should be set to the private
+    registry from which the images for helm, heapster, dashboard and dns (and other
+    addon-services) should be pulled.
+  type: string
+- variable: EMBEDDED_BACKUPS
+  label: Enable Backups
+  description: Periodically backup state to /var/etcd/backups. Mount network storage
+    here on all hosts before continuing
+  type: boolean
+  required: true
+  default: "true"
+- variable: BACKUP_PERIOD
+  label: Backup Creation Period
+  description: Create a backup after this amount of time passes. Must conform to duration
+    format
+  type: string
+  required: true
+  default: 15m0s
+- variable: BACKUP_RETENTION
+  label: Backup Retention Period
+  description: Expire a backup after this amount of time passes. Must conform to duration
+    format
+  type: string
+  required: true
+  default: 24h
+- variable: ETCD_HEARTBEAT_INTERVAL
+  label: Etcd Heartbeat Interval
+  description: Time (in milliseconds) of a heartbeat interval.
+  type: int
+  required: true
+  default: "500"
+- variable: ETCD_ELECTION_TIMEOUT
+  label: Etcd Election Timeout
+  description: Time (in milliseconds) for an election to timeout.
+  type: int
+  required: true
+  default: "5000"

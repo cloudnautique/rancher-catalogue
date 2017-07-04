@@ -1,0 +1,23 @@
+name: Rancher EFS
+version: 0.2.0
+description: |
+  Docker volume plugin for EFS
+minimum_rancher_version: v1.1.99
+maximum_rancher_version: v1.1.99
+questions:
+- variable: AWS_ACCESS_KEY_ID
+  label: AWS Access Key
+  description: Optional if using IAM Profile
+  type: string
+- variable: AWS_SECRET_ACCESS_KEY
+  label: AWS Secret Key
+  description: Optional if using IAM Profile
+  type: password
+- variable: RANCHER_DEBUG
+  label: Debug Mode
+  description: Enable or disable verbose logging
+  type: enum
+  default: "false"
+  options:
+  - "true"
+  - "false"

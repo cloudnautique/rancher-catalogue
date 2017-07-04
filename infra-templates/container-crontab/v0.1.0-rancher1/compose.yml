@@ -1,0 +1,10 @@
+version: "2"
+services:
+  container-crontab:
+    image: rancher/container-crontab:v0.1.0
+    labels:
+      io.rancher.container.hostname_override: container_name
+      io.rancher.scheduler.global: true
+    privileged: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock

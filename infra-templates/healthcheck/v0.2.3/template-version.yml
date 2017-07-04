@@ -1,0 +1,5 @@
+name: Healthcheck Service
+version: v0.2.3
+description: Rancher healthcheck service
+minimum_rancher_version: v1.4.0-rc1
+maximum_rancher_version: v1.5.99
