@@ -1,0 +1,20 @@
+version: "2"
+services:
+  nat:
+    image: rancher/none
+    labels:
+      io.rancher.service.selector.container: experimental-windows-rancher
+    network_driver:
+      default_network:
+        kind: nat
+        name: nat
+      name: NAT Networking
+  transparent:
+    image: rancher/none
+    labels:
+      io.rancher.service.selector.container: experimental-windows-rancher
+    network_driver:
+      default_network:
+        kind: $TRANSPARENT_NETWORK_DRIVER_NAME
+        name: transparent
+      name: Transparent Networking

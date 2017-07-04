@@ -1,0 +1,5 @@
+name: Windows (Experimental)
+default_version: v0.0.1
+category: Orchestration
+labels:
+  io.rancher.certified: Experimental

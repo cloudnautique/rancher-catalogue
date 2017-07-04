@@ -1,0 +1,5 @@
+name: Scheduler
+version: v0.1.0-dev
+description: A resource based scheduler plugin for Rancher.
+minimum_rancher_version: v1.1.99
+maximum_rancher_version: v1.3.99

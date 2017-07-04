@@ -1,0 +1,8 @@
+name: Scheduler
+description: A resource based scheduler plugin for Rancher.
+default_version: v0.5.1
+category: Framework
+project_url: https://github.com/rancher/scheduler
+labels:
+  io.rancher.certified: rancher
+  io.rancher.orchestration.supported: cattle,mesos,swarm,kubernetes

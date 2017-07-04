@@ -1,0 +1,5 @@
+name: Kubernetes
+default_version: v1.5.4-rancher1-4.1
+category: Orchestration
+labels:
+  io.rancher.certified: rancher

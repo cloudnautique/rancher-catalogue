@@ -1,0 +1,19 @@
+name: Convoy NFS
+version: v0.1
+description: Convoy NFS - Docker volume plugin
+maximum_rancher_version: v1.1.99
+questions:
+- variable: NFS_SERVER
+  label: NFS Server
+  description: IP or hostname of the NFS Server
+  type: string
+  required: true
+- variable: MOUNT_DIR
+  label: Mount Directory
+  description: The directory on the NFS server to mount
+  type: string
+  required: true
+- variable: MOUNT_OPTS
+  label: Mount Options
+  description: 'Comma delimited list of mount options, for example: ''nfsvers=4,proto=udp'''
+  type: string

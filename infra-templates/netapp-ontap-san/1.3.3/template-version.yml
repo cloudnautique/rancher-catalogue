@@ -1,0 +1,51 @@
+name: nDVP
+version: 1.3.3
+description: NetApp Docker Volume Plugin (nDVP)
+questions:
+- variable: STORAGE_PREFIX
+  label: Storage Prefix
+  description: Prefix for created storage objects
+  type: string
+  default: netappdvp_
+- variable: DEBUG_ENABLED
+  label: Debug Logging
+  description: Enable debugging output in logs
+  type: boolean
+  default: "false"
+- variable: MANAGEMENT_LIF
+  label: Management LIF
+  description: IP address of clustered Data ONTAP management LIF
+  type: string
+  required: true
+- variable: DATA_LIF
+  label: Data LIF
+  description: IP address of protocol LIF; will be derived if not specified
+  type: string
+- variable: SVM
+  label: SVM
+  description: Storage Virtual Machine to use for provisioning
+  type: string
+  required: true
+- variable: AGGREGATE
+  label: Aggregate
+  description: Default aggregate for creating ontap storage objects
+  type: string
+  required: true
+- variable: USER_NAME
+  label: User Name
+  description: Username for connecting to your storage system
+  type: string
+  required: true
+  default: vsadmin
+- variable: USER_PASSWORD
+  label: Password
+  description: Password for connecting to your storage system
+  type: password
+  required: true
+- variable: VOLUME_DRIVER_NAME
+  label: Volume Driver Name
+  description: 'Name to use for this plugin instance with Docker:  docker volume create
+    -d <volume driver name>'
+  type: string
+  required: true
+  default: netapp

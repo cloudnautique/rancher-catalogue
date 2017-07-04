@@ -1,0 +1,38 @@
+portworx:
+  command: -c ${CLUSTER_ID} -k ${KVDB} ${USE_DISKS}
+  container_name: px
+  environment:
+    CLUSTER_ID: ${CLUSTER_ID}
+    HDR_DIR: ${HEADER_DIR}
+    KVDB: ${KVDB}
+    USE_DISKS: ${USE_DISKS}
+  image: portworx/px-dev:edge
+  ipc: host
+  labels:
+    io.rancher.container.dns: "true"
+    io.rancher.container.hostname_override: container_name
+    io.rancher.container.pull_image: always
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+  metadata:
+    debug: true
+    storageDriverName: ${VOLUME_DRIVE_NAME}
+    version: 1
+    volumeDriverName: ${VOLUME_DRIVER_NAME}
+  net: host
+  privileged: true
+  scale: 3
+  start_on_create: true
+  storage_driver:
+    blockDevicePath: null
+    name: ${VOLUME_DRIVER_NAME}
+    scope: environment
+    volume_access_mode: multiHostRW
+  volumes:
+  - /dev:/dev
+  - ${HEADER_DIR}:${HEADER_DIR}
+  - /run/docker/plugins:/run/docker/plugins
+  - /var/lib/osd:/var/lib/osd:shared
+  - /etc/pwx:/etc/pwx
+  - /opt/pwx/bin:/export_bin
+  - /var/run/docker.sock:/var/run/docker.sock
+  - /var/cores:/var/cores

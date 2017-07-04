@@ -1,0 +1,34 @@
+netapp-eseries:
+  cap_add:
+  - SYS_ADMIN
+  command: /netapp/container-launch.sh --config=http://169.254.169.250/latest/services/netapp-eseries/metadata
+  image: netapp/ndvp:1.3.3
+  ipc: host
+  labels:
+    io.rancher.scheduler.global: "true"
+  metadata:
+    controllerA: ${CONTROLLER_A}
+    controllerB: ${CONTROLLER_B}
+    debug: true
+    hostData_IP: ${HOSTDATA_IP}
+    password: ${USER_PASSWORD}
+    passwordArray: ${PASSWORD_ARRAY}
+    storageDriverName: eseries-iscsi
+    storagePrefix: ${STORAGE_PREFIX}
+    username: ${USER_NAME}
+    version: 1
+    volumeDriverName: ${VOLUME_DRIVER_NAME}
+    webProxyHostname: ${WEB_PROXY_HOSTNAME}
+    webProxyPort: ${WEB_PROXY_PORT}
+    webProxyUseHTTP: ${WEB_PROXY_USE_HTTP}
+    webProxyVerifyTLS: ${WEB_PROXY_VERIFY_TLS}
+  net: host
+  privileged: true
+  storage_driver:
+    name: ${VOLUME_DRIVER_NAME}
+    scope: environment
+    volume_access_mode: singleHostRW
+  tty: true
+  volumes:
+  - /:/host:shared
+  - /run:/run:shared

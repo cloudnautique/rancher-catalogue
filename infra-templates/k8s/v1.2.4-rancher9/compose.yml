@@ -1,0 +1,217 @@
+controller-manager:
+  command:
+  - kube-controller-manager
+  - --master=https://kubernetes:6443
+  - --cloud-provider=rancher
+  - --address=0.0.0.0
+  - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
+  - --root-ca-file=/etc/kubernetes/ssl/ca.pem
+  - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 10252
+    request_line: GET /healthz HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/k8s:v1.2.4-rancher9
+  labels:
+    io.rancher.container.agent.role: environmentAdmin
+    io.rancher.container.create_agent: "true"
+    io.rancher.scheduler.affinity:host_label_soft: orchestration=true
+    io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
+  links:
+  - kubernetes
+data:
+  entrypoint: /bin/true
+  image: busybox
+  labels:
+    io.rancher.container.start_once: "true"
+  net: none
+  volumes:
+  - /data
+etcd:
+  environment:
+    BACKUP_PERIOD: 15m
+    BACKUP_RETENTION: 24h
+    RANCHER_DEBUG: "true"
+  health_check:
+    healthy_threshold: 2
+    interval: 5000
+    port: 2378
+    recreate_on_quorum_strategy_config:
+      quorum: 2
+    request_line: GET /health HTTP/1.0
+    response_timeout: 3000
+    strategy: recreateOnQuorum
+    unhealthy_threshold: 3
+  image: rancher/etcd:v2.3.7-9
+  labels:
+    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
+    io.rancher.scheduler.affinity:host_label_soft: etcd=true
+    io.rancher.sidekicks: data
+  retain_ip: true
+  scale_policy:
+    increment: 1
+    max: 3
+    min: 1
+  volumes:
+  - etcd:/pdata
+  - /var/etcd/backups:/data-backup
+  volumes_from:
+  - data
+kubectld:
+  environment:
+    LISTEN: :8091
+    SERVER: http://master
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 8091
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/kubectld:v0.2.1
+  labels:
+    io.rancher.k8s.kubectld: "true"
+    io.rancher.scheduler.affinity:host_label_soft: orchestration=true
+    io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
+  links:
+  - kubernetes:master
+kubelet:
+  command:
+  - kubelet
+  - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
+  - --api_servers=https://kubernetes:6443
+  - --allow-privileged=true
+  - --register-node=true
+  - --cloud-provider=rancher
+  - --healthz-bind-address=0.0.0.0
+  - --cluster-dns=169.254.169.250
+  - --cluster-domain=cluster.local
+  image: rancher/k8s:v1.2.4-rancher9
+  ipc: host
+  labels:
+    io.rancher.container.agent.role: environmentAdmin
+    io.rancher.container.create_agent: "true"
+    io.rancher.container.dns: "true"
+    io.rancher.scheduler.affinity:host_label_ne: nopods=true
+    io.rancher.scheduler.global: "true"
+  links:
+  - kubernetes
+  net: host
+  pid: host
+  privileged: true
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+  - /var/run:/host/var/run
+  - /var/lib/docker:/var/lib/docker
+  - /dev:/host/dev
+kubernetes:
+  command:
+  - kube-apiserver
+  - --service-cluster-ip-range=10.43.0.0/16
+  - --etcd-servers=http://etcd:2379
+  - --insecure-bind-address=0.0.0.0
+  - --insecure-port=80
+  - --cloud-provider=rancher
+  - --allow_privileged=true
+  - --admission-control=NamespaceLifecycle,LimitRanger,SecurityContextDeny,ResourceQuota,ServiceAccount
+  - --client-ca-file=/etc/kubernetes/ssl/ca.pem
+  - --tls-cert-file=/etc/kubernetes/ssl/cert.pem
+  - --tls-private-key-file=/etc/kubernetes/ssl/key.pem
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 80
+    request_line: GET /healthz HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/k8s:v1.2.4-rancher9
+  labels:
+    io.rancher.container.agent.role: environmentAdmin
+    io.rancher.container.create_agent: "true"
+    io.rancher.scheduler.affinity:host_label_soft: orchestration=true
+    io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
+  links:
+  - etcd
+  metadata:
+    sans:
+    - IP:10.43.0.1
+  retain_ip: true
+proxy:
+  command:
+  - kube-proxy
+  - --master=http://master
+  - --v=2
+  - --healthz-bind-address=0.0.0.0
+  - --proxy-mode=userspace
+  image: rancher/k8s:v1.2.4-rancher9
+  labels:
+    io.rancher.container.dns: "true"
+    io.rancher.scheduler.affinity:host_label_ne: nopods=true
+    io.rancher.scheduler.global: "true"
+  links:
+  - kubernetes:master
+  net: host
+  privileged: true
+rancher-ingress-controller:
+  command:
+  - ingress-controller
+  - --lb-controller=kubernetes
+  - --lb-provider=rancher
+  environment:
+    KUBERNETES_URL: http://master
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 10241
+    request_line: GET /healthz HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/ingress-controller:v0.1.3
+  labels:
+    io.rancher.container.agent.role: environment
+    io.rancher.container.create_agent: "true"
+    io.rancher.scheduler.affinity:host_label_soft: orchestration=true
+    io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
+  links:
+  - kubernetes:master
+rancher-kubernetes-agent:
+  environment:
+    KUBERNETES_URL: http://master
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 10240
+    request_line: GET /healthcheck HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/kubernetes-agent:v0.2.1
+  labels:
+    io.rancher.container.agent_service.labels_provider: "true"
+    io.rancher.container.create_agent: "true"
+    io.rancher.scheduler.affinity:host_label_soft: orchestration=true
+    io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
+  links:
+  - kubernetes:master
+  privileged: true
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+scheduler:
+  command:
+  - kube-scheduler
+  - --master=http://master
+  - --address=0.0.0.0
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 10251
+    request_line: GET /healthz HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/k8s:v1.2.4-rancher9
+  labels:
+    io.rancher.scheduler.affinity:host_label_soft: orchestration=true
+    io.rancher.scheduler.affinity:host_label_soft_ne: etcd=true
+  links:
+  - kubernetes:master

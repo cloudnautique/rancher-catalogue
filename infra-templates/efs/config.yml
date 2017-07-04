@@ -1,8 +1,0 @@
-name: Rancher EFS
-description: |
-  Docker volume and Flex Vol plugin for Amazon EFS
-version: 0.2.2
-category: Storage
-labels:
-  io.rancher.certified: Experimental
-  io.rancher.orchestration.supported: 'cattle,mesos,swarm'

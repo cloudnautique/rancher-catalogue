@@ -1,0 +1,42 @@
+convoy-nfs:
+  command: volume-agent-nfs
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 10241
+    request_line: GET /healthcheck HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/convoy-agent:v0.7.0
+  labels:
+    io.rancher.container.create_agent: "true"
+    io.rancher.scheduler.global: "true"
+  metadata:
+    mount_dir: ${MOUNT_DIR}
+    mount_opts: ${MOUNT_OPTS}
+    nfs_server: ${NFS_SERVER}
+  pid: host
+  privileged: true
+  volumes:
+  - /lib/modules:/lib/modules:ro
+  - /proc:/host/proc
+  - /var/run:/host/var/run
+  - /etc/docker/plugins:/etc/docker/plugins
+convoy-nfs-storagepool:
+  command: storagepool-agent
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 10241
+    request_line: GET /healthcheck HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/convoy-agent:v0.7.0
+  labels:
+    io.rancher.container.create_agent: "true"
+  metadata:
+    mount_dir: ${MOUNT_DIR}
+    nfs_server: ${NFS_SERVER}
+  scale: 1
+  volumes:
+  - /var/run:/host/var/run

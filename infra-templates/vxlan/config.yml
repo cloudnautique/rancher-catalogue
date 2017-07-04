@@ -1,8 +1,0 @@
-name: Rancher VXLAN
-description: |
-  Rancher Networking plugin using VXLAN overlay.
-version: v0.1.0
-category: Networking
-labels:
-  io.rancher.certified: rancher
-  io.rancher.orchestration.supported: 'cattle,mesos,kubernetes'
