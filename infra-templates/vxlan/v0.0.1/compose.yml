@@ -1,0 +1,63 @@
+version: "2"
+services:
+  cni-driver:
+    command: sh -c "touch /var/log/rancher-ipam.log && exec tail ---disable-inotify
+      -F /var/log/rancher-ipam.log"
+    image: rancher/net:v0.7.5
+    labels:
+      io.rancher.container.dns: "true"
+      io.rancher.network.cni.binary: rancher-bridge
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: 25m
+    network_mode: host
+    pid: host
+    privileged: true
+  vxlan:
+    cap_add:
+    - NET_ADMIN
+    command: start-vxlan.sh
+    image: rancher/net:v0.7.5
+    labels:
+      io.rancher.container.agent_service.vxlan: "true"
+      io.rancher.container.create_agent: "true"
+      io.rancher.scheduler.global: "true"
+      io.rancher.sidekicks: cni-driver
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: 25m
+    network_driver:
+      cni_config:
+        10-rancher-vxlan.conf:
+          bridge: $DOCKER_BRIDGE
+          bridgeSubnet: $SUBNET
+          hairpinMode: true
+          hostNat: true
+          ipam:
+            logToFile: /var/log/rancher-ipam.log
+            routes:
+            - dst: 169.254.169.250/32
+            type: rancher-cni-ipam
+          isDefaultGateway: true
+          linkMTUOverhead: 98
+          name: rancher-cni-network
+          type: rancher-bridge
+      default_network:
+        dns:
+        - 169.254.169.250
+        dns_search:
+        - rancher.internal
+        host_ports: true
+        name: vxlan
+        subnets:
+        - network_address: $SUBNET
+      name: Rancher VXLAN
+    network_mode: vxlan
+    ports:
+    - 4789:4789/udp
+    volumes_from:
+    - cni-driver

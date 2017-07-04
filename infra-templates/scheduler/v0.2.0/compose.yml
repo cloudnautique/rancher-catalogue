@@ -1,0 +1,20 @@
+version: "2"
+services:
+  scheduler:
+    command: scheduler
+    health_check:
+      healthy_threshold: 2
+      interval: 2000
+      port: 80
+      request_line: GET /healthcheck HTTP/1.0
+      response_timeout: 2000
+      unhealthy_threshold: 3
+    image: rancher/scheduler:v0.5.0
+    labels:
+      io.rancher.container.agent_service.scheduling: "true"
+      io.rancher.container.create_agent: "true"
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: 25m

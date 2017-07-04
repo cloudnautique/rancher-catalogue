@@ -1,0 +1,8 @@
+name: Healthcheck Service
+description: Rancher healthcheck service
+default_version: v0.3.0
+category: Framework
+project_url: https://github.com/rancher/healthcheck
+labels:
+  io.rancher.certified: rancher
+  io.rancher.orchestration.supported: cattle,mesos,swarm,kubernetes

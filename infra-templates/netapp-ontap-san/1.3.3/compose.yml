@@ -1,0 +1,30 @@
+netapp-ontap-san:
+  cap_add:
+  - SYS_ADMIN
+  command: /netapp/container-launch.sh --config=http://169.254.169.250/latest/services/netapp-ontap-san/metadata
+  image: netapp/ndvp:1.3.3
+  ipc: host
+  labels:
+    io.rancher.scheduler.global: "true"
+  metadata:
+    aggregate: ${AGGREGATE}
+    dataLIF: ${DATA_LIF}
+    debug: true
+    managementLIF: ${MANAGEMENT_LIF}
+    password: ${USER_PASSWORD}
+    storageDriverName: ontap-san
+    storagePrefix: ${STORAGE_PREFIX}
+    svm: ${SVM}
+    username: ${USER_NAME}
+    version: 1
+    volumeDriverName: ${VOLUME_DRIVER_NAME}
+  net: host
+  privileged: true
+  storage_driver:
+    name: ${VOLUME_DRIVER_NAME}
+    scope: environment
+    volume_access_mode: singleHostRW
+  tty: true
+  volumes:
+  - /:/host:shared
+  - /run:/run:shared

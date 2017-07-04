@@ -1,0 +1,10 @@
+name: Network Services
+version: v0.2.0
+minimum_rancher_version: v1.6.0-alpha1
+questions:
+- variable: DNS_RECURSER_TIMEOUT
+  label: Timeout for Rancher DNS Recurser
+  description: Specify timeout in seconds for DNS Recurser.
+  type: int
+  required: true
+  default: "2"

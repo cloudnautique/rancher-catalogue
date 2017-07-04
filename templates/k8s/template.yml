@@ -1,0 +1,5 @@
+name: Kubernetes
+description: |
+  Kubernetes service
+default_version: v1.3.0-rancher4
+category: System

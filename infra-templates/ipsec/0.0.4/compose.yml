@@ -1,0 +1,75 @@
+version: "2"
+services:
+  cni-driver:
+    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify
+      -F /var/log/rancher-cni.log"
+    image: rancher/net:v0.8.7
+    labels:
+      io.rancher.container.dns: "true"
+      io.rancher.network.cni.binary: rancher-bridge
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: 25m
+    network_mode: host
+    pid: host
+    privileged: true
+  ipsec:
+    command: sh -c "echo Refer to router sidekick for logs; mkfifo f; exec cat f"
+    image: rancher/net:holder
+    labels:
+      io.rancher.cni.link_mtu_overhead: "0"
+      io.rancher.scheduler.global: "true"
+      io.rancher.sidekicks: router,cni-driver
+    network_driver:
+      cni_config:
+        10-rancher.conf:
+          bridge: $DOCKER_BRIDGE
+          bridgeSubnet: $SUBNET
+          hairpinMode: true
+          hostNat: true
+          ipam:
+            isDebugLevel: ${RANCHER_DEBUG}
+            logToFile: /var/log/rancher-cni.log
+            routes:
+            - dst: 169.254.169.250/32
+            type: rancher-cni-ipam
+          isDebugLevel: ${RANCHER_DEBUG}
+          isDefaultGateway: true
+          linkMTUOverhead: 98
+          logToFile: /var/log/rancher-cni.log
+          mtu: ${MTU}
+          name: rancher-cni-network
+          type: rancher-bridge
+      default_network:
+        dns:
+        - 169.254.169.250
+        dns_search:
+        - rancher.internal
+        host_ports: true
+        name: ipsec
+        subnets:
+        - network_address: $SUBNET
+      name: Rancher IPsec
+    network_mode: ipsec
+    ports:
+    - 500:500/udp
+    - 4500:4500/udp
+    volumes_from:
+    - cni-driver
+  router:
+    cap_add:
+    - NET_ADMIN
+    environment:
+      RANCHER_DEBUG: ${RANCHER_DEBUG}
+    image: rancher/net:v0.8.7
+    labels:
+      io.rancher.container.agent_service.ipsec: "true"
+      io.rancher.container.create_agent: "true"
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: 25m
+    network_mode: container:ipsec

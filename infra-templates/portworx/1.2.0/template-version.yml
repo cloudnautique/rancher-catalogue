@@ -1,0 +1,35 @@
+name: Portworx
+version: 1.2.0
+description: Portworx Docker Volume Plugin
+questions:
+- variable: VOLUME_DRIVER_NAME
+  label: Volume Driver Name
+  description: 'Name to use for this plugin instance with Docker:  docker volume create
+    -d <volume driver name>'
+  type: string
+  required: true
+  default: pxd
+- variable: CLUSTER_ID
+  label: Cluster ID
+  description: 'Arbitrary Cluster ID, common to all nodes in PX cluster '
+  type: string
+  required: true
+- variable: KVDB
+  label: Key-Value Database
+  description: 'Key-value database, accessibe to all nodes in PX cluster (Ex: ''etcd://10.0.0.42:4001'')'
+  type: string
+  required: true
+- variable: USE_DISKS
+  label: Use Disks
+  description: 'Cmdline args for disks to use. Ex: ''-a'' for all available, or ''-s
+    /dev/sdX'' for each individual disk'
+  type: string
+  required: true
+  default: -s /dev/xvdb
+- variable: HEADER_DIR
+  label: Headers Directory
+  description: Directory where kernel headers can be found.  Default is '/usr/src'.  For
+    CoreOS use '/lib/modules'
+  type: string
+  required: true
+  default: /usr/src

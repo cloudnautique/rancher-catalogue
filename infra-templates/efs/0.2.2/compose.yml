@@ -1,0 +1,28 @@
+version: "2"
+services:
+  efs-driver:
+    environment:
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    image: rancher/storage-efs:v0.6.5
+    labels:
+      io.rancher.container.agent.role: environment
+      io.rancher.container.create_agent: "true"
+      io.rancher.scheduler.global: "true"
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: 25m
+    network_mode: host
+    pid: host
+    privileged: true
+    storage_driver:
+      name: rancher-efs
+      scope: environment
+      volume_access_mode: multiHostRW
+    volumes:
+    - /run:/run
+    - /var/run:/var/run
+    - /dev:/host/dev
+    - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared

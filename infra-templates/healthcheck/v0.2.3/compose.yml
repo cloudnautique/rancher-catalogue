@@ -1,0 +1,18 @@
+version: "2"
+services:
+  healthcheck:
+    health_check:
+      healthy_threshold: 2
+      interval: 2000
+      port: 42
+      response_timeout: 2000
+      unhealthy_threshold: 3
+    image: rancher/healthcheck:v0.2.3
+    labels:
+      io.rancher.container.create_agent: "true"
+      io.rancher.scheduler.global: "true"
+    logging:
+      driver: json-file
+      options:
+        max-file: "2"
+        max-size: 25m

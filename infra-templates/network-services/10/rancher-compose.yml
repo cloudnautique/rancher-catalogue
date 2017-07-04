@@ -1,5 +1,0 @@
-.catalog:
-    name: Network Services
-    version: v0.1.0
-    minimum_rancher_version: v1.5.0-alpha1
-    maximum_rancher_version: v1.5.0-alpha1

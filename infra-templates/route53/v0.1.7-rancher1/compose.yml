@@ -1,0 +1,20 @@
+route53:
+  environment:
+    AWS_ACCESS_KEY: ${AWS_ACCESS_KEY}
+    AWS_REGION: ${AWS_REGION}
+    AWS_SECRET_KEY: ${AWS_SECRET_KEY}
+    ROOT_DOMAIN: ${ROOT_DOMAIN}
+    TTL: ${TTL}
+  expose:
+  - 1000
+  health_check:
+    healthy_threshold: 2
+    interval: 2000
+    port: 1000
+    request_line: GET / HTTP/1.0
+    response_timeout: 2000
+    unhealthy_threshold: 3
+  image: rancher/external-dns:v0.1.7
+  labels:
+    io.rancher.container.agent.role: external-dns
+    io.rancher.container.create_agent: "true"

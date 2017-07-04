@@ -1,0 +1,75 @@
+name: nDVP
+version: 1.3.3
+description: NetApp Docker Volume Plugin (nDVP)
+questions:
+- variable: STORAGE_PREFIX
+  label: Storage Prefix
+  description: Prefix for created storage objects
+  type: string
+  default: netappdvp_
+- variable: DEBUG_ENABLED
+  label: Debug Logging
+  description: Enable debugging output in logs
+  type: boolean
+  default: "false"
+- variable: WEB_PROXY_HOSTNAME
+  label: Web Proxy Hostname
+  description: Hostname or IP address of Web Services Proxy
+  type: string
+  required: true
+- variable: WEB_PROXY_PORT
+  label: Web Proxy Port
+  description: Port number of the Web Services Proxy (optional)
+  type: string
+  required: true
+  default: "8443"
+- variable: WEB_PROXY_USE_HTTP
+  label: Web Proxy Use HTTP?
+  description: Use HTTP instead of HTTPS for Web Services Proxy (default = false)?
+  type: boolean
+  required: true
+  default: "false"
+- variable: WEB_PROXY_VERIFY_TLS
+  label: Web Proxy verify TLS?
+  description: Verify server's certificate chain and hostname (default = false)?
+  type: boolean
+  required: true
+  default: "false"
+- variable: USER_NAME
+  label: User Name
+  description: Username for Web Services Proxy
+  type: string
+  required: true
+  default: rw
+- variable: USER_PASSWORD
+  label: Password
+  description: Password for Web Services Proxy
+  type: password
+  required: true
+  default: rw
+- variable: CONTROLLER_A
+  label: Controller A IP
+  description: IP address of controller A
+  type: string
+  required: true
+- variable: CONTROLLER_B
+  label: Controller B IP
+  description: IP address of controller B
+  type: string
+  required: true
+- variable: PASSWORD_ARRAY
+  label: Password for Array
+  description: Password for storage array (if set)
+  type: password
+- variable: HOSTDATA_IP
+  label: Host iSCSI IP address
+  description: Host iSCSI IP address (if multipathing just choose either one)
+  type: string
+  required: true
+- variable: VOLUME_DRIVER_NAME
+  label: Volume Driver Name
+  description: 'Name to use for this plugin instance with Docker:  docker volume create
+    -d <volume driver name>'
+  type: string
+  required: true
+  default: netapp
