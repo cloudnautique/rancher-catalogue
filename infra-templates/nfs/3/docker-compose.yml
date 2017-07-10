@@ -2,7 +2,7 @@ version: '2'
 services:
   nfs-driver:
     privileged: true
-    image: rancher/storage-nfs:v0.6.5
+    image: llparse/storage-nfs:dev
     pid: host
     labels:
       io.rancher.scheduler.global: 'true'
@@ -12,6 +12,8 @@ services:
       NFS_SERVER: '${NFS_SERVER}'
       MOUNT_DIR: '${MOUNT_DIR}'
       MOUNT_OPTS: '${MOUNT_OPTS},${NFS_VERS}'
+      ON_REMOVE: '${ON_REMOVE}'
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
     volumes:
     - /run:/run
     - /var/run:/var/run

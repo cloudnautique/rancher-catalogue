@@ -1,6 +1,6 @@
 .catalog:
   name: "Rancher NFS"
-  version: "0.2.2"
+  version: "0.2.3"
   description: |
     Docker volume plugin for NFS
   minimum_rancher_version: v1.4.0-rc1
@@ -19,6 +19,15 @@
     label: "Mount Options"
     description: "Comma delimited list of mount options, for example: 'proto=udp'. Do not specify `nfsvers` option, it will be ignored."
     type: "string"
+  - variable: ON_REMOVE
+    label: On Remove
+    description: On removal of Rancher NFS volume, should the underlying data be retained or purged.
+    type: enum
+    required: true
+    default: purge
+    options:
+    - purge
+    - retain
   - variable: "NFS_VERS"
     label: NFS Version
     description: The NFS version to use
