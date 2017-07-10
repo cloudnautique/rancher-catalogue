@@ -2,8 +2,8 @@ version: '2'
 services:
   nfs-driver:
     privileged: true
-    image: rancher/storage-nfs:v0.6.5
-    pid: host
+    image: llparse/storage-nfs:dev-nfs3
+    network_mode: host
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
@@ -11,7 +11,8 @@ services:
     environment:
       NFS_SERVER: '${NFS_SERVER}'
       MOUNT_DIR: '${MOUNT_DIR}'
-      MOUNT_OPTS: '${MOUNT_OPTS},${NFS_VERS}'
+      MOUNT_OPTS: '${NFS_VERS},${MOUNT_OPTS}'
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
     volumes:
     - /run:/run
     - /var/run:/var/run

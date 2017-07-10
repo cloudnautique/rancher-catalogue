@@ -1,6 +1,6 @@
 .catalog:
   name: "Rancher NFS"
-  version: "0.2.2"
+  version: "0.2.3"
   description: |
     Docker volume plugin for NFS
   minimum_rancher_version: v1.4.0-rc1
@@ -21,12 +21,14 @@
     type: "string"
   - variable: "NFS_VERS"
     label: NFS Version
-    description: The NFS version to use
+    description: Default NFS version to use
     type: enum
     required: true
     default: nfsvers=4
     options:
     - nfsvers=4
+    - nfsvers=3
+    - nfsvers=2
   - variable: RANCHER_DEBUG
     label: Debug Mode
     type: enum
