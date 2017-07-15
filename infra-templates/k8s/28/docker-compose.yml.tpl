@@ -19,6 +19,7 @@ kubelet:
         - --cluster-domain=cluster.local
         - --network-plugin=cni
         - --cni-conf-dir=/etc/cni/managed.d
+        - --node-status-update-frequency=4s
         {{- if and (ne .Values.REGISTRY "") (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
         - --pod-infra-container-image=${REGISTRY}/${POD_INFRA_CONTAINER_IMAGE}
         {{- else if (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
@@ -62,6 +63,7 @@ kubelet-unschedulable:
         - --cluster-domain=cluster.local
         - --network-plugin=cni
         - --cni-conf-dir=/etc/cni/managed.d
+        - --node-status-update-frequency=4s
         {{- if and (ne .Values.REGISTRY "") (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
         - --pod-infra-container-image=${REGISTRY}/${POD_INFRA_CONTAINER_IMAGE}
         {{- else if (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
@@ -148,12 +150,15 @@ kubernetes:
         - --runtime-config=batch/v2alpha1
         - --authentication-token-webhook-config-file=/etc/kubernetes/authconfig
         - --runtime-config=authentication.k8s.io/v1beta1=true
+        - --audit-log-path=/var/log/kube-apiserver-audit.log
         {{- if eq .Values.RBAC "true" }}
         - --authorization-mode=RBAC
         {{- end }}
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
     image: rancher/k8s:v1.6.6-rancher1-4
+    volumes:
+        - /var/log/kube-apiserver-audit.log:/var/log/kube-apiserver-audit.log
     links:
         - etcd
         - rancher-kubernetes-auth
@@ -217,6 +222,9 @@ controller-manager:
         - --address=0.0.0.0
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
+        - --node-monitor-period=2s
+        - --node-monitor-grace-period=16s
+        - --pod-eviction-timeout=30s
     image: rancher/k8s:v1.6.6-rancher1-4
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
