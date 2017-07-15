@@ -150,7 +150,7 @@ kubernetes:
         - --runtime-config=batch/v2alpha1
         - --authentication-token-webhook-config-file=/etc/kubernetes/authconfig
         - --runtime-config=authentication.k8s.io/v1beta1=true
-        - --audit-log-path=/var/log/kube-apiserver-audit.log
+        - --audit-log-path=/var/log/kubernetesaudit/kube-apiserver-audit.log
         {{- if eq .Values.RBAC "true" }}
         - --authorization-mode=RBAC
         {{- end }}
@@ -158,7 +158,7 @@ kubernetes:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
     image: rancher/k8s:v1.6.6-rancher1-4
     volumes:
-        - /var/log/kube-apiserver-audit.log:/var/log/kube-apiserver-audit.log
+        - /var/log/kubernetesaudit:/var/log/kubernetesaudit
     links:
         - etcd
         - rancher-kubernetes-auth
