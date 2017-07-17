@@ -19,6 +19,16 @@
     label: "Mount Options"
     description: "Comma delimited list of mount options, for example: 'proto=udp'. Do not specify `nfsvers` option, it will be ignored."
     type: "string"
+  - variable: "NFS_VERS"
+    label: NFS Version
+    description: Default NFS version to use
+    type: enum
+    required: true
+    default: nfsvers=4
+    options:
+    - nfsvers=4
+    - nfsvers=3
+    - nfsvers=2
   - variable: ON_REMOVE
     label: On Remove
     description: On removal of Rancher NFS volume, should the underlying data be retained or purged.
@@ -28,14 +38,6 @@
     options:
     - purge
     - retain
-  - variable: "NFS_VERS"
-    label: NFS Version
-    description: The NFS version to use
-    type: enum
-    required: true
-    default: nfsvers=4
-    options:
-    - nfsvers=4
   - variable: RANCHER_DEBUG
     label: Debug Mode
     type: enum
