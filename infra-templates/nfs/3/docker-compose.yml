@@ -3,7 +3,7 @@ services:
   nfs-driver:
     privileged: true
     image: llparse/storage-nfs:dev
-    pid: host
+    network_mode: host
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
