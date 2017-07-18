@@ -1,8 +1,8 @@
-## Kubernetes v1.7.0
+## Kubernetes v1.7.1
 
 ### Software Versions
 
-* [Kubernetes v1.7.0](https://github.com/rancher/kubernetes/tree/v1.7.0-rancher1)
+* [Kubernetes v1.7.1](https://github.com/rancher/kubernetes/tree/v1.7.1-rancher1)
 * [Etcd v2.3.7](https://github.com/coreos/etcd/releases/tag/v2.3.7)
 
 ### Upgrading to this Version
