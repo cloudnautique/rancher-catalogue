@@ -1,9 +1,9 @@
-## Kubernetes
+## Kubernetes v1.7.0
 
 ### Software Versions
 
 * [Kubernetes v1.7.0](https://github.com/rancher/kubernetes/tree/v1.7.0-rancher1)
-* [Etcd v2.3.7](https://github.com/coreos/etcd/releases/tag/v2.3.7)
+* [Etcd v3.0.17](https://github.com/coreos/etcd/releases/tag/v3.0.17)
 
 ### Required Open Ports on hosts
 
@@ -16,4 +16,3 @@ If you want to separate the planes for resiliency by labeling your hosts to sepa
 ### KubeDNS
 
 KubeDNS is enabled for name resolution as described in the [Kubernetes DNS docs](http://kubernetes.io/docs/admin/dns/). The DNS service IP address is `10.43.0.10`.
-

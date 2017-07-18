@@ -1,15 +1,13 @@
-## Kubernetes
+## Kubernetes v1.7.0
 
 ### Software Versions
 
-* [Kubernetes v1.7.0-rancher1](https://github.com/rancher/kubernetes/tree/v1.7.0-rancher1)
+* [Kubernetes v1.7.0](https://github.com/rancher/kubernetes/tree/v1.7.0-rancher1)
 * [Etcd v2.3.7](https://github.com/coreos/etcd/releases/tag/v2.3.7)
 
 ### Upgrading to this Version
 
 Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ignoring this will result in data loss. For older templates, please first upgrade to `v1.5.4-rancher1`.
-
-If you are trying to create resiliency planes by labeling your hosts to separate out the data, orchestration and compute planes, you **must** change the plane isolation option to `required`. The host labels, `compute=true`, `orchestration=true` and `etcd=true`, are required on your hosts in order for Kubernetes to successfully launch. By default, `none` is selected and there will be not attempt for plane isolation.
 
 ### Required Open Ports on hosts
 
@@ -22,9 +20,3 @@ If you want to separate the planes for resiliency by labeling your hosts to sepa
 ### KubeDNS
 
 KubeDNS is enabled for name resolution as described in the [Kubernetes DNS docs](http://kubernetes.io/docs/admin/dns/). The DNS service IP address is `10.43.0.10`.
-
-### Software Versions
-
-* [Etcd v2.3.7](https://github.com/coreos/etcd/releases/tag/v2.3.7)
-
-* [Kubernetes v1.7.0-rancher1](https://github.com/rancher/kubernetes/tree/v1.7.0-rancher1)
