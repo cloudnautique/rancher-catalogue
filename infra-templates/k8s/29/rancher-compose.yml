@@ -1,6 +1,6 @@
 .catalog:
   name: Kubernetes
-  version: v1.7.0-rancher3
+  version: v1.7.1-rancher1
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.5-rc1
   questions:
@@ -34,6 +34,12 @@
     required: false
     default: ""
     type: string
+  - variable: DNS_REPLICAS
+    description: Number of replicas for SKY DNS service. Each replica would run on the separate host, so change the value according to your infrastructure.
+    label: Sky DNS service scale
+    required: false
+    default: 1
+    type: int
   - variable: ENABLE_RANCHER_INGRESS_CONTROLLER
     description: Deploy the Rancher ingress controller which automatically provisions Rancher load balancers in response to Kubernetes ingress creation events.
     label: Enable Rancher Ingress Controller
