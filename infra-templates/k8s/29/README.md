@@ -1,4 +1,9 @@
-## Kubernetes 1.7.0
+## Kubernetes
+
+### Software Versions
+
+* [Kubernetes v1.7.0-rancher1](https://github.com/rancher/kubernetes/tree/v1.7.0-rancher1)
+* [Etcd v2.3.7](https://github.com/coreos/etcd/releases/tag/v2.3.7)
 
 ### Upgrading to this Version
 
@@ -12,7 +17,7 @@ If you are trying to create resiliency planes by labeling your hosts to separate
 
 ### Plane Isolation
 
-If you set the "Plane Isolation" field to `required`, the host labels, `compute=true`, `orchestration=true` and `etcd=true`, are required on your hosts in order for Kubernetes to successfully launch.
+If you want to separate the planes for resiliency by labeling your hosts to separate out the data, orchestration and compute planes, you **must** change the plane isolation option to `required`. The host labels, `compute=true`, `orchestration=true` and `etcd=true`, are required on your hosts in order for Kubernetes to successfully launch. By default, `none` is selected and there will be no attempt for plane isolation.
 
 ### KubeDNS
 
