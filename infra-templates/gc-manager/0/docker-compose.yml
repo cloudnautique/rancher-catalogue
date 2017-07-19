@@ -1,0 +1,23 @@
+version: '2'
+services:
+  gc-manager:
+    privileged: true
+    network_mode: host
+    image: rancher/gc-manager:v0.1.0
+    labels:
+      io.rancher.scheduler.global: 'true'
+    environment:
+      IMAGE_GC_HIGH_THRESHOLD: '${IMAGE_GC_HIGH_THRESHOLD}'
+      IMAGE_GC_LOW_THRESHOLD: '${IMAGE_GC_LOW_THRESHOLD}'
+      IMAGE_GC_MIN_AGE: '${IMAGE_GC_MIN_AGE}'
+      IMAGE_GC_INTERVAL: '${IMAGE_GC_INTERVAL}'
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    volumes:
+    - /proc:/host/proc
+    - /dev:/host/dev
+    - /var/run/docker.sock:/var/run/docker.sock
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'

@@ -1,0 +1,7 @@
+name: Garbage Collection Manager
+description: Rancher Garbage Collection Manager
+version: v0.1.0
+category: Garbage Collection
+projectURL: https://github.com/rancher/gc-manager
+labels:
+  io.rancher.orchestration.supported: 'cattle'

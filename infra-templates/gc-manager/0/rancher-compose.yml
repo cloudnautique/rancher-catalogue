@@ -1,0 +1,37 @@
+.catalog:
+  name: "Rancher GC Manager"
+  version: "0.1.0"
+  description: |
+    Rancher Garbage Collection Manager
+  minimum_rancher_version: v1.1.99
+  questions:
+  - variable: IMAGE_GC_HIGH_THRESHOLD
+    description: the percent of disk usage which triggers image garbage collection
+    label: High Threshold
+    required: true
+    default: 90
+    type: int
+  - variable: IMAGE_GC_LOW_THRESHOLD
+    description: the percent of disk usage to which image garbage collection attempts to free.
+    label: Low Threshold
+    required: true
+    default: 80
+    type: int
+  - variable: IMAGE_GC_MIN_AGE
+    description: The minimum age an image can be garbage collected from the first detected time
+    label: minumum age(Minutes)
+    required: true
+    default: 5
+    type: int
+  - variable: IMAGE_GC_INTERVAL
+    description: Image Garbage Collection Interval
+    label: GC Interval(Minutes)
+    required: true
+    default: 5
+    type: int
+  - variable: "RANCHER_DEBUG"
+    label: "Enable Debug Logs"
+    description: "This will enable very verbose debug logs."
+    type: "boolean"
+    default: "false"
+    required: true
