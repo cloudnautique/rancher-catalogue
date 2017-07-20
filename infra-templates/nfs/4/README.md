@@ -75,3 +75,23 @@ volumes:
       host: 172.22.101.100
       export: /
 ```
+
+# Changelog
+
+Changelog format inspired by [keepachangelog](http://keepachangelog.com/en/0.3.0/).
+
+## [Unreleased]
+
+## [0.4.0] - 2017-07-19
+
+### Added
+
+* New driver option `onRemove=retain|purge` to conditionally [preserve data](#preserve-data)
+* NFS v3 support
+
+### Changed
+
+* Improve framework and driver logging
+
+[Unreleased]: https://github.com/rancher/storage/compare/v0.8.4...master
+[0.4.0]: https://github.com/rancher/storage/compare/v0.8.3...v0.8.4
