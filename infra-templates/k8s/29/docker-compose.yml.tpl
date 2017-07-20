@@ -192,7 +192,7 @@ kubectld:
     environment:
         SERVER: http://kubernetes.kubernetes.rancher.internal
         LISTEN: ":8091"
-    image: rancher/kubectld:v0.6.9
+    image: rancher/kubectld:v0.8.0
     links:
         - kubernetes
 
@@ -207,7 +207,7 @@ kubectl-shell:
         io.rancher.k8s.token: "true"
     command:
         - kubectl-shell-entry.sh
-    image: rancher/kubectld:v0.6.8
+    image: rancher/kubectld:v0.8.0
     privileged: true
 
 scheduler:
