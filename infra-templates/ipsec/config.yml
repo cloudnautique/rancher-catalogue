@@ -1,5 +1,5 @@
 name: Rancher IPsec
-version: 0.1.2
+version: 0.1.3
 category: Networking
 labels:
   io.rancher.certified: rancher
