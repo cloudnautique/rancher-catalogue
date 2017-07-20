@@ -80,6 +80,7 @@ services:
           linkMTUOverhead: 50
           ipam:
             type: rancher-cni-ipam
+            subnetPrefixSize: /{{ .Values.SUBNET_PREFIX }}
             logToFile: /var/log/rancher-cni.log
             isDebugLevel: ${RANCHER_DEBUG}
             routes:

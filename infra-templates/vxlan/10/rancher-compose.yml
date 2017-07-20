@@ -21,6 +21,12 @@
       type: "string"
       default: '10.42.0.0/16'
       required: true
+    - variable: "SUBNET_PREFIX"
+      label: "IPAM Subnet Prefix"
+      description: "The Subnet prefix to use for the managed network. For most users this is same as the bridge subnet prefix. Ex: 16 if using 10.42.0.0/16 for bridge subnet."
+      type: int
+      default: 16
+      required: true
     - variable: "RANCHER_DEBUG"
       label: "Enable Debug Logs"
       description: "This will enable very verbose debug logs."

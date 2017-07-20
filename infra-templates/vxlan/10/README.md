@@ -19,6 +19,7 @@ Traffic to and from hosts requires UDP port `4789` to be open.
 * `RANCHER_HAIRPIN_MODE`
 * `RANCHER_PROMISCUOUS_MODE`
 * `HOST_PORTS`
+* `SUBNET_PREFIX`
 
 #### Changelog
 
