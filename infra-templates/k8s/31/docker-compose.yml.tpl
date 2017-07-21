@@ -162,7 +162,7 @@ kube-hostname-updater:
     net: container:kubernetes
     command:
         - etc-host-updater
-    image: rancher/etc-host-updater:v0.0.2
+    image: rancher/etc-host-updater:v0.0.3
     links:
         - kubernetes
 
