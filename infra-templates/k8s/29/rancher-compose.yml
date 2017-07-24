@@ -1,6 +1,6 @@
 .catalog:
   name: Kubernetes
-  version: v1.7.1-rancher2
+  version: v1.7.2-rancher1
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.5-rc1
   questions:
