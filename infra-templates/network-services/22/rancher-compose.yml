@@ -13,5 +13,5 @@
       label: Timeout for Internal Rancher DNS
       description: Specify timeout in seconds for local requests.
       required: true
-      default: 10
+      default: 1
       type: int
