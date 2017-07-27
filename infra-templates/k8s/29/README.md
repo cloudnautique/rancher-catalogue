@@ -2,8 +2,8 @@
 
 ### Software Versions
 
-* [Kubernetes v1.7.2](https://github.com/rancher/kubernetes/tree/v1.7.2-rancher1)
-* [Etcd v2.3.7](https://github.com/coreos/etcd/releases/tag/v2.3.7)
+* [Kubernetes v1.7.2]
+* [Etcd v2.3.7]
 
 ### Upgrading to this Version
 
