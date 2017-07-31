@@ -1,10 +1,9 @@
 .catalog:
   name: "Rancher NFS"
-  version: "0.3.0"
+  version: 0.4.0
   description: |
     Docker volume plugin for NFS
-  minimum_rancher_version: v1.6.0
-  maximum_rancher_version: v1.6.5
+  minimum_rancher_version: v1.6.6-rc1
   questions:
   - variable: "NFS_SERVER"
     description: "IP or hostname of the default NFS Server"
@@ -22,12 +21,22 @@
     type: "string"
   - variable: "NFS_VERS"
     label: NFS Version
-    description: The NFS version to use
+    description: Default NFS version to use
     type: enum
     required: true
     default: nfsvers=4
     options:
     - nfsvers=4
+    - nfsvers=3
+  - variable: ON_REMOVE
+    label: On Remove
+    description: On removal of Rancher NFS volume, should the underlying data be retained or purged.
+    type: enum
+    required: true
+    default: purge
+    options:
+    - purge
+    - retain
   - variable: RANCHER_DEBUG
     label: Debug Mode
     type: enum

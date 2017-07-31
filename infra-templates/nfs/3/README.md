@@ -14,6 +14,7 @@ version: '2'
 services:
   foo:
     image: alpine
+    stdin_open: true
     volumes:
     - bar:/data
 volumes:
@@ -30,6 +31,7 @@ version: '2'
 services:
   foo:
     image: alpine
+    stdin_open: true
     volumes:
     - bar:/data
 volumes:
@@ -47,6 +49,7 @@ version: '2'
 services:
   foo:
     image: alpine
+    stdin_open: true
     volumes:
     - bar:/data
 volumes:

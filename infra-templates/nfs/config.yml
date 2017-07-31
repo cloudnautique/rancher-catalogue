@@ -1,7 +1,7 @@
 name: Rancher NFS
 description: |
-  Docker volume plugin for NFS. Supported for NFS v4.
-version: 0.3.0
+  Docker volume plugin for NFS. Supported for NFS v3 and v4.
+version: 0.4.0
 category: Storage
 labels:
   io.rancher.certified: rancher

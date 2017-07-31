@@ -3,7 +3,7 @@
   version: "v0.1.0"
   description: "Rancher healthcheck service"
   minimum_rancher_version: v1.1.99
-  maximum_rancher_version: v1.3.99
+  maximum_rancher_version: v1.1.99
 healthcheck:
   health_check:
       port: 42
