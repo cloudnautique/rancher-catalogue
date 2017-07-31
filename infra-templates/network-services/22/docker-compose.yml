@@ -1,7 +1,7 @@
 version: '2'
 services:
   network-manager:
-    image: rancher/network-manager:v0.7.6
+    image: rancher/network-manager:v0.7.7
     privileged: true
     network_mode: host
     pid: host

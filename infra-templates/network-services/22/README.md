@@ -10,8 +10,8 @@ This stack provides the following services:
 
 Default timeout for internal Rancher DNS was updated from 10 seconds to 1 second.
 
-#### Network Manager [rancher/network-manager:v0.7.6]
-* Fixes the arpsync logic to take action on only running and starting containers.
+#### Network Manager [rancher/network-manager:v0.7.7]
+* Fixes the conntrack, arpsync logic to take action on only running and starting containers.
 * Fixes the logic of figuring out local networks in an environment to support different CNI plugins.
 
 ### Configuration Options
