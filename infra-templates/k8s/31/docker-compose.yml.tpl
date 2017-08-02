@@ -121,7 +121,7 @@ proxy:
         - kubernetes
 
 etcd:
-    image: rancher/etcd:v2.3.7-12
+    image: rancher/etcd:v2.3.7-13
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: etcd=true
