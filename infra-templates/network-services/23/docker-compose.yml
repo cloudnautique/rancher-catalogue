@@ -41,10 +41,14 @@ services:
       options:
         max-size: 25m
         max-file: '2'
+    sysctls:
+      net.ipv4.conf.all.send_redirects: '0'
+      net.ipv4.conf.default.send_redirects: '0'
+      net.ipv4.conf.eth0.send_redirects: '0'
   dns:
     image: rancher/dns:v0.15.1
     network_mode: container:metadata
-    command: rancher-dns --metadata-server=localhost --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
+    command: rancher-dns --listen 169.254.169.250:53 --metadata-server=localhost --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
     labels:
       io.rancher.scheduler.global: 'true'
     logging:
