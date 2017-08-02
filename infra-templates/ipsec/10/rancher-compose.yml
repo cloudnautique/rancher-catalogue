@@ -1,8 +1,7 @@
 .catalog:
-  name: "Rancher VXLAN"
-  version: "v0.1.1"
-  minimum_rancher_version: v1.6.3-rc1
-  maximum_rancher_version: v1.6.5
+  name: "Rancher IPsec"
+  version: "0.1.2"
+  minimum_rancher_version: v1.6.6-rc1
   questions:
     - variable: "DOCKER_BRIDGE"
       label: "Docker Bridge"
@@ -18,9 +17,15 @@
       type: int
     - variable: "SUBNET"
       label: "Subnet"
-      description: "The subnet to use for the managed network."
+      description: "The subnet to use for the managed IPSEC network."
       type: "string"
       default: '10.42.0.0/16'
+      required: true
+    - variable: "SUBNET_PREFIX"
+      label: "IPAM Subnet Prefix"
+      description: "The Subnet prefix to use for the managed network. For most users this is same as the bridge subnet prefix. Ex: 16 if using 10.42.0.0/16 for bridge subnet."
+      type: int
+      default: 16
       required: true
     - variable: "RANCHER_DEBUG"
       label: "Enable Debug Logs"
