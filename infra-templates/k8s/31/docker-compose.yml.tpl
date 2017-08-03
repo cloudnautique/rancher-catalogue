@@ -13,11 +13,7 @@ kubelet:
         - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
-        {{- if eq .Values.CLOUD_PROVIDER "rancher" }}
-        - --cloud-provider=external
-        {{- else }}
         - --cloud-provider=${CLOUD_PROVIDER}
-        {{- end }}
         - --healthz-bind-address=0.0.0.0
         - --cluster-dns=10.43.0.10
         - --cluster-domain=cluster.local
@@ -31,7 +27,7 @@ kubelet:
         {{- range $i, $elem := splitPreserveQuotes .Values.ADDITIONAL_KUBELET_FLAGS }}
         - {{ $elem }}
         {{- end }}
-    image: rancher/k8s:v1.7.2-rancher6
+    image: rancher/k8s:v1.7.2-rancher7
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -49,7 +45,6 @@ kubelet:
     privileged: true
     links:
         - kubernetes
-        - rancher-cloud-controller-manager
 
 {{- if eq .Values.CONSTRAINT_TYPE "required" }}
 kubelet-unschedulable:
@@ -65,11 +60,7 @@ kubelet-unschedulable:
         - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
-        {{- if eq .Values.CLOUD_PROVIDER "rancher" }}
-        - --cloud-provider=external
-        {{- else }}
         - --cloud-provider=${CLOUD_PROVIDER}
-        {{- end }}
         - --healthz-bind-address=0.0.0.0
         - --cluster-dns=10.43.0.10
         - --cluster-domain=cluster.local
@@ -84,7 +75,7 @@ kubelet-unschedulable:
         {{- range $i, $elem := splitPreserveQuotes .Values.ADDITIONAL_KUBELET_FLAGS }}
         - {{ $elem }}
         {{- end }}
-    image: rancher/k8s:v1.7.2-rancher6
+    image: rancher/k8s:v1.7.2-rancher7
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -110,7 +101,7 @@ proxy:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --v=2
         - --healthz-bind-address=0.0.0.0
-    image: rancher/k8s:v1.7.2-rancher6
+    image: rancher/k8s:v1.7.2-rancher7
     labels:
         io.rancher.container.dns: "true"
         io.rancher.scheduler.global: "true"
@@ -171,7 +162,7 @@ kubernetes:
         {{- end }}
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
-    image: rancher/k8s:v1.7.2-rancher6
+    image: rancher/k8s:v1.7.2-rancher7
     links:
         - etcd
 
@@ -225,7 +216,7 @@ scheduler:
         - kube-scheduler
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --address=0.0.0.0
-    image: rancher/k8s:v1.7.2-rancher6
+    image: rancher/k8s:v1.7.2-rancher7
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -239,32 +230,11 @@ controller-manager:
     command:
         - kube-controller-manager
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
-        {{- if eq .Values.CLOUD_PROVIDER "rancher" }}
-        - --cloud-provider=external
-        {{- else }}
         - --cloud-provider=${CLOUD_PROVIDER}
-        {{- end }}
         - --address=0.0.0.0
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.7.2-rancher6
-    labels:
-        {{- if eq .Values.CONSTRAINT_TYPE "required" }}
-        io.rancher.scheduler.affinity:host_label: orchestration=true
-        {{- end }}
-        io.rancher.container.create_agent: "true"
-        io.rancher.container.agent.role: environmentAdmin
-    links:
-        - kubernetes
-
-rancher-cloud-controller-manager:
-    command:
-        - rancher-cloud-controller-manager
-        - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
-        - --cloud-provider=rancher
-        - --address=0.0.0.0
-        - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.7.2-rancher6
+    image: rancher/k8s:v1.7.2-rancher7
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -342,7 +312,7 @@ rancher-kubernetes-auth:
 
 {{- if eq .Values.ENABLE_ADDONS "true" }}
 addon-starter:
-    image: rancher/k8s:v1.7.2-rancher6
+    image: rancher/k8s:v1.7.2-rancher7
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
