@@ -1,0 +1,86 @@
+.catalog:
+  name: "nDVP"
+  version: "17.07"
+  description: "NetApp Docker Volume Plugin (nDVP)"
+  questions:
+    - variable: "TENANT_NAME"
+      description: "SolidFire tenant to use (created if not found)"
+      label: "TenantName"
+      required: true
+      default: "docker"
+      type: "string"
+
+    - variable: "DEBUG_ENABLED"
+      description: "Enable debugging output in logs"
+      label: "Debug Logging"
+      required: false
+      default: false
+      type: "boolean"
+
+    # SolidFire settings
+    - variable: "ENDPOINT"
+      description: "Example: https://user:pass@192.168.100.1/json-rpc/7.0"
+      label: "Endpoint URL"
+      required: true
+      default: "https://USER:PASS@HOSTNAME/json-rpc/7.0"
+      type: "string"
+
+    - variable: "SVIP"
+      description: "iSCSI IP address and port; example 10.0.0.7:3260"
+      label: "SVIP"
+      required: true
+      type: "string"
+
+    - variable: "INITIATOR_IFACE"
+      description: "Specify interface when restricting iSCSI traffic to non-default interface"
+      label: "Initiator Interface"
+      required: true
+      default: "default"
+      type: "string"
+
+    - variable: "TYPES"
+      description: "QoS specifications"
+      label: "Types"
+      required: true
+      type: multiline
+      default: |
+        [{"Type": "Bronze", "Qos": {"minIOPS": 1000, "maxIOPS": 2000, "burstIOPS": 4000}},
+        {"Type": "Silver", "Qos": {"minIOPS": 4000, "maxIOPS": 6000, "burstIOPS": 8000}},
+        {"Type": "Gold", "Qos": {"minIOPS": 6000, "maxIOPS": 8000, "burstIOPS": 10000}}]
+
+    # Common settings
+    - variable: "SIZE"
+      description: "Optional default size for new volumes. Default: '1G'"
+      label: "Volume Size"
+      required: false
+      default: "1G"
+      type: "string"
+
+    - variable: "VOLUME_DRIVER_NAME"
+      description: "Name to use for this plugin instance with Docker:  docker volume create -d <volume driver name>"
+      label: "Volume Driver Name"
+      required: true
+      default: "netapp"
+      type: "string"
+
+netapp-solidfire:
+  labels:
+    io.rancher.scheduler.global: 'true'
+  metadata:
+    version: 1
+    storageDriverName: "solidfire-san"
+    debug: true
+    storagePrefix: "${STORAGE_PREFIX}"
+    Endpoint: "${ENDPOINT}"
+    SVIP: "${SVIP}"
+    TenantName: "${TENANT_NAME}"
+    InitiatorIFace: "${INITIATOR_IFACE}"
+    Types: "${TYPES}"
+    defaults:
+      size: "${SIZE}"
+    volumeDriverName: "${VOLUME_DRIVER_NAME}"
+  storage_driver:
+    name: "${VOLUME_DRIVER_NAME}"
+    scope: environment
+    volume_access_mode: singleHostRW
+
