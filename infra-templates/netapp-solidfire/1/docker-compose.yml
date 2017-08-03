@@ -1,5 +1,5 @@
 netapp-solidfire:
-  image: netapp/ndvp:1.3.3
+  image: netapp/ndvp:17.07
   privileged: true
   ipc: host
   net: host

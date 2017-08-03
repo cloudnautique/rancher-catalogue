@@ -1,6 +1,6 @@
 .catalog:
   name: "nDVP"
-  version: "1.3.3"
+  version: "17.07"
   description: "NetApp Docker Volume Plugin (nDVP)"
   questions:
     # Common settings
@@ -88,6 +88,35 @@
       default: ""
       type: "string"
 
+    - variable: "POOL_NAME_SEARCH_PATTERN"
+      description: "Regular expression for matching storage pools available for nDVP volumes (default = .+)"
+      label: "Pool Name Search Pattern"
+      required: true
+      default: ".+"
+      type: "string"
+
+    - variable: "HOST_TYPE"
+      description: "Type of E-series Host created by nDVP (default = linux_dm_mp)"
+      label: "Host Type"
+      required: true
+      default: "linux_dm_mp"
+      type: "string"
+
+    - variable: "ACCESS_GROUP_NAME"
+      description: "Name of E-series Host Group to contain Hosts defined by nDVP (default = netappdvp)"
+      label: "Access Group Name"
+      required: true
+      default: "netappdvp"
+      type: "string"
+
+    # Common settings
+    - variable: "SIZE"
+      description: "Optional default size for new volumes. Default: '1G'"
+      label: "Volume Size"
+      required: false
+      default: "1G"
+      type: "string"
+
     - variable: "VOLUME_DRIVER_NAME"
       description: "Name to use for this plugin instance with Docker:  docker volume create -d <volume driver name>"
       label: "Volume Driver Name"
@@ -113,9 +142,13 @@ netapp-eseries:
     controllerB: "${CONTROLLER_B}"
     passwordArray: "${PASSWORD_ARRAY}"
     hostData_IP: "${HOSTDATA_IP}"
+    poolNameSearchPattern: "${POOL_NAME_SEARCH_PATTERN}"
+    hostType: "${HOST_TYPE}"
+    accessGroupName: "${ACCESS_GROUP_NAME}"
+    defaults:
+      size: "${SIZE}"
     volumeDriverName: "${VOLUME_DRIVER_NAME}"
   storage_driver:
     name: "${VOLUME_DRIVER_NAME}"
     scope: environment
     volume_access_mode: singleHostRW
-
