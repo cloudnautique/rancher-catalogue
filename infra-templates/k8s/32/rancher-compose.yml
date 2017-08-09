@@ -1,8 +1,9 @@
 .catalog:
   name: Kubernetes
-  version: v1.7.2-rancher7
+  version: v1.7.2-rancher8-etcdv2
   description: Rancher Kubernetes service
-  minimum_rancher_version: v1.6.6-rc1
+  minimum_rancher_version: v1.6.8-rc1
+  upgrade_from: <=v1.7.2-rancher7
   questions:
   - variable: CONSTRAINT_TYPE
     label: Plane Isolation
