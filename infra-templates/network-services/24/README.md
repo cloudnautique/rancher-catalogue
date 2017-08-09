@@ -6,13 +6,11 @@ This stack provides the following services:
 * DNS
 * Network Manager
 
-### Changelog for v0.2.5
+### Changelog for v0.2.6
 
-#### Metadata [rancher/rancher-metadata:v0.9.3]
-* Fixes around decoding delta when reading from file and event stream
-
-#### DNS [rancher/dns:v0.15.1]
-* Uses a fixed listen address of 169.254.169.250, instead of all available IP addresses.
+#### DNS [rancher/dns:v0.15.2]
+* Fix to honor upstream TTL
+* Check locally before searching in global cache
 
 ### Configuration Options
 

@@ -46,7 +46,7 @@ services:
       net.ipv4.conf.default.send_redirects: '0'
       net.ipv4.conf.eth0.send_redirects: '0'
   dns:
-    image: rancher/dns:v0.15.1
+    image: rancher/dns:v0.15.2
     network_mode: container:metadata
     command: rancher-dns --listen 169.254.169.250:53 --metadata-server=localhost --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
     labels:

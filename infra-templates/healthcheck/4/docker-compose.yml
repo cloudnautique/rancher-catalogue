@@ -4,7 +4,7 @@ services:
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.scheduler.global: 'true'
-    image: rancher/healthcheck:v0.3.1
+    image: rancher/healthcheck:v0.3.2
     logging:
       driver: json-file
       options:
