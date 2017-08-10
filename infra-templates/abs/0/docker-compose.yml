@@ -1,0 +1,25 @@
+version: '2'
+services:
+  abs-driver:
+    privileged: true
+    network_mode: host
+    image: maiwj/rancher-storage-abs:0.1.0
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: environment
+    environment:
+      ECS_ACCESS_KEY_SECRET: '${ECS_ACCESS_KEY_SECRET}'
+      ECS_ACCESS_KEY_ID: '${ECS_ACCESS_KEY_ID}'
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    volumes:
+    - /run:/run
+    - /var/run:/var/run
+    - /dev:/host/dev
+    - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
+    - /tmp:/tmp
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
