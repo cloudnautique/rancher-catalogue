@@ -1,0 +1,30 @@
+.catalog:
+  name: "Rancher ABS"
+  version: "0.1.0"
+  description: |
+    Docker volume plugin for Aliyun Block Storage
+  minimum_rancher_version: v1.6.0-rc1
+  questions:
+  - variable: ECS_ACCESS_KEY_ID
+    label: ECS Access Key ID
+    required: true
+    type: string
+    description: The id of unique certificate for using Aliyun ECS and Block Storage
+  - variable: ECS_ACCESS_KEY_SECRET
+    label: ECS Access Key Secret
+    required: true
+    type: string
+    description: The secret of unique certificate for using Aliyun ECS and Block Storage
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    description: Enable or disable verbose logging
+    default: false
+    options:
+    - true
+    - false
+abs-driver:
+  storage_driver:
+    name: rancher-abs
+    scope: environment
+    volume_access_mode: singleHostRW
