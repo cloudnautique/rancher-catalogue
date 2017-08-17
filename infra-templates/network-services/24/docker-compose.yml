@@ -28,7 +28,7 @@ services:
   metadata:
     cap_add:
     - NET_ADMIN
-    image: rancher/metadata:v0.9.3
+    image: rancher/metadata:v0.9.4
     network_mode: bridge
     command: start.sh rancher-metadata -subscribe
     labels:
