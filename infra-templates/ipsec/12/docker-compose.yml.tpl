@@ -21,6 +21,7 @@ services:
     network_mode: container:ipsec
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
+      IPSEC_REPLAY_WINDOW_SIZE: '${IPSEC_REPLAY_WINDOW_SIZE}'
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.container.agent_service.ipsec: 'true'
