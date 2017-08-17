@@ -57,3 +57,15 @@
       type: "string"
       default: '1024'
       required: true
+    - variable: "IPSEC_IKE_SA_REKEY_INTERVAL"
+      label: "IPSec IKE_SA rekey interval"
+      description: "Proceed with caution; typical users will not need to change this. Incorrect values can break your Rancher installation."
+      type: "string"
+      default: '4h'
+      required: true
+    - variable: "IPSEC_CHILD_SA_REKEY_INTERVAL"
+      label: "IPSec CHILD_SA rekey time"
+      description: "Proceed with caution; typical users will not need to change this. Incorrect values can break your Rancher installation."
+      type: "string"
+      default: '1h'
+      required: true

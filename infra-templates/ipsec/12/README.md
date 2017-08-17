@@ -12,6 +12,7 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 * Use of rancher-metadata IP address to avoid name resolution
 * Initiate IPSec tunnels from only one end
 * Configurable replay window size
+* Configurable rekey intervals
 
 ### Configuration options
 * `RANCHER_DEBUG`
