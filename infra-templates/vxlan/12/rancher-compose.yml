@@ -1,6 +1,6 @@
 .catalog:
   name: "Rancher VXLAN"
-  version: "v0.2.1"
+  version: "v0.2.2"
   minimum_rancher_version: v1.6.8-rc1
   upgrade_from: v0.2.0 || >v0.2.0
   questions:

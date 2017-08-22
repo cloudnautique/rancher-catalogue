@@ -23,10 +23,11 @@ services:
   router:
     cap_add:
       - NET_ADMIN
-    image: rancher/net:v0.11.8
+    image: rancher/net:v0.11.9
     network_mode: container:vxlan
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
+      VXLAN_VTEP_MTU: '${MTU}'
     command: start-vxlan.sh
     logging:
       driver: json-file
@@ -39,7 +40,7 @@ services:
       net.ipv4.conf.eth0.send_redirects: '0'
   cni-driver:
     privileged: true
-    image: rancher/net:v0.11.8
+    image: rancher/net:v0.11.9
     command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
     network_mode: host
     pid: host
