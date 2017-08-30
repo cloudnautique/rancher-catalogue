@@ -1,10 +1,9 @@
 .catalog:
   name: "Rancher EBS"
-  version: "0.3.0"
+  version: "0.4.0"
   description: |
     Docker volume plugin for EBS
-  minimum_rancher_version: v1.5.10-rc2
-  maximum_rancher_version: v1.6.9
+  minimum_rancher_version: v1.6.10-rc1
   questions:
   - variable: AWS_ACCESS_KEY_ID
     label: AWS Access Key

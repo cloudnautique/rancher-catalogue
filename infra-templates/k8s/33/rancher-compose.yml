@@ -1,9 +1,9 @@
 .catalog:
   name: Kubernetes
-  version: v1.7.4-rancher2
+  version: v1.8.0-beta.1-rancher2-etcdv2
   description: Rancher Kubernetes service
-  minimum_rancher_version: v1.6.8-rc1
-  maximum_rancher_version: v1.6.8
+  minimum_rancher_version: v1.6.10-rc1
+  maximum_rancher_version: v1.6.10
   questions:
   - variable: CONSTRAINT_TYPE
     label: Plane Isolation
@@ -65,6 +65,24 @@
     required: false
     default: false
     type: boolean
+  - variable: SERVICE_CLUSTER_CIDR
+    label: Service Cluster IP CIDR
+    description: A CIDR notation IP range from which to assign service cluster IPs. This must not overlap with any IP ranges assigned to the cluster pod IP CIDR (10.42.0.0/16).
+    required: true
+    default: "10.43.0.0/16"
+    type: string
+  - variable: DNS_CLUSTER_IP
+    label: KubeDNS cluster IP
+    description: The IP address assigned to kubedns service. This must be within the range of Service Cluster IP CIDR.
+    required: true
+    default: "10.43.0.10"
+    type: string
+  - variable: KUBEAPI_CLUSTER_IP
+    label: KubeAPI cluster IP for TLS certificate
+    description: This is the IP address that will be added as a SAN to the TLS certificate for kubernetes api, this must matches the IP of the kubernetes master service which is the first IP of the Service Cluster IP CIDR.
+    required: true
+    default: "10.43.0.1"
+    type: string
   - variable: INFLUXDB_HOST_PATH
     label: InfluxDB Host Path
     description: "Write Heapster metrics to an absolute path on the host. This may be network-attached storage."
@@ -113,7 +131,7 @@
 kubernetes:
     metadata:
         sans:
-        - "IP:10.43.0.1"
+        - "IP:${KUBEAPI_CLUSTER_IP}"
     health_check:
         port: 6443
         interval: 2000
