@@ -1,0 +1,24 @@
+version: '2'
+services:
+  rbd-driver:
+    privileged: true
+    network_mode: host
+    image: rancher/storage-rbd:v0.8.6
+    labels:
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent.role: environment
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    volumes:
+    - /run:/run
+    - /var/run:/var/run
+    - /dev:/host/dev
+    - /etc/ceph:/etc/ceph
+    - /lib/modules:/lib/modules:ro
+    - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'

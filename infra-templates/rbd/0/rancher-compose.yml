@@ -1,0 +1,20 @@
+.catalog:
+  name: "Rancher RBD"
+  version: "0.1.0"
+  description: |
+    Docker volume plugin for Ceph RBD
+  minimum_rancher_version: v1.6.8-rc1
+  questions:
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    description: Enable or disable verbose logging
+    default: false
+    options:
+    - true
+    - false
+rbd-driver:
+  storage_driver:
+    name: rancher-rbd
+    scope: environment
+    volume_access_mode: singleHostRW
