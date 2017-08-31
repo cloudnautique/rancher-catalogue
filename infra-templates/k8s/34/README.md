@@ -3,15 +3,7 @@
 ### Software Versions
 
 * Kubernetes v1.7.4
-* Etcd v2.3.7
-
-### Upgrading to this Version
-
-Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ignoring this will result in data loss. For older templates, please first upgrade to `v1.5.4-rancher1`.
-
-### Changelog for Kubernetes 1.7.4
-
-* Added healthcheck to addon-starter
+* Etcd v3.0.17
 
 ### Required Open Ports on hosts
 
