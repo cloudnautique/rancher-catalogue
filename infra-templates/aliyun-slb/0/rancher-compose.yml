@@ -1,0 +1,48 @@
+.catalog:
+  name: "Aliyun SLB"
+  version: "v0.3.2"
+  description: "External LB service"
+  minimum_rancher_version: v1.6.8
+  questions:
+    - variable: "SLB_ACCESS_KEY"
+      label: "SLB Access Key ID"
+      description: "Access key ID for your Aliyun account"
+      type: "string"
+      required: true
+    - variable: "SLB_SECRET_KEY"
+      label: "SLB Secret Access Key"
+      description: "Secret access key for your Aliyun account"
+      type: "string"
+      required: true
+    - variable: "SLB_REGION_ID"
+      label: "SLB Region"
+      description: "The region for load balancers and ECS instances in this Rancher environment. Defaults to the region of the instance the service will be running on."
+      type: "string"
+      required: true
+    - variable: "SLB_VPC_ID"
+      label: "Aliyun VPC ID (Optional)"
+      description: "The VPC for the load balancers and ECS instances in this Rancher environment. Defaults to the VPC of the instance the service will be running on."
+      type: "string"
+      required: false
+    - variable: "SLB_USE_PRIVATE_IP"
+      label: "ECS Private IP Lookup"
+      description: "If your ECS instances are registered in Rancher with their private IP addresses, then this must be set to true."
+      required: true
+      type: "boolean"
+      default: false
+    - variable: "DEBUG"
+      label: "Logging Debug"
+      description: "Debug logging output."
+      required: true
+      type: "boolean"
+      default: false
+
+slb:
+  health_check:
+    healthy_threshold: 2
+    response_timeout: 2000
+    port: 1000
+    unhealthy_threshold: 2
+    interval: 5000
+    request_line: GET / HTTP/1.0
+
