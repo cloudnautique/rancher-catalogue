@@ -3,6 +3,7 @@ services:
   kubelet:
     labels:
       io.rancher.container.dns: "true"
+      io.rancher.container.dns.priority: "None"
       io.rancher.container.create_agent: "true"
       io.rancher.container.agent.role: environmentAdmin
       io.rancher.scheduler.global: "true"
