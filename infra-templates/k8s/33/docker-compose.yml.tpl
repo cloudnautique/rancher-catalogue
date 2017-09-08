@@ -11,7 +11,6 @@ kubelet:
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
-        - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
         - --cloud-provider=${CLOUD_PROVIDER}
@@ -28,7 +27,7 @@ kubelet:
         {{- range $i, $elem := splitPreserveQuotes .Values.ADDITIONAL_KUBELET_FLAGS }}
         - {{ $elem }}
         {{- end }}
-    image: rancher/k8s:v1.7.4-rancher2
+    image: rancher/k8s:v1.8.0-beta.0-rancher1
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -58,7 +57,6 @@ kubelet-unschedulable:
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
-        - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
         - --cloud-provider=${CLOUD_PROVIDER}
@@ -76,7 +74,7 @@ kubelet-unschedulable:
         {{- range $i, $elem := splitPreserveQuotes .Values.ADDITIONAL_KUBELET_FLAGS }}
         - {{ $elem }}
         {{- end }}
-    image: rancher/k8s:v1.7.4-rancher2
+    image: rancher/k8s:v1.8.0-beta.0-rancher1
     volumes:
         - /run:/run
         - /var/run:/var/run
@@ -102,7 +100,7 @@ proxy:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --v=2
         - --healthz-bind-address=0.0.0.0
-    image: rancher/k8s:v1.7.4-rancher2
+    image: rancher/k8s:v1.8.0-beta.0-rancher1
     labels:
         io.rancher.container.dns: "true"
         io.rancher.scheduler.global: "true"
@@ -168,6 +166,7 @@ kubernetes:
         - --runtime-config=batch/v2alpha1
         - --authentication-token-webhook-config-file=/etc/kubernetes/authconfig
         - --runtime-config=authentication.k8s.io/v1beta1=true
+        - --external-hostname=kubernetes.kubernetes.rancher.internal
         {{- if eq .Values.AUDIT_LOGS "true" }}
         - --audit-log-path=-
         {{- end }}
@@ -176,7 +175,7 @@ kubernetes:
         {{- end }}
     environment:
         KUBERNETES_URL: https://kubernetes.kubernetes.rancher.internal:6443
-    image: rancher/k8s:v1.7.4-rancher2
+    image: rancher/k8s:v1.8.0-beta.0-rancher1
     links:
         - etcd
 
@@ -230,7 +229,7 @@ scheduler:
         - kube-scheduler
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --address=0.0.0.0
-    image: rancher/k8s:v1.7.4-rancher2
+    image: rancher/k8s:v1.8.0-beta.0-rancher1
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -248,7 +247,7 @@ controller-manager:
         - --address=0.0.0.0
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
         - --service-account-private-key-file=/etc/kubernetes/ssl/key.pem
-    image: rancher/k8s:v1.7.4-rancher2
+    image: rancher/k8s:v1.8.0-beta.0-rancher1
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
@@ -326,7 +325,7 @@ rancher-kubernetes-auth:
 
 {{- if eq .Values.ENABLE_ADDONS "true" }}
 addon-starter:
-    image: rancher/k8s:v1.7.4-rancher2
+    image: rancher/k8s:v1.8.0-beta.0-rancher1
     labels:
         {{- if eq .Values.CONSTRAINT_TYPE "required" }}
         io.rancher.scheduler.affinity:host_label: orchestration=true
