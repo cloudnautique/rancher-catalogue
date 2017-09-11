@@ -11,7 +11,6 @@ kubelet:
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
-        - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
         - --cloud-provider=${CLOUD_PROVIDER}
@@ -58,7 +57,6 @@ kubelet-unschedulable:
     command:
         - kubelet
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
-        - --api_servers=https://kubernetes.kubernetes.rancher.internal:6443
         - --allow-privileged=true
         - --register-node=true
         - --cloud-provider=${CLOUD_PROVIDER}
@@ -168,6 +166,7 @@ kubernetes:
         - --runtime-config=batch/v2alpha1
         - --authentication-token-webhook-config-file=/etc/kubernetes/authconfig
         - --runtime-config=authentication.k8s.io/v1beta1=true
+        - --external-hostname=kubernetes.kubernetes.rancher.internal
         {{- if eq .Values.AUDIT_LOGS "true" }}
         - --audit-log-path=-
         {{- end }}
