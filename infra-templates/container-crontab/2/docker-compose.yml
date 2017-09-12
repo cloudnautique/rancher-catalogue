@@ -3,6 +3,8 @@ services:
   container-crontab:
     image: rancher/container-crontab:v0.3.0
     privileged: true
+    environment:
+      DOCKER_API_VERSION: 1.24
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
