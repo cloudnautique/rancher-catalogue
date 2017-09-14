@@ -1,7 +1,7 @@
 version: '2'
 services:
   network-manager:
-    image: ibuildthecloud/network-manager:710704e
+    image: rancher/network-manager:v0.8.0
     privileged: true
     network_mode: host
     pid: host
@@ -45,7 +45,7 @@ services:
       net.ipv4.conf.default.send_redirects: '0'
       net.ipv4.conf.eth0.send_redirects: '0'
   dns:
-    image: rancher/dns:v0.15.1
+    image: rancher/dns:v0.16.0
     network_mode: container:metadata
     command: rancher-dns --listen 169.254.169.250:53 --metadata-server=localhost --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
     labels:
