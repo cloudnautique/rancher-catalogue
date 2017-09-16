@@ -1,6 +1,6 @@
 .catalog:
   name: Kubernetes
-  version: v1.8.0-beta.1-rancher2-etcdv2
+  version: v1.8.0-beta.1-rancher4-etcdv2
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.10-rc1
   maximum_rancher_version: v1.6.10
@@ -30,8 +30,20 @@
     default: false
     type: boolean
   - variable: REGISTRY
-    description: The registry to pull addon images and the optional pod infra container image. This should be set to the private registry from which the images for addon-services (i.e. helm, heapster, dashboard, dns) and the pod infra container image should be pulled.
+    description: The registry to pull addon images and the optional pod infra container image. This should be set to the private registry from which the images for addon-services (i.e. helm, heapster, dashboard, dns) and the pod infra container image should be pulled. ( Default：gcr.io ).
     label: Private Registry for Add-Ons and Pod Infra Container Image
+    required: false
+    default: ""
+    type: string
+  - variable: BASE_IMAGE_NAMESPACE
+    description: images namespace for Add-Ons and Pod Infra Container Image ( Default：google_containers ).
+    label: Image namespace for  Add-Ons and Pod Infra Container Image
+    required: false
+    default: ""
+    type: string
+  - variable: HELM_IMAGE_NAMESPACE
+    description: images namespace for kubernetes-helm ( Default：kubernetes-helm ).
+    label: Image namespace for kubernetes-helm Image
     required: false
     default: ""
     type: string
