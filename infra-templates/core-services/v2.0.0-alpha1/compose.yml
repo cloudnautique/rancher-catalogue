@@ -27,7 +27,7 @@ services:
     - rancher-cni-driver:/opt/cni
     labels:
       io.rancher.scheduler.global: 'true'
-      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "false") }}
+      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "true") }}
       io.rancher.container.orchestration: 'cattle'
       {{- end }}
     logging:
@@ -45,7 +45,7 @@ services:
       io.rancher.container.create_agent: 'true'
       io.rancher.scheduler.global: 'true'
       io.rancher.container.agent_service.metadata: 'true'
-      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "false") }}
+      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "true") }}
       io.rancher.container.orchestration: 'cattle'
       {{- end }}
     logging:
@@ -60,7 +60,7 @@ services:
     command: rancher-dns --listen 169.254.169.250:53 --metadata-server=169.254.169.250 --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
     labels:
       io.rancher.scheduler.global: 'true'
-      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "false") }}
+      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "true") }}
       io.rancher.container.orchestration: 'cattle'
       {{- end }}
     logging:
@@ -73,7 +73,7 @@ services:
     labels:
       io.rancher.container.create_agent: 'true'
       io.rancher.scheduler.global: 'true'
-      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "false") }}
+      {{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "true") }}
       io.rancher.container.orchestration: 'cattle'
       {{- end }}
     image: {{$hcImage}}
@@ -90,7 +90,7 @@ services:
         unhealthy_threshold: 3
         healthy_threshold: 2
 
-{{- if and (eq .Cluster.Orchestration "kubernetes") (eq .Cluster.Embedded "false") }}
+{{- if and (eq .Cluster.Orchestration "kubernetes") (ne .Cluster.Embedded "true") }}
   network-driver:
     network_driver:
       name: Kubernetes Networking
