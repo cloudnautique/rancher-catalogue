@@ -28,7 +28,7 @@ services:
   metadata:
     cap_add:
     - NET_ADMIN
-    image: rancher/metadata:v1.0.0
+    image: rancher/metadata:v1.0.1
     network_mode: bridge
     labels:
       io.rancher.sidekicks: dns
