@@ -2,8 +2,20 @@ version: '2'
 
 {{- $k8sImage:="rancher/netes:v1.7.4-rancher1-netes1" }}
 
-{{- if (eq .Cluster.Embedded "true") }}
 services:
+  kubectl-shell:
+    labels:
+      io.rancher.container.create_agent: "true"
+      io.rancher.container.agent.role: environmentAdmin
+      io.rancher.k8s.kubectld: "true"
+      io.rancher.k8s.token: "true"
+      io.rancher.kubernetes.service_account: rancher
+    command:
+    - kubectl-shell-entry.sh
+    image: rancher/kubectld:v1.0.0
+    privileged: true
+
+{{- if (eq .Cluster.Embedded "true") }}
   controller-manager:
     command:
     - kube-controller-manager
@@ -76,15 +88,3 @@ services:
     ipc: host
     privileged: true
 {{- end }}
-
-  kubectl-shell:
-    labels:
-      io.rancher.container.create_agent: "true"
-      io.rancher.container.agent.role: environmentAdmin
-      io.rancher.k8s.kubectld: "true"
-      io.rancher.k8s.token: "true"
-      io.rancher.kubernetes.service_account: rancher
-    command:
-    - kubectl-shell-entry.sh
-    image: rancher/kubectld:v1.0.0
-    privileged: true
