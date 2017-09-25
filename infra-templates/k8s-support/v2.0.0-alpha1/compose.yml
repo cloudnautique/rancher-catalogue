@@ -2,6 +2,7 @@ version: '2'
 
 {{- $k8sImage:="rancher/netes:v1.7.6-netes2-1" }}
 {{- $kubectlImage:="rancher/kubectld:v0.8.3" }}
+{{- $kubernetesAgentImage:="joshwget/kubernetes-agent" }}
 
 services:
   kubectl-shell:
@@ -16,6 +17,20 @@ services:
     - kubectl-shell-entry.sh
     image: {{$kubectlImage}}
     privileged: true
+
+  rancher-kubernetes-agent:
+    labels:
+      io.rancher.container.create_agent: "true"
+      io.rancher.container.agent.role: agent,environmentAdmin
+      io.rancher.container.agent_service.labels_provider: "true"
+      io.rancher.k8s.agent: "true"
+      {{- if (eq .Cluster.Embedded "false") }}
+      io.rancher.kubernetes.service_account: rancher
+      {{- end }}
+    image: {{$kubernetesAgentImage}}
+    privileged: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
 
 {{- if (eq .Cluster.Embedded "true") }}
   controller-manager:
