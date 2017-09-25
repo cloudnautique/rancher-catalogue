@@ -1,0 +1,5 @@
+name: Aliyun SLB Load Balancer
+description: |
+      External LB service powered by Aliyun SLB
+version: v0.3.2
+category: Load Balancing

@@ -1,0 +1,18 @@
+version: '2'
+services:
+  slb:
+    image: rancher/external-lb:v0.3.2
+    environment:
+      SLB_ACCESS_KEY: ${SLB_ACCESS_KEY}
+      SLB_SECRET_KEY: ${SLB_SECRET_KEY}
+      SLB_REGION_ID: ${SLB_REGION_ID}
+      SLB_VPC_ID: ${SLB_VPC_ID}
+      SLB_USE_PRIVATE_IP: ${SLB_USE_PRIVATE_IP}
+    expose:
+    - '1000'
+    command:
+    - -provider=aliyun_slb
+    - -debug=${DEBUG}
+    labels:
+      io.rancher.container.agent.role: external-dns
+      io.rancher.container.create_agent: 'true'
