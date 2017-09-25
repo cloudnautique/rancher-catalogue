@@ -17,7 +17,7 @@ spec:
       serviceAccountName: "rancher-helm"
       containers:
           - name: "tiller"
-            image: "gcr.io/kubernetes-helm/tiller:v2.3.0"
+            image: "rancher/tiller:v2.3.0"
             imagePullPolicy: "Always"
             ports:
              - name: "tiller"

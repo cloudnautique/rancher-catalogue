@@ -72,7 +72,7 @@ services:
     - --cluster-domain=cluster.local
     - --network-plugin=cni
     - --cni-conf-dir=/etc/cni/managed.d
-    - --pod-infra-container-image=gcr.io/google_containers/pause-amd64:3.0
+    - --pod-infra-container-image=rancher/pause-amd64:3.0
     image: {{$k8sImage}}
     volumes:
     - /run:/run
