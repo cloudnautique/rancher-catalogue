@@ -243,6 +243,7 @@ controller-manager:
     command:
         - kube-controller-manager
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
+        - --allow-untagged-cloud
         - --cloud-provider=${CLOUD_PROVIDER}
         - --address=0.0.0.0
         - --root-ca-file=/etc/kubernetes/ssl/ca.pem
