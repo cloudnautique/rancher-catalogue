@@ -8,7 +8,8 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 
 ### Changelog - 0.2.0
 
-#### Router and CNI Driver [rancher/net:v0.12.0]
+#### Router and CNI Driver [rancher/net:v0.13.0]
+* Use fastpath for setting up network interface if labels are present.
 * Refactored to have a clean separation with rest of the plugins.
 
 ### Configuration options

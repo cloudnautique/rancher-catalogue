@@ -3,7 +3,7 @@ services:
   vxlan:
     cap_add:
       - NET_ADMIN
-    image: rancher/net:v0.12.0
+    image: rancher/net:v0.13.0
     command: start-vxlan.sh
     network_mode: host
     environment:
@@ -25,7 +25,7 @@ services:
         max-file: '2'
   cni-driver:
     privileged: true
-    image: rancher/net:v0.12.0
+    image: rancher/net:v0.13.0
     command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
     network_mode: host
     pid: host
