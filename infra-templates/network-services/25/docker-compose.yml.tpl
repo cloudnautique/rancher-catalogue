@@ -1,11 +1,16 @@
 version: '2'
+
+{{- $netManagerImage:="rancher/network-manager:v0.7.10" }}
+{{- $metadataImage:="rancher/metadata:v0.9.4" }}
+{{- $dnsImage:="rancher/dns:v0.15.3" }}
+
 services:
   network-manager:
-    image: rancher/network-manager:v0.7.10
+    image: {{$netManagerImage}}
     privileged: true
     network_mode: host
     pid: host
-    command: plugin-manager --disable-cni-setup --metadata-url http://169.254.169.250/2016-07-29
+    command: plugin-manager --disable-cni-setup --metadata-address 169.254.169.250
     environment:
       DOCKER_BRIDGE: docker0
       METADATA_IP: 169.254.169.250
@@ -28,7 +33,7 @@ services:
   metadata:
     cap_add:
     - NET_ADMIN
-    image: rancher/metadata:v0.9.4
+    image: {{$metadataImage}}
     network_mode: bridge
     command: start.sh rancher-metadata -subscribe
     labels:
@@ -46,7 +51,7 @@ services:
       net.ipv4.conf.default.send_redirects: '0'
       net.ipv4.conf.eth0.send_redirects: '0'
   dns:
-    image: rancher/dns:v0.15.3
+    image: {{$dnsImage}}
     network_mode: container:metadata
     command: rancher-dns --listen 169.254.169.250:53 --metadata-server=localhost --answers=/etc/rancher-dns/answers.json --recurser-timeout ${DNS_RECURSER_TIMEOUT} --ttl ${TTL}
     labels:

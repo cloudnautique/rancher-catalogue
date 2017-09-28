@@ -65,3 +65,4 @@ Note: You could use the functionality in the UI to add the label, specify the su
 * `MTU`
 * `RANCHER_HAIRPIN_MODE`
 * `RANCHER_PROMISCUOUS_MODE`
+* `HOST_PORTS`

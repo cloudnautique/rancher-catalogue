@@ -1,4 +1,7 @@
 version: '2'
+
+{{- $netImage:="rancher/net:v0.13.0" }}
+
 services:
   ipsec:
     # IMPORTANT!!!! DO NOT CHANGE VERSION ON UPGRADE
@@ -17,7 +20,7 @@ services:
   router:
     cap_add:
       - NET_ADMIN
-    image: rancher/net:v0.13.0
+    image: {{$netImage}}
     command: start-ipsec.sh
     network_mode: container:ipsec
     environment:
@@ -40,10 +43,12 @@ services:
       net.ipv4.xfrm4_gc_thresh: '2147483647'
   cni-driver:
     privileged: true
-    image: rancher/net:v0.13.0
-    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
+    image: {{$netImage}}
+    command: start-cni-driver.sh
     network_mode: host
     pid: host
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.network.cni.binary: 'rancher-bridge'
@@ -53,6 +58,9 @@ services:
       options:
         max-size: 25m
         max-file: '2'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - rancher-cni-driver:/opt/cni-driver
     network_driver:
       name: Rancher IPsec
       default_network:

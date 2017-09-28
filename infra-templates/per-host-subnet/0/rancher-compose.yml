@@ -59,3 +59,9 @@
       type: "boolean"
       default: "true"
       required: true
+    - variable: "HOST_PORTS"
+      label: "Enable Host Ports"
+      description: "Flag to enable/disable publishing the ports on the hosts"
+      type: "boolean"
+      default: "true"
+      required: true
