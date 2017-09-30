@@ -2,6 +2,7 @@ version: '2'
 
 {{- $k8sImage:="rancher/netes:v1.7.6-netes2-1" }}
 {{- $kubectlImage:="rancher/kubectld:v0.9.0" }}
+{{- $kubernetesAgentImage:="rancher/kubernetes-agent:v0.7.0" }}
 
 services:
   kubectl-shell:
@@ -19,6 +20,19 @@ services:
     depends_on:
     - controller-manager
     - scheduler
+
+  rancher-kubernetes-agent:
+    labels:
+      io.rancher.container.create_agent: "true"
+      io.rancher.container.agent.role: agent
+      io.rancher.k8s.agent: "true"
+      {{- if (eq .Cluster.Embedded "false") }}
+      io.rancher.kubernetes.service_account: rancher
+      {{- end }}
+    image: {{$kubernetesAgentImage}}
+    privileged: true
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
 
 {{- if (eq .Cluster.Embedded "true") }}
   controller-manager:
