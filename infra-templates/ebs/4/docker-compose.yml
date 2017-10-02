@@ -3,7 +3,7 @@ services:
   ebs-driver:
     privileged: true
     network_mode: host
-    image: rancher/storage-ebs:v0.8.8
+    image: rancher/storage-ebs:v0.8.10
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.container.create_agent: 'true'
