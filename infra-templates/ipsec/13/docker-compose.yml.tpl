@@ -9,8 +9,8 @@ services:
     command: sh -c "echo Refer to router sidekick for logs; mkfifo f; exec cat f"
     network_mode: ipsec
     ports:
-      - 500:500/udp
-      - 4500:4500/udp
+      - 0.0.0.0:500:500/udp
+      - 0.0.0.0:4500:4500/udp
     labels:
       io.rancher.sidekicks: router
       io.rancher.scheduler.global: 'true'

@@ -12,7 +12,7 @@ services:
     environment:
       RANCHER_DEBUG: '${RANCHER_DEBUG}'
     ports:
-      - 4789:4789/udp
+      - 0.0.0.0:4789:4789/udp
     labels:
       io.rancher.scheduler.global: 'true'
       io.rancher.cni.link_mtu_overhead: '0'
