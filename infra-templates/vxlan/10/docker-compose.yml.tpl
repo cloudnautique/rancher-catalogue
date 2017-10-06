@@ -37,6 +37,7 @@ services:
       net.ipv4.conf.all.send_redirects: '0'
       net.ipv4.conf.default.send_redirects: '0'
       net.ipv4.conf.eth0.send_redirects: '0'
+      net.ipv4.icmp_echo_ignore_broadcasts: '0'
   cni-driver:
     privileged: true
     image: rancher/net:v0.11.5
