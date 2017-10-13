@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: Kubernetes
-  version: v1.8.0-rancher4-etcdv3
+  version: v1.8.1-rancher1-etcdv3
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.11-rc1
   upgrade_from: 0.0.0
