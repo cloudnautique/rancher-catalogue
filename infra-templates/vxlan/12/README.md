@@ -10,8 +10,9 @@ Traffic to and from hosts requires UDP port `4789` to be open.
 
 The earlier version of this stack would cause a traffic disruption during upgrades, this version address to solve this problem. Also this version removes the `cni-driver` service as a sidekick of the `vxlan` container and makes it standalone.
 
-#### Router and CNI Driver [rancher/net:v0.13.0]
+#### Router and CNI Driver [rancher/net:v0.13.1]
 * Refactor to run in host network ns for performance improvements.
+* Including stopping containers for haproxy drain feature.
 
 ### Configuration options
 * `RANCHER_DEBUG`
