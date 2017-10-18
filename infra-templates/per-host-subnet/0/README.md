@@ -17,7 +17,7 @@ This network plugin requires a **unique**, **routable**, **non-overlapping** sub
     sudo docker run --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /var/lib/rancher:/var/lib/rancher rancher/agent:v1.2.5 http://172.31.5.93:8080/v1/scripts/04033066C0164CF25094:1483142400000:KQrf2wQfJtdKxLHYuprV6LfWuQ
     ```
 
-2. For each host to be added in the environment, the unique subnet to be used for this host has to be specified using the label: `io.rancher.network.per_host_subnet.cidr`.
+2. For each host to be added in the environment, the unique subnet to be used for this host has to be specified using the label: `io.rancher.network.per_host_subnet.subnet`.
 
    For example, to use the subnet `192.168.100.0/24` while adding the host, the additional launch parameter will be: `-e CATTLE_HOST_LABELS='io.rancher.network.per_host_subnet.subnet=192.168.100.0/24'`
 
@@ -55,6 +55,12 @@ Note: You could use the functionality in the UI to add the label, specify the su
   This label is used to specify the ending IP address in the subnet to use for the containers. If this is not specified, the plugin uses the last usable IP address in the subnet as the ending IP address.
 
   *Example:* `io.rancher.network.per_host_subnet.range_end: 192.168.100.200`
+
+- **io.rancher.network.per\_host\_subnet.override\_agent\_ip**
+
+  This label on the host is used to override the routing IP.
+
+  *Example:* `io.rancher.network.per_host_subnet.override_agent_ip: 172.16.3.20`
 
 ### Configuration options
 * `RANCHER_DEBUG`
