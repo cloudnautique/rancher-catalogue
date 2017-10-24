@@ -1,7 +1,7 @@
 version: '2'
 
 {{- $netManagerImage:="rancher/network-manager:v0.7.13" }}
-{{- $metadataImage:="rancher/metadata:v0.9.4" }}
+{{- $metadataImage:="rancher/metadata:v0.9.5" }}
 {{- $dnsImage:="rancher/dns:v0.15.3" }}
 
 services:
@@ -35,7 +35,7 @@ services:
     - NET_ADMIN
     image: {{$metadataImage}}
     network_mode: bridge
-    command: start.sh rancher-metadata -subscribe
+    command: start.sh rancher-metadata -reload-interval-limit=${RELOAD_INTERVAL_LIMIT} -subscribe
     labels:
       io.rancher.sidekicks: dns
       io.rancher.container.create_agent: 'true'
@@ -50,6 +50,8 @@ services:
       net.ipv4.conf.all.send_redirects: '0'
       net.ipv4.conf.default.send_redirects: '0'
       net.ipv4.conf.eth0.send_redirects: '0'
+    cpu_period: ${CPU_PERIOD}
+    cpu_quota: ${CPU_QUOTA}
   dns:
     image: {{$dnsImage}}
     network_mode: container:metadata

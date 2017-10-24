@@ -17,9 +17,19 @@ This stack provides the following services:
 * Added ability to avoid adding rancher internal search domains if "io.rancher.container.dns.priority" is None.
 * Including stopping containers for haproxy drain feature.
 
+#### Metadata [rancher/metadata:v0.9.5]
+
 ### Configuration Options
+* Introduces cpu_quota/cpu_limit to limit CPU resources for metadata container
+* Support for metadata config reload throttling
 
 #### dns
 
 * `DNS_RECURSER_TIMEOUT`
 * `TTL`
+
+#### metadata
+
+* `CPU_PERIOD`
+* `CPU_QUOTA`
+* `RELOAD_INTERVAL_LIMIT`

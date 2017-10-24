@@ -15,3 +15,21 @@
       required: true
       default: 1
       type: int
+    - variable: CPU_PERIOD
+      label: CPU scheduler period
+      description: Sets the period of CPUs to limit the metadata container’s CPU usage
+      required: true
+      default: 100000
+      type: int
+    - variable: CPU_QUOTA
+      label: CPU quota on the metadata container
+      description: Sets the CPU quota on the metadata container
+      required: true
+      default: 70000
+      type: int
+    - variable: RELOAD_INTERVAL_LIMIT
+      label: Metadata reload interval limit
+      description: Limits reload to 1 per interval (milliseconds)
+      required: true
+      default: 1000
+      type: int
