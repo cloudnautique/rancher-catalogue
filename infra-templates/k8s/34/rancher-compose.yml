@@ -4,6 +4,7 @@ catalog:
   version: v1.8.2-rancher1-etcdv3
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.11-rc1
+  minimum_rancher_version: v1.6.10
   upgrade_from: 0.0.0
   questions:
   - variable: CONSTRAINT_TYPE
