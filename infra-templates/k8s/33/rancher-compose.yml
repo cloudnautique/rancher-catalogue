@@ -3,6 +3,8 @@
   version: v1.8.2-rancher2-etcdv2
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.11-rc1
+  minimum_rancher_version: v1.6.10
+  minimum_rancher_version: v1.6.7
   questions:
   - variable: CONSTRAINT_TYPE
     label: Plane Isolation
