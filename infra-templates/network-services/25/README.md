@@ -8,7 +8,8 @@ This stack provides the following services:
 
 ### Changelog for v0.2.7
 
-#### Network Manager [rancher/network-manager:v0.7.14]
+#### Network Manager [rancher/network-manager:v0.7.15]
+* Fixed an issue with cni driver services during upgrade.
 * Fixed incorrect network modes when rancher label is used.
 * Fixed iptables rules reordering issue after docker daemon restart.
 * Added ability to log message if MTU mismatch is found.
