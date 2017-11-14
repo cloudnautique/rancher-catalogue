@@ -1,15 +1,15 @@
-## Kubernetes v1.8.2
+## Kubernetes v1.8.3
 
 ### Software Versions
 
-* Kubernetes v1.8.2
+* Kubernetes v1.8.3
 * Etcd v2.3.7
 
 ### Upgrading to this Version
 
 Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ignoring this will result in data loss. For older templates, please first upgrade to `v1.5.4-rancher1`.
 
-### Changelog for Kubernetes v1.8.2
+### Changelog for Kubernetes v1.8.3
 
 * Added configurable value to service cluster IP cidr.
 * Added Azure cloud provider support.
