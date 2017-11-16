@@ -14,6 +14,7 @@ Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ign
 * Added configurable value to service cluster IP cidr.
 * Added Azure cloud provider support.
 * Added configurable log verbosity levels for add-ons.
+* Fixed add-ons for RBAC enabled setups
 
 ### Required Open Ports on hosts
 
