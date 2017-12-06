@@ -71,13 +71,13 @@
     default: ""
     type: string
   - variable: BASE_IMAGE_NAMESPACE
-    description: images namespace for Add-Ons and Pod Infra Container Image ( Default：rancher ).
+    description: "images namespace for Add-Ons and Pod Infra Container Image ( Default：rancher )."
     label: Image namespace for  Add-Ons and Pod Infra Container Image
     required: false
     default: ""
     type: string
   - variable: HELM_IMAGE_NAMESPACE
-    description: images namespace for kubernetes-helm ( Default：rancher ).
+    description: "images namespace for kubernetes-helm ( Default：rancher )."
     label: Image namespace for kubernetes-helm Image
     required: false
     default: ""
