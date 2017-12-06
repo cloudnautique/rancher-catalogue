@@ -1,0 +1,51 @@
+.catalog:
+  name: "Portworx"
+  version: "1.2.11.6"
+  description: "Portworx Docker Volume Plugin"
+  questions:
+
+    - variable: "VOLUME_DRIVER_NAME"
+      description: "Name to use for this plugin instance with Docker:  docker volume create -d <volume driver name>"
+      label: "Volume Driver Name"
+      required: true
+      default: "pxd"
+      type: "string"
+    - variable: "CLUSTER_ID"
+      description: "Arbitrary Cluster ID, common to all nodes in PX cluster "
+      label: "Cluster ID"
+      type: "string"
+      required: true
+      default: ""
+    - variable: "KVDB"
+      description: "Key-value database, accessibe to all nodes in PX cluster (Ex: 'etcd://10.0.0.42:4001')"
+      label: "Key-Value Database"
+      type: "string"
+      required: true
+      default: ""
+    - variable: "USE_DISKS"
+      description: "Cmdline args for disks to use. Ex: '-a' for all available, or '-s /dev/sdX' for each individual disk"
+      label: "Use Disks"
+      type: "string"
+      required: true
+      default: "-s /dev/xvdb"
+    - variable: "HEADER_DIR"
+      description: "Directory where kernel headers can be found.  Default is '/usr/src'.  For CoreOS use '/lib/modules'"
+      label: "Headers Directory"
+      type: "string"
+      required: true
+      default: "/usr/src"
+
+
+portworx:
+  metadata:
+    version: 1
+    storageDriverName: "${VOLUME_DRIVE_NAME}"
+    debug: true
+    volumeDriverName: "${VOLUME_DRIVER_NAME}"
+  storage_driver:
+    name: "${VOLUME_DRIVER_NAME}"
+    scope: environment
+    volume_access_mode: multiHostRW
+    blockDevicePath: null
+  scale: 3
+  start_on_create: true

@@ -17,7 +17,7 @@
       type: int
     - variable: CPU_PERIOD
       label: CPU scheduler period
-      description: Sets the period of CPUs to limit the metadata container’s CPU usage
+      description: Sets the period of CPUs to limit the metadata container's CPU usage
       required: true
       default: 400000
       type: int

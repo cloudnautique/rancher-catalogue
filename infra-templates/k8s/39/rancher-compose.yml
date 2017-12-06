@@ -65,7 +65,7 @@
     default: false
     type: boolean
   - variable: REGISTRY
-    description: The registry to pull addon images and the optional pod infra container image. This should be set to the private registry from which the images for addon-services (i.e. helm, heapster, dashboard, dns) and the pod infra container image should be pulled. ( Default：gcr.io ).
+    description: "The registry to pull addon images and the optional pod infra container image. This should be set to the private registry from which the images for addon-services (i.e. helm, heapster, dashboard, dns) and the pod infra container image should be pulled. ( Default: docker.io )."
     label: Private Registry for Add-Ons and Pod Infra Container Image
     required: false
     default: ""
