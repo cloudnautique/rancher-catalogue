@@ -1,0 +1,23 @@
+.catalog:
+  name: "Rancher Container Crontab"
+  version: "v0.3.0"
+  description: "Service that will start, stop or restart containers"
+  minimum_rancher_version: v1.6.0
+  questions:
+    - variable: metrics
+      type: enum
+      label: Enable Metrics Endpoint
+      description: |
+        <container>:9191/metrics will be available for Prometheus scraping.
+      default: false
+      options:
+        - true
+        - false
+    - variable: debug
+      type: enum
+      default: false
+      options:
+        - true
+        - false
+      label: Enable Debug
+      

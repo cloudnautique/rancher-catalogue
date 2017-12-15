@@ -1,5 +1,9 @@
 ## Kubernetes 1.5.2
 
+### Required Open Ports on hosts
+
+The following TCP ports are required to be open for `kubectl`: `10250` and `10255`. To access any exposed services, the ports used for the NodePort will also need to be opened. The default ports used by NodePort are TCP ports `30000` - `32767`.
+
 ### KubeDNS
 
 KubeDNS is enabled for name resolution as described in the [Kubernetes DNS docs](http://kubernetes.io/docs/admin/dns/). The DNS service IP address is `10.43.0.10`.

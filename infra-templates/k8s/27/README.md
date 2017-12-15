@@ -1,5 +1,9 @@
 ## Kubernetes 1.5.4
 
+### Required Open Ports on hosts
+
+The following TCP ports are required to be open for `kubectl`: `10250` and `10255`. To access any exposed services, the ports used for the NodePort will also need to be opened. The default ports used by NodePort are TCP ports `30000` - `32767`.
+
 ### Private Registry for Pod Infra Container Image and Add-ons
 
 The private registry field populates which private registry the pod infra container image should be pulled from as well as the add-ons.

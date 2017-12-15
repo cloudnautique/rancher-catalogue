@@ -2,7 +2,7 @@
   name: "Rancher IPsec"
   version: "0.0.1"
   minimum_rancher_version: v1.1.99
-  maximum_rancher_version: v1.3.99
+  maximum_rancher_version: v1.1.99
   questions:
     - variable: "DOCKER_BRIDGE"
       label: "Docker Bridge"

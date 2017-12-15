@@ -1,0 +1,6 @@
+name: Network Diagnostics
+version: 0.0.2
+category: Networking
+labels:
+  io.rancher.certified: rancher
+  io.rancher.orchestration.supported: 'cattle,kubernetes'

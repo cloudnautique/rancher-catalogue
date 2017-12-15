@@ -4,6 +4,7 @@
   version: "v0.6.4.1"
   description: "Rancher External DNS service powered by Amazon Route53."
   minimum_rancher_version: v1.6.0-rc1
+  maximum_rancher_version: v1.6.0-rc1
   questions:
     - variable: "AWS_ACCESS_KEY"
       label: "AWS Access Key ID"

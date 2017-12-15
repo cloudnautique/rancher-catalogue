@@ -1,5 +1,9 @@
 ## Kubernetes 1.5.4
 
+### Required Open Ports on hosts
+
+The following TCP ports are required to be open for `kubectl`: `10250` and `10255`. To access any exposed services, the ports used for the NodePort will also need to be opened. The default ports used by NodePort are TCP ports `30000` - `32767`.
+
 ### Upgrading to this Version
 
 Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ignoring this will result in data loss. For older templates, please first upgrade to `v1.5.4-rancher1`.

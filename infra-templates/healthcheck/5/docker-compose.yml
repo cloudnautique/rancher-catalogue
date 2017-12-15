@@ -1,0 +1,13 @@
+version: '2'
+services:
+  healthcheck:
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+    image: rancher/healthcheck:v0.3.3
+    command: healthcheck --metadata-address 169.254.169.250
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'

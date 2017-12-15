@@ -3,3 +3,4 @@ description: Experimental Windows template
 stacks:
   - name: windows
     templateId: 'library:infra*windows'
+    
