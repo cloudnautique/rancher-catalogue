@@ -5,9 +5,14 @@ credentials in Rancher for an Amazon Elastic Container Registry (ECR).
 
 Originally contributed by John Engelman from [Object Partners](http://www.objectpartners.com).
 
+### Changelog - 2.0.1
+
+#### ecr_updater [rancher/rancher-ecr-credentials:v2.0.1]
+* adding retry logic to AWS and Rancher API calls
+
 ## Why is this needed?
 
-ECR is controlled with AWS IAM and registries in Rancher are verified using credentials (i.e. username and password). These credentials expire every 12 hours and need to be constantly updated. 
+ECR is controlled with AWS IAM and registries in Rancher are verified using credentials (i.e. username and password). These credentials expire every 12 hours and need to be constantly updated.
 
 > **Note:** This application runs on a 6 hour loop. There is a possibility where there could be a slight gap where the credentials expire before this program updates them.
 
