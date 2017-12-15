@@ -1,7 +1,7 @@
 name: ECR Credential Updater
 description: |
   Automatically updates AWS EC2 Container Registry credentials in Rancher.
-version: v0.1.0
+version: v2.0.1
 category: Applications
 labels:
   io.rancher.certified: rancher

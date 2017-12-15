@@ -10,5 +10,5 @@ ecr-updater:
     io.rancher.container.create_agent: 'true'
     io.rancher.container.agent.role: environment
   tty: true
-  image: rancher/rancher-ecr-credentials:v2.0.0
+  image: rancher/rancher-ecr-credentials:v2.0.1
   stdin_open: true

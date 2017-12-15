@@ -3,11 +3,11 @@
 A Docker service that will update the Docker registry
 credentials in Rancher for an Amazon Elastic Container Registry (ECR).
 
-Originally contributed by John Engelman from [Object Partners](http://www.objectpartners.com). 
+Originally contributed by John Engelman from [Object Partners](http://www.objectpartners.com).
 
 ## Why is this needed?
 
-ECR is controlled with AWS IAM and registries in Rancher are verified using credentials (i.e. uersname and password). These credentials expire every 12 hours and need to be constantly updated. 
+ECR is controlled with AWS IAM and registries in Rancher are verified using credentials (i.e. username and password). These credentials expire every 12 hours and need to be constantly updated. 
 
 > **Note:** This application runs on a 6 hour loop. There is a possibility where there could be a slight gap where the credentials expire before this program updates them.
 
