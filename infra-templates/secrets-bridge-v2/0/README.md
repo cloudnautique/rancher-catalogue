@@ -18,7 +18,9 @@ This volume driver delivers access tokens per-container to authenticate with Has
 
 1. Create a new role in Vault that encompasses all of the policies that will be used in an environment. Applications policy scope can be limited to a subset when requesting an access token.
 
-`vault write auth/token/roles/<your role name> allowed_policies=app1,default,etc`
+```
+vault write auth/token/roles/<your role name> allowed_policies=app1,default,etc
+```
 
 2. Create a policy that can be used for the issuing token.
 
