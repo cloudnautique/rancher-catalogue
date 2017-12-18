@@ -1,0 +1,17 @@
+#check_tag: Only support the docker hub repo tag check
+#Preinstall shyaml jq docker and login docker-hub
+source_repo: gcr.io
+target_repo: docker.io
+target_namespace: rancher
+check_tag: true 
+images:
+- google_containers/pause-amd64:3.0
+- google_containers/cluster-proportional-autoscaler-amd64:1.0.0
+- google_containers/k8s-dns-sidecar-amd64:1.14.5
+- google_containers/k8s-dns-dnsmasq-nanny-amd64:1.14.5
+- google_containers/kubernetes-dashboard-amd64:v1.7.1
+- google_containers/k8s-dns-kube-dns-amd64:1.14.5
+- google_containers/heapster-grafana-amd64:v4.4.3
+- google_containers/heapster-amd64:v1.4.0
+- google_containers/heapster-influxdb-amd64:v1.3.3
+- kubernetes-helm/tiller:v2.6.1
