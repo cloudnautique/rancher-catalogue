@@ -71,7 +71,7 @@ Information required:
 
 ### Custom CA/Self signed certs
 
-In order to for the Vault Token Driver to communicate with a Vault server behind a self-signed certificate, the `ca.pem` file will need to be added to `/var/lib/rancher/` on each Rancher host in the environment.
+In order to for the Vault Token Driver to communicate with a Vault server behind a self-signed certificate, the CA pem file will need to be added to `/var/lib/rancher/etc/ssl/ca.crt` on each Rancher host in the environment.
 
 ## Using
 
