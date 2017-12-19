@@ -1,0 +1,62 @@
+.catalog:
+  name: "ECR Credential Updater"
+  version: "v2.0.2"
+  description: "Updates credentials for ECR in Rancher"
+  minimum_rancher_version: "v1.5.0"
+  questions:
+    - variable: "aws_access_key_id"
+      label: "AWS Access Key ID"
+      description: "AWS API Access Key to use for obtaining ECR credentials. Not required if using IAM roles."
+      required: false
+      type: "string"
+    - variable: "aws_secret_access_key"
+      label: "AWS Secret Access Key"
+      description: "AWS API Secret Key to use for obtaining ECR credentials. Not required if using IAM roles."
+      required: false
+      type: "string"
+    - variable: "aws_region"
+      label: "AWS Region"
+      description: "AWS Region that hosts the ECR"
+      default: us-east-1
+      required: true
+      type: "string"
+    - variable: "auto_create"
+      label: "Auto Create"
+      description: "Automatically create registry in Rancher for corresponding ECR repo if it doesn't already exist"
+      default: "false"
+      required: true
+      type: "string"
+    - variable: "log_level"
+      label: "Log Level"
+      description: "Logging level to run service at"
+      default: "INFO"
+      required: true
+      type: "string"
+    - variable: "is_other_environment"
+      type: enum
+      label: "Environment"
+      description: "Which environment it should serve"
+      default: current
+      options:
+        - current
+        - other
+    - variable: "cattle_url"
+      label: "Cattle URL"
+      description: "Cattle url for other environment"
+      default: ""
+      required: false
+      type: "string"
+    - variable: "cattle_access_key"
+      label: "Cattle Access Key"
+      description: "Cattle access key for other environment"
+      default: ""
+      required: false
+      type: "string"
+    - variable: "cattle_access_secret"
+      label: "Cattle Access Secret"
+      description: "Cattle access secret for other environment"
+      default: ""
+      required: false
+      type: "string"
+ecr-updater:
+  scale: 1
