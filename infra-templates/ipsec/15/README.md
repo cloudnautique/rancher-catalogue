@@ -10,6 +10,7 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 
 #### Router and CNI Driver [rancher/net:v0.13.7]
 * Introduced connectivity check for ipsec.
+* Fixed an issue where scheduler IPs could be picked up as the IP for the ipsec service for ports `500` and `4500`, which would cause cross host communication to no longer work for that host
 
 ### Configuration options
 * `RANCHER_DEBUG`

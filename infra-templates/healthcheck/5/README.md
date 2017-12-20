@@ -3,7 +3,7 @@
 This stack provides a healthcheck service
 
 ### Changelog for v0.3.3-1
-* Add timeouts for healthcheck service 
+* Add re-initializing and initializing timeouts for the healthcheck service 
 
 #### Healthcheck [rancher/healthcheck:v0.3.3]
 * Added health check for sidekick service containers using networkFrom primary

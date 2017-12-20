@@ -1,5 +1,5 @@
 ## Scheduler
 
-### Changelog for v0.6.3
+### Changelog for v0.8.3
 
-* Uses a fixed listen address of 169.254.169.250, instead of all available IP addresses.
+* Fixed a panic that could occur if metadata was not available

@@ -7,6 +7,7 @@ Rancher External DNS service powered by Amazon Route53
 ##### v0.7.9
 
 * Skip Traffic Policy records when traversing zone
+* Fixed an issue where modifying an environment name was not being updated
 
 #### Usage
 
