@@ -8,7 +8,7 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 
 ### Changelog - 0.2.3
 
-#### Router, CNI Driver, Connectivity Check [rancher/net:v0.13.8]
+#### Router, CNI Driver, Connectivity Check [rancher/net:v0.13.9]
 * Added support for regions
 * Reduced the logging level for ipsec
 
