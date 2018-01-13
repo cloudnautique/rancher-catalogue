@@ -1,7 +1,7 @@
 version: '2'
 services:
   secrets-bridge-v2-server:
-    image: rancher/secrets-bridge-v2:v0.1.1
+    image: rancher/secrets-bridge-v2:v0.2.0
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: 'true'
