@@ -1,6 +1,6 @@
 version: '2'
 
-{{- $npmImage:="rancher/network-policy-manager:v0.2.5" }}
+{{- $npmImage:="rancher/network-policy-manager:v0.2.6" }}
 
 services:
   network-policy-manager:
