@@ -14,6 +14,10 @@ This stack provides the following services:
 #### DNS [rancher/dns:v0.17.1]
 * Added regions support
 
+#### Network Manager [rancher/network-manager:v0.7.20]
+* Fixes issue during startup of healthcheck not able to reach server.
+* Fixes issue with deletiion of conntrack entries related to kubernetes cluster IP subnet.
+
 ### Configuration Options
 
 #### dns
