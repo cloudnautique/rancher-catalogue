@@ -1,6 +1,1 @@
-portworx:
-  labels:
-    io.rancher.container.dns: 'true'
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-  command: curl -fsL http://get.portworx.com | sudo sh -- -c ${CLUSTER_ID} -k ${KVDB} ${USE_DISKS} -a -f
+command: curl -fsL http://get.portworx.com | sudo sh -- -c ${CLUSTER_ID} -k ${KVDB} ${USE_DISKS} -a -f
