@@ -24,6 +24,4 @@ portworx:
      - /var/run/docker.sock:/var/run/docker.sock
      - /var/cores:/var/cores
      - /proc:/hostproc
-  command: curl -fsL http://get.portworx.com | sudo sh 
-  command: sudo /opt/pwx/bin/px-runc install -c ${CLUSTER_ID} -k ${KVDB} ${USE_DISKS} -a -f
-  command: sudo systemctl daemon-reload && sudo systemctl enable portworx && sudo systemctl start portworx
+  command: curl -fsL http://get.portworx.com | sudo sh && sudo /opt/pwx/bin/px-runc install -c ${CLUSTER_ID} -k ${KVDB} ${USE_DISKS} -a -f && sudo systemctl daemon-reload && sudo systemctl enable portworx && sudo systemctl start portworx
