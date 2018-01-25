@@ -1,10 +1,10 @@
 ecr-updater:
   environment:
-    AWS_ACCESS_KEY_ID: ${aws_access_key_id}
-    AWS_SECRET_ACCESS_KEY: ${aws_secret_access_key}
-    AWS_REGION: ${aws_region}
-    AUTO_CREATE: ${auto_create}
-    LOG_LEVEL: ${log_level}
+    AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+    AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+    AWS_REGION: ${AWS_REGION}
+    AUTO_CREATE: ${AUTO_CREATE}
+    LOG_LEVEL: ${LOG_LEVEL}
     {{- if eq .Values.registry_in_which_environment "other" }}
     CATTLE_URL: ${environment_api_endpoint}
     CATTLE_ACCESS_KEY: ${environment_api_access_key}
