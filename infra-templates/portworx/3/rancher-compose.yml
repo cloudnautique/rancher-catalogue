@@ -1,6 +1,6 @@
 .catalog:
   name: "Portworx"
-  version: "1.2.12.1-OCI"
+  version: "1.2.14"
   description: "Portworx OCI Plugin"
   questions:
 
