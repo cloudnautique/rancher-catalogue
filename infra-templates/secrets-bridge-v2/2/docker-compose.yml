@@ -1,7 +1,7 @@
 version: '2'
 services:
   secrets-bridge-v2-server:
-    image: rancher/secrets-bridge-v2:v0.2.0
+    image: rancher/secrets-bridge-v2:v0.3.0
     labels:
       io.rancher.container.agent.role: environment
       io.rancher.container.create_agent: 'true'
@@ -11,7 +11,7 @@ services:
     
   secrets-bridge-v2-driver:
     privileged: true
-    image: rancher/storage-secrets-bridge-v2:v0.9.0
+    image: rancher/storage-secrets-bridge-v2:v0.9.1
     network_mode: host
     environment:
         VAULT_TOKEN_SERVER_URL: http://secrets-bridge-v2-server:8080/v1-vault-driver/tokens
