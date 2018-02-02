@@ -1,0 +1,48 @@
+version: '2'
+services:
+  ipsec:
+    # IMPORTANT!!!! DO NOT CHANGE VERSION ON UPGRADE
+    image: rancher/net:holder
+    command: sh -c "echo Refer to router sidekick for logs; mkfifo f; exec cat f"
+    network_mode: ipsec
+    ports:
+      - 500:500/udp
+      - 4500:4500/udp
+    # Force cni-driver to start first
+    volumes_from:
+      - cni-driver
+    labels:
+      io.rancher.sidekicks: router,cni-driver
+      io.rancher.scheduler.global: 'true'
+      io.rancher.cni.link_mtu_overhead: '0'
+      io.rancher.network.macsync: 'true'
+      io.rancher.network.arpsync: 'true'
+  router:
+    cap_add:
+      - NET_ADMIN
+    image: rancher/net:v0.11.1
+    network_mode: container:ipsec
+    environment:
+      RANCHER_DEBUG: '${RANCHER_DEBUG}'
+    labels:
+      io.rancher.container.create_agent: 'true'
+      io.rancher.container.agent_service.ipsec: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'
+  cni-driver:
+    privileged: true
+    image: rancher/net:v0.11.1
+    command: sh -c "touch /var/log/rancher-cni.log && exec tail ---disable-inotify -F /var/log/rancher-cni.log"
+    network_mode: host
+    pid: host
+    labels:
+      io.rancher.network.cni.binary: 'rancher-bridge'
+      io.rancher.container.dns: 'true'
+    logging:
+      driver: json-file
+      options:
+        max-size: 25m
+        max-file: '2'

@@ -1,0 +1,71 @@
+# notemplating
+.catalog:
+  name: "Route53 DNS"
+  version: "v0.7.9"
+  description: "Rancher External DNS service powered by Amazon Route53."
+  minimum_rancher_version: v1.6.13-rc1
+  questions:
+    - variable: "AWS_ACCESS_KEY"
+      label: "AWS Access Key ID"
+      description: "Access key ID for your AWS account (not required if using EC2 IAM role)"
+      type: "string"
+      required: false
+    - variable: "AWS_SECRET_KEY"
+      label: "AWS Secret Access Key"
+      description: "Secret access key for your AWS account (not required if using EC2 IAM role)"
+      type: "string"
+      required: false
+    - variable: "TTL"
+      label: "TTL"
+      description: "The resource record cache time to live (TTL), in seconds"
+      type: "int"
+      default: 60
+      required: false
+    - variable: "ROOT_DOMAIN"
+      label: "Hosted Zone Name"
+      description: "Route53 hosted zone name (zone has to be pre-created)."
+      type: "string"
+      required: true
+    - variable: "ROUTE53_ZONE_ID"
+      label: "Hosted Zone ID"
+      description: "If there are multiple zones with the same name, then you must additionally specify the ID of the hosted zone to use."
+      type: "string"
+      required: false
+    - variable: "NAME_TEMPLATE"
+      label: "DNS Name Template"
+      description: |
+        Name template used to construct the subdomain part (left of the hosted zone name) of the DNS record names.
+        Supported placeholders: %{{service_name}}, %{{stack_name}}, %{{environment_name}}.
+        By default DNS entries will be named '<service>.<stack>.<environment>.<domain>'.
+      type: "string"
+      default: "%{{service_name}}.%{{stack_name}}.%{{environment_name}}"
+      required: false
+    - variable: "HEALTH_CHECK"
+      label: "Health Check Interval"
+      description: |
+        The health check interval for this service, in milliseconds.
+        Raise this value if the global requests for your account are exceeding the Route53 API rate limits.
+      type: "int"
+      min: 2000
+      max: 60000
+      default: 10000
+      required: true
+    - variable: "ROUTE53_MAX_RETRIES"
+      label: "Maximum number of retries for rate-limited API requests"
+      description: |
+        By default requests that have been rate-limited by Route53 are retried up to 3 times using an incremental backoff.
+        Running this service in a high number of environments might make it necessary to choose a higher number.
+      type: "int"
+      min: 1
+      max: 5
+      default: 3
+      required: false
+
+route53:
+  health_check:
+    port: 1000
+    interval: ${HEALTH_CHECK}
+    unhealthy_threshold: 2
+    request_line: GET / HTTP/1.0
+    healthy_threshold: 2
+    response_timeout: 8000

@@ -1,0 +1,52 @@
+.catalog:
+  name: "Rancher NFS"
+  version: 0.5.0
+  description: |
+    Docker volume plugin for NFS
+  minimum_rancher_version: v1.6.15-rc1
+  questions:
+  - variable: "NFS_SERVER"
+    description: "IP or hostname of the default NFS Server"
+    label: "NFS Server"
+    required: true
+    type: "string"
+  - variable: "MOUNT_DIR"
+    label: "Export Base Directory"
+    description: "The default exported base directory"
+    type: "string"
+    required: true
+  - variable: "MOUNT_OPTS"
+    label: "Mount Options"
+    description: "Comma delimited list of default mount options, for example: 'proto=udp'. Do not specify `nfsvers` option, it will be ignored."
+    type: "string"
+  - variable: "NFS_VERS"
+    label: NFS Version
+    description: Default NFS version to use
+    type: enum
+    required: true
+    default: nfsvers=4
+    options:
+    - nfsvers=4
+    - nfsvers=3
+  - variable: ON_REMOVE
+    label: On Remove
+    description: On removal of Rancher NFS volume, should the underlying data be retained or purged.
+    type: enum
+    required: true
+    default: purge
+    options:
+    - purge
+    - retain
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    description: Enable or disable verbose logging
+    default: false
+    options:
+    - true
+    - false
+nfs-driver:
+  storage_driver:
+    name: rancher-nfs
+    scope: environment
+    volume_access_mode: multiHostRW

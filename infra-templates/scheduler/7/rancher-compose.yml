@@ -1,0 +1,24 @@
+.catalog:
+    name: Scheduler
+    description: A resource based scheduler plugin for Rancher.
+    version: v0.6.1
+    minimum_rancher_version: v1.6.1-rc1
+    maximum_rancher_version: v1.6.1-rc1
+    questions:
+        - variable: "RANCHER_DEBUG"
+          label: "Enable Debug Logs"
+          description: "This will enable very verbose debug logs."
+          type: "boolean"
+          default: "false"
+          required: true
+
+scheduler:
+    health_check:
+        request_line: GET /healthcheck HTTP/1.0
+        port: 80
+        interval: 2000
+        initializing_timeout: 10000
+        reinitializing_timeout: 10000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2

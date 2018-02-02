@@ -3,7 +3,7 @@
   version: v1.5.2-rancher1-4
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.4.0-rc1
-  maximum_rancher_version: v1.4.99
+  maximum_rancher_version: v1.4.0-rc1
   questions:
   - variable: CLOUD_PROVIDER
     label: Cloud Provider
@@ -25,8 +25,8 @@
      - false
   - variable: POD_INFRA_CONTAINER_IMAGE
     label: Pod Infra Container Image
-    description: The image whose network/ipc namespaces containers in each pod will use. (It uses kubelet default if left empty)
-    required: false
+    description: The image whose network/ipc namespaces containers in each pod will use. If your images are being pulled from a private registry, you need to add this image to your private registry and put the private registry into this field.
+    required: true
     default: "gcr.io/google_containers/pause-amd64:3.0"
     type: string
   - variable: REGISTRY_ADDONS

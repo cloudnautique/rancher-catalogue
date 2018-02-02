@@ -1,0 +1,18 @@
+.catalog:
+    name: Network Services
+    version: v0.2.3
+    minimum_rancher_version: v1.6.1
+    maximum_rancher_version: v1.6.5
+    questions:
+    - variable: DNS_RECURSER_TIMEOUT
+      label: Timeout for Rancher DNS Recurser
+      description: Specify timeout in seconds for DNS Recurser.
+      required: true
+      default: 2
+      type: int
+    - variable: TTL
+      label: TTL for service discovery answers
+      description: How long answers for *.rancher.internal responses are valid
+      required: true
+      default: 10
+      type: int

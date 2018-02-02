@@ -3,6 +3,7 @@
     description: A resource based scheduler plugin for Rancher.
     version: v0.5.0
     minimum_rancher_version: v1.5.0-rc1
+    maximum_rancher_version: v1.5.0-rc1
     questions:
         - variable: "RANCHER_DEBUG"
           label: "Enable Debug Logs"

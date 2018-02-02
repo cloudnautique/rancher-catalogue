@@ -1,0 +1,164 @@
+.catalog:
+  name: Kubernetes
+  version: v1.5.4-rancher1-2
+  description: Rancher Kubernetes service
+  minimum_rancher_version: v1.5.0-rc1
+  maximum_rancher_version: v1.5.0-rc1
+  questions:
+  - variable: CONSTRAINT_TYPE
+    label: Plane Isolation
+    description: Isolate the data, orchestration and compute planes via host labels. Set to required when running in production.
+    required: true
+    default: none
+    type: enum
+    options:
+    - none
+    - required
+  - variable: CLOUD_PROVIDER
+    label: Cloud Provider
+    description: The cloud provider on which Kubernetes is running
+    required: true
+    default: rancher
+    type: enum
+    options:
+     - rancher
+     - aws
+  - variable: REGISTRY
+    description: The registry to pull addon images and the optional pod infra container image. This should be set to the private registry from which the images for addon-services (i.e. helm, heapster, dashboard, dns) and the pod infra container image should be pulled.
+    label: Private Registry for Add-Ons and Pod Infra Container Image
+    required: false
+    default: ""
+    type: string
+  - variable: DISABLE_ADDONS
+    label: Disable Rancher Add-ons
+    description: Setting this to `true` will disable SkyDNS, dashboard, helm and other k8s services. This is meant for advanced users who want to implement their own DNS, UI and other add-ons.
+    required: true
+    default: false
+    type: enum
+    options:
+     - true
+     - false
+  - variable: POD_INFRA_CONTAINER_IMAGE
+    label: Pod Infra Container Image
+    description: The image whose network/ipc namespaces containers in each pod will use. It uses kubelet default if left empty. Do not add the private registry to this field, update the `Private Registry for Add-Ons and Pod Infra Container Image` field with the registry information.
+    required: false
+    default: "gcr.io/google_containers/pause-amd64:3.0"
+    type: string
+  - variable: EMBEDDED_BACKUPS
+    label: Enable Backups
+    description: "Periodically backup state to /var/etcd/backups. Mount network storage here on all hosts before continuing"
+    required: true
+    default: true
+    type: boolean
+  - variable: BACKUP_PERIOD
+    label: Backup Creation Period
+    description: Create a backup after this amount of time passes. Must conform to duration format
+    required: true
+    default: 15m0s
+    type: string
+  - variable: BACKUP_RETENTION
+    label: Backup Retention Period
+    description: Expire a backup after this amount of time passes. Must conform to duration format
+    required: true
+    default: 24h
+    type: string
+  - variable: ETCD_HEARTBEAT_INTERVAL
+    label: Etcd Heartbeat Interval
+    description: Time (in milliseconds) of a heartbeat interval.
+    required: true
+    default: 500
+    type: int
+  - variable: ETCD_ELECTION_TIMEOUT
+    label: Etcd Election Timeout
+    description: Time (in milliseconds) for an election to timeout.
+    required: true
+    default: 5000
+    type: int
+kubernetes:
+    metadata:
+        sans:
+        - "IP:10.43.0.1"
+    health_check:
+        request_line: GET /healthz HTTP/1.0
+        port: 80
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+    retain_ip: true
+
+etcd:
+    retain_ip: true
+    scale_policy:
+        increment: 1
+        max: 3
+        min: 1
+    health_check:
+        port: 2378
+        request_line: GET /health HTTP/1.0
+        interval: 5000
+        response_timeout: 3000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 120000
+        reinitializing_timeout: 120000
+        recreate_on_quorum_strategy_config:
+            quorum: 2
+        strategy: recreateOnQuorum
+
+rancher-kubernetes-agent:
+    health_check:
+        request_line: GET /healthcheck HTTP/1.0
+        port: 10240
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+
+scheduler:
+    health_check:
+        request_line: GET /healthz HTTP/1.0
+        port: 10251
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+
+controller-manager:
+    health_check:
+        request_line: GET /healthz HTTP/1.0
+        port: 10252
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+
+kubectld:
+    health_check:
+        port: 8091
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000
+
+
+rancher-ingress-controller:
+    health_check:
+        request_line: GET /healthz HTTP/1.0
+        port: 10241
+        interval: 2000
+        response_timeout: 2000
+        unhealthy_threshold: 3
+        healthy_threshold: 2
+        initializing_timeout: 60000
+        reinitializing_timeout: 60000

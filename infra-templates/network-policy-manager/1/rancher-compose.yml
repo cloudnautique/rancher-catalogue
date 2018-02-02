@@ -2,3 +2,4 @@
   name: Network Policy Manager
   version: v0.0.2
   minimum_rancher_version: v1.5.0-rc1
+  maximum_rancher_version: v1.6.14

@@ -1,0 +1,22 @@
+.catalog:
+  version: 0.0.2
+  minimum_rancher_version: v1.6.6-rc1
+  questions:
+    - variable: RANCHER_DEBUG
+      label: "Enable Debug logs"
+      description: "To enable very verbose debug logging for the services"
+      required: true
+      default: false
+      type: boolean
+    - variable: INFO_COLLECTION_INTERVAL
+      label: "Log collection interval (in milliseconds)"
+      description: "How often should the logs be collected on every host?"
+      required: true
+      default: 600000
+      type: int
+    - variable: INFO_HISTORY_LENGTH
+      label: "Log History Length"
+      description: "How many log snapshots to keep?"
+      required: true
+      default: 1000
+      type: int

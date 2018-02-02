@@ -1,0 +1,35 @@
+version: '2'
+services:
+  secrets-bridge-v2-server:
+    image: rancher/secrets-bridge-v2:v0.1.1
+    labels:
+      io.rancher.container.agent.role: environment
+      io.rancher.container.create_agent: 'true'
+    command: secrets-bridge-v2-server server --vault-url {{.Values.vault_url}} --vault-role {{.Values.vault_role}} --vault-token-file /run/secrets/{{.Values.issuing_token}}
+    secrets:
+      - "{{.Values.issuing_token}}"
+    
+  secrets-bridge-v2-driver:
+    privileged: true
+    image: rancher/storage-secrets-bridge-v2:v0.8.13
+    network_mode: host
+    environment:
+        VAULT_TOKEN_SERVER_URL: http://secrets-bridge-v2-server:8080/v1-vault-driver/tokens
+    volumes:
+    - /var/run:/var/run
+    - /dev:/host/dev
+    - /var/lib/rancher/volumes:/var/lib/rancher/volumes:shared
+    logging:
+      driver: json-file
+      options:
+        max-file: '2'
+        max-size: 25m
+    labels:
+      io.rancher.container.agent.role: environment
+      io.rancher.container.create_agent: 'true'
+      io.rancher.scheduler.global: 'true'
+      io.rancher.container.dns: 'true'
+
+secrets:
+  {{.Values.issuing_token}}:
+    external: true

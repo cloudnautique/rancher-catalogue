@@ -1,0 +1,36 @@
+.catalog:
+    name: Network Services
+    version: v0.2.8
+    minimum_rancher_version: v1.6.13-rc1
+    maximum_rancher_version: v1.6.14
+    questions:
+    - variable: DNS_RECURSER_TIMEOUT
+      label: Timeout for Rancher DNS Recurser
+      description: Specify timeout in seconds for DNS Recurser.
+      required: true
+      default: 2
+      type: int
+    - variable: TTL
+      label: TTL for service discovery answers
+      description: How long answers for *.rancher.internal responses are valid
+      required: true
+      default: 1
+      type: int
+    - variable: CPU_PERIOD
+      label: CPU scheduler period
+      description: Sets the period of CPUs to limit the metadata container's CPU usage
+      required: true
+      default: 400000
+      type: int
+    - variable: CPU_QUOTA
+      label: CPU quota on the metadata container
+      description: Sets the CPU quota on the metadata container
+      required: true
+      default: 200000
+      type: int
+    - variable: RELOAD_INTERVAL_LIMIT
+      label: Metadata reload interval limit
+      description: Limits reload to 1 per interval (milliseconds)
+      required: true
+      default: 1000
+      type: int

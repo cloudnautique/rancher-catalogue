@@ -1,0 +1,40 @@
+.catalog:
+    name: "Rancher Secrets Bridge V2"
+    version: v0.1.1
+    description: "Volume plugin to fetch and present access tokens to Hashicorp Vault to the container"
+    minimum_rancher_version: v1.6.13-rc1
+    maximum_rancher_version: v1.6.14
+    questions:
+      - variable: vault_url
+        label: Vault URL
+        type: string
+        description: "URL for Hashicorp Vault server endpoint. Include http(s)"
+        required: true
+      - variable: vault_role
+        label: Vault Role
+        type: string
+        description: "Role that issuing token is assigned in Hashicorp Vault"
+        required: true
+      - variable: issuing_token
+        label: Issuing Token Secret
+        type: secret
+        description: "Secret containing issuing token"
+        required: true
+secrets-bridge-v2-server:
+  health_check:
+      response_timeout: 2000
+      healthy_threshold: 2
+      port: 8080
+      unhealthy_threshold: 3
+      initializing_timeout: 60000
+      interval: 2000
+      strategy: none
+      request_line: GET "/healthcheck" "HTTP/1.0"
+      reinitializing_timeout: 60000
+secrets-bridge-v2-driver:
+  storage_driver:
+    name: secrets-bridge-v2
+    description: "Secrets Bridge V2"
+    scope: local
+    volume_access_mode: singleHostRW
+    start_on_create: true

@@ -1,0 +1,7 @@
+.catalog:
+  name: "Rancher Container Crontab"
+  version: "v0.2.0"
+  description: "Service that will start, stop or restart containers"
+  minimum_rancher_version: v1.4.0
+  maximum_rancher_version: v1.5.99
+  questions:
