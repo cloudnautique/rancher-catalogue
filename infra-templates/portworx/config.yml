@@ -1,7 +1,7 @@
 name: Portworx
 description: |
   Volume plugin for Portworx Elastic Data Fabric, providing scale-out persistent storage for containers.
-version: 1.2.11.6
+version: edge
 category: Storage
 labels:
   io.rancher.orchestration.supported: 'cattle'
