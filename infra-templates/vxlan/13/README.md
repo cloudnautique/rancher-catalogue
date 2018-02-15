@@ -21,6 +21,7 @@ Traffic to and from hosts requires UDP port `4789` to be open.
 
 * `DOCKER_BRIDGE`
 * `MTU`
+# `LINK_MTU_OVERHEAD`
 * `SUBNET`
 * `RANCHER_HAIRPIN_MODE`
 * `RANCHER_PROMISCUOUS_MODE`

@@ -16,6 +16,12 @@
       required: true
       default: 1500
       type: int
+    - variable: LINK_MTU_OVERHEAD
+      label: "MTU overhead for the rancher network"
+      description: "Adjust the MTU overhead for the rancher network (usually you should not need to, though!)"
+      required: true
+      default: 50
+      type: int
     - variable: "SUBNET"
       label: "Subnet"
       description: "The subnet to use for the managed network."

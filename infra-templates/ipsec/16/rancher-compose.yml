@@ -15,6 +15,12 @@
       required: true
       default: 1500
       type: int
+    - variable: LINK_MTU_OVERHEAD
+      label: "MTU overhead for the rancher network"
+      description: "Adjust the MTU overhead for the rancher network (usually you should not need to, though!)"
+      required: true
+      default: 98
+      type: int
     - variable: "RANCHER_DEBUG"
       label: "Enable Debug Logs"
       description: "This will enable very verbose debug logs."

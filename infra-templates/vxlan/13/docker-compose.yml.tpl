@@ -83,7 +83,7 @@ services:
           hairpinMode: {{  .Values.RANCHER_HAIRPIN_MODE }}
           promiscMode: {{ .Values.RANCHER_PROMISCUOUS_MODE }}
           mtu: ${MTU}
-          linkMTUOverhead: 50
+          linkMTUOverhead: ${LINK_MTU_OVERHEAD}
           ipam:
             type: rancher-cni-ipam
             subnetPrefixSize: /{{ .Values.SUBNET_PREFIX }}

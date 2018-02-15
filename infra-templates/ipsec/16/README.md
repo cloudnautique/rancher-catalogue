@@ -25,6 +25,7 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 
 * `DOCKER_BRIDGE`
 * `MTU`
+* `LINK_MTU_OVERHEAD`
 * `SUBNET`
 * `SUBNET_START_ADDRESS`
 * `SUBNET_END_ADDRESS`
