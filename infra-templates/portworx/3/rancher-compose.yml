@@ -1,7 +1,7 @@
 .catalog:
   name: "Portworx"
-  version: "1.2.14"
-  description: "Portworx OCI Plugin"
+  version: "1.2.20.0"
+  description: "Portworx Docker Volume Plugin"
   questions:
 
     - variable: "VOLUME_DRIVER_NAME"
