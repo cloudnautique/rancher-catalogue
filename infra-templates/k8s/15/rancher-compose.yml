@@ -5,6 +5,15 @@
   minimum_rancher_version: v1.2.0-pre4-rc1
   maximum_rancher_version: v1.2.99
   questions:
+  - variable: CLOUD_PROVIDER
+    label: Cloud Provider
+    description: The cloud provider on which Kubernetes is running
+    required: true
+    default: rancher
+    type: enum
+    options:
+     - rancher
+     - aws
   - variable: EMBEDDED_BACKUPS
     label: Enable Backups
     description: "Periodically backup state to /var/etcd/backups. Mount network storage here on all hosts before continuing"
@@ -23,15 +32,6 @@
     required: true
     default: 24h
     type: string
-  - variable: CLOUD_PROVIDER
-    label: Cloud Provider
-    description: The cloud provider on which Kubernetes is running
-    required: true
-    default: rancher
-    type: enum
-    options:
-     - rancher
-     - aws
 
 kubernetes:
     metadata:

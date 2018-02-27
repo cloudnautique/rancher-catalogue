@@ -1,0 +1,6 @@
+name: Windows Network Services
+version: v0.1.0
+category: Framework
+labels:
+  io.rancher.certified: Experimental
+  io.rancher.orchestration.supported: 'windows'

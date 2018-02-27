@@ -1,0 +1,154 @@
+.catalog:
+  name: "nDVP"
+  version: "17.07"
+  description: "NetApp Docker Volume Plugin (nDVP)"
+  questions:
+    # Common settings
+    - variable: "STORAGE_PREFIX"
+      description: "Prefix for created storage objects"
+      label: "Storage Prefix"
+      required: false
+      default: "netappdvp_"
+      type: "string"
+
+    - variable: "DEBUG_ENABLED"
+      description: "Enable debugging output in logs"
+      label: "Debug Logging"
+      required: false
+      default: false
+      type: "boolean"
+
+    # E-Series settings
+    - variable: "WEB_PROXY_HOSTNAME"
+      description: "Hostname or IP address of Web Services Proxy"
+      label: "Web Proxy Hostname"
+      required: true
+      default: ""
+      type: "string"
+
+    - variable: "WEB_PROXY_PORT"
+      description: "Port number of the Web Services Proxy (optional)"
+      label: "Web Proxy Port"
+      required: true
+      default: "8443"
+      type: "string"
+
+    - variable: "WEB_PROXY_USE_HTTP"
+      description: "Use HTTP instead of HTTPS for Web Services Proxy (default = false)?"
+      label: "Web Proxy Use HTTP?"
+      required: true
+      default: false
+      type: "boolean"
+
+    - variable: "WEB_PROXY_VERIFY_TLS"
+      description: "Verify server's certificate chain and hostname (default = false)?"
+      label: "Web Proxy verify TLS?"
+      required: true
+      default: false
+      type: "boolean"
+
+    - variable: "USER_NAME"
+      description: "Username for Web Services Proxy"
+      label: "User Name"
+      required: true
+      default: "rw"
+      type: "string"
+    - variable: "USER_PASSWORD"
+      description: "Password for Web Services Proxy"
+      label: "Password"
+      required: true
+      default: "rw"
+      type: "password"
+
+    - variable: "CONTROLLER_A"
+      description: "IP address of controller A"
+      label: "Controller A IP"
+      required: true
+      default: ""
+      type: "string"
+
+    - variable: "CONTROLLER_B"
+      description: "IP address of controller B"
+      label: "Controller B IP"
+      required: true
+      default: ""
+      type: "string"
+
+    - variable: "PASSWORD_ARRAY"
+      description: "Password for storage array (if set)"
+      label: "Password for Array"
+      required: false
+      default: ""
+      type: "password"
+
+    - variable: "HOSTDATA_IP"
+      description: "Host iSCSI IP address (if multipathing just choose either one)"
+      label: "Host iSCSI IP address"
+      required: true
+      default: ""
+      type: "string"
+
+    - variable: "POOL_NAME_SEARCH_PATTERN"
+      description: "Regular expression for matching storage pools available for nDVP volumes (default = .+)"
+      label: "Pool Name Search Pattern"
+      required: true
+      default: ".+"
+      type: "string"
+
+    - variable: "HOST_TYPE"
+      description: "Type of E-series Host created by nDVP (default = linux_dm_mp)"
+      label: "Host Type"
+      required: true
+      default: "linux_dm_mp"
+      type: "string"
+
+    - variable: "ACCESS_GROUP_NAME"
+      description: "Name of E-series Host Group to contain Hosts defined by nDVP (default = netappdvp)"
+      label: "Access Group Name"
+      required: true
+      default: "netappdvp"
+      type: "string"
+
+    # Common settings
+    - variable: "SIZE"
+      description: "Optional default size for new volumes. Default: '1G'"
+      label: "Volume Size"
+      required: false
+      default: "1G"
+      type: "string"
+
+    - variable: "VOLUME_DRIVER_NAME"
+      description: "Name to use for this plugin instance with Docker:  docker volume create -d <volume driver name>"
+      label: "Volume Driver Name"
+      required: true
+      default: "netapp"
+      type: "string"
+
+netapp-eseries:
+  labels:
+    io.rancher.scheduler.global: 'true'
+  metadata:
+    version: 1
+    storageDriverName: "eseries-iscsi"
+    debug: true
+    storagePrefix: "${STORAGE_PREFIX}"
+    webProxyHostname: "${WEB_PROXY_HOSTNAME}"
+    webProxyPort: "${WEB_PROXY_PORT}"
+    webProxyUseHTTP: "${WEB_PROXY_USE_HTTP}"
+    webProxyVerifyTLS: "${WEB_PROXY_VERIFY_TLS}"
+    username: "${USER_NAME}"
+    password: "${USER_PASSWORD}"
+    controllerA: "${CONTROLLER_A}"
+    controllerB: "${CONTROLLER_B}"
+    passwordArray: "${PASSWORD_ARRAY}"
+    hostData_IP: "${HOSTDATA_IP}"
+    poolNameSearchPattern: "${POOL_NAME_SEARCH_PATTERN}"
+    hostType: "${HOST_TYPE}"
+    accessGroupName: "${ACCESS_GROUP_NAME}"
+    defaults:
+      size: "${SIZE}"
+    volumeDriverName: "${VOLUME_DRIVER_NAME}"
+  storage_driver:
+    name: "${VOLUME_DRIVER_NAME}"
+    scope: environment
+    volume_access_mode: singleHostRW

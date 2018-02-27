@@ -1,0 +1,65 @@
+.catalog:
+  name: "l2-flat"
+  version: "v0.1.0"
+  minimum_rancher_version: v1.6.11-rc1
+  questions:
+    - variable: "FLAT_BRIDGE"
+      label: "FLAT Bridge"
+      description: "Name of Flat Bridge. Default is `flatbr0`"
+      type: "string"
+      default: "flatbr0"
+      required: true
+    - variable: "FLAT_IF"
+      label: "FLAT Interface"
+      description: "Name of Flat interface. Default is `eth0`"
+      type: "string"
+      default: "eth0"
+      required: true
+    - variable: MTU
+      label: "MTU for the network"
+      description: "Adjust the MTU for the network, according to your needs. Ex: GCE(1460), AWS(1500), etc"
+      required: true
+      default: 1500
+      type: int
+    - variable: "SUBNET"
+      label: "Subnet"
+      description: "The subnet to use for the managed network."
+      type: "string"
+      default: '172.22.101.0/24'
+      required: true
+    - variable: "START_ADDRESS"
+      label: "Start IP Address"
+      description: "The subnet to use for the managed network."
+      type: "string"
+      default: '172.22.101.110'
+      required: true
+    - variable: "END_ADDRESS"
+      label: "END IP Address"
+      description: "The subnet to use for the managed network."
+      type: "string"
+      default: '172.22.101.240'
+      required: true
+    - variable: "GATEWAY"
+      label: "Gateway"
+      description: "Container default gateway."
+      type: "string"
+      default: '172.22.101.1'
+      required: true
+    - variable: "RANCHER_METADATA_ADDRESS"
+      label: "Metadata IP Address"
+      description: "IP address of rancher-metadata service. Default is `169.254.169.250`"
+      type: "string"
+      default: "169.254.169.250"
+      required: true
+    - variable: "AUTO_SETUP_FLAT_BRIDGE"
+      label: "Auto Setup Flat Bridge"
+      description: "Flag to enable/disable setup flat bridge automatically"
+      type: "boolean"
+      default: "true"
+      required: true
+    - variable: "RANCHER_DEBUG"
+      label: "Enable Debug Logs"
+      description: "This will enable very verbose debug logs."
+      type: "boolean"
+      default: "false"
+      required: true

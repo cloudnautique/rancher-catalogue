@@ -1,0 +1,7 @@
+name: Rancher Layer2 Flat
+version: v0.1.0
+description: |
+  Rancher Networking plugin using Layer2 Flat.
+category: Networking
+labels:
+  io.rancher.orchestration.supported: 'cattle'

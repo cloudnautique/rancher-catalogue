@@ -1,0 +1,67 @@
+.catalog:
+  name: "per-host-subnet"
+  version: "v0.1.2"
+  minimum_rancher_version: v1.6.11-rc1
+  questions:
+    - variable: "BRIDGE"
+      label: "BRIDGE"
+      description: "Name of Bridge. Default is `docker0`"
+      type: "string"
+      default: "docker0"
+      required: true
+    - variable: "RANCHER_METADATA_ADDRESS"
+      label: "Metadata IP Address"
+      description: "IP address of rancher-metadata service. Default is `169.254.169.250`"
+      type: "string"
+      default: "169.254.169.250"
+      required: true
+    - variable: "RANCHER_DEBUG"
+      label: "Enable Debug Logs"
+      description: "This will enable very verbose debug logs."
+      type: "boolean"
+      default: "false"
+      required: true
+    - variable: MTU
+      label: "MTU for the network"
+      description: "Adjust the MTU for the network"
+      required: true
+      default: 1500
+      type: int
+    - variable: "RANCHER_ENABLE_ROUTE_UPDATE"
+      label: "Enable Route Update"
+      description: "This will enable route update."
+      type: "boolean"
+      default: "true"
+      required: true
+    - variable: "RANCHER_ROUTE_UPDATE_PROVIDER"
+      label: "Route Update Provider"
+      description: "The provider for route update."
+      type: "enum"
+      default: "hostgw"
+      required: true
+      options:
+      - hostgw
+    - variable: "RANCHER_HAIRPIN_MODE"
+      label: "Enable Hairpin mode"
+      description: "If this is enabled, Promiscuous mode needs to be disabled."
+      type: "boolean"
+      default: "false"
+      required: true
+    - variable: "RANCHER_PROMISCUOUS_MODE"
+      label: "Enable Promiscuous mode on the bridge"
+      description: "If this is enabled, Hairpin mode needs to be disabled."
+      type: "boolean"
+      default: "true"
+      required: true
+    - variable: "HOST_NAT"
+      label: "Enable Host NAT"
+      description: "Flag to enable/disable NAT for subnet"
+      type: "boolean"
+      default: "true"
+      required: true
+    - variable: "HOST_PORTS"
+      label: "Enable Host Ports"
+      description: "Flag to enable/disable publishing the ports on the hosts"
+      type: "boolean"
+      default: "true"
+      required: true

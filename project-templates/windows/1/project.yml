@@ -1,0 +1,8 @@
+name: Windows
+description: Experimental Windows template
+stacks:
+  - name: windows
+    templateId: 'library:infra*windows'
+  - name: windows-network-services
+    templateId: 'library:infra*windows-network-services'
+    

@@ -1,8 +1,12 @@
 # Rancher Catalog
 
-In Rancher, one of the two automatically packaged catalogs is this repository and the [community-catalog](https://github.com/rancher/community-catalog). The **library** catalog points to a git mirror of the **master** branch of this repo.
+In Rancher, one of the two automatically packaged catalogs is this repository and the [community-catalog](https://github.com/rancher/community-catalog). 
 
 ## Branches
+
+If you are running Rancher v1.6.1+, the **library** catalog points to a git mirror of the **v1.6-release** branch of this repo.
+
+If you are running Rancher v1.6.0 and lower,  the **library** catalog points to a git mirror of the **v1.6-release** branch of this repo.
 
 ### Branches before a Release
 
