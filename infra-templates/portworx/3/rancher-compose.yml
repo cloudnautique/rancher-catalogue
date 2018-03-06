@@ -1,6 +1,6 @@
 .catalog:
   name: "Portworx"
-  version: "edge"
+  version: "1.2.20.0"
   description: "Portworx Docker Volume Plugin"
   questions:
 
@@ -37,11 +37,6 @@
 
 
 portworx:
-  labels:
-    io.rancher.container.dns: 'true'
-    io.rancher.container.hostname_override: container_name
-    io.rancher.scheduler.affinity:container_label_ne: io.rancher.stack_service.name=$${stack_name}/$${service_name}
-    io.rancher.container.pull_image: always
   metadata:
     version: 1
     storageDriverName: "${VOLUME_DRIVE_NAME}"
