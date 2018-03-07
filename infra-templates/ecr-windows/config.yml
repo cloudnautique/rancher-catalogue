@@ -1,0 +1,8 @@
+name: ECR Credential Updater for Windows Environment
+description: |
+  Automatically updates AWS EC2 Container Registry credentials in Rancher.
+version: v3.0.0
+category: Applications
+labels:
+  io.rancher.certified: Experimental
+  io.rancher.orchestration.supported: 'windows'
