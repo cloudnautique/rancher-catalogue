@@ -1,9 +1,10 @@
 ## Rancher Container Crontab
 Starts, stops or restarts containers in your environment
 
-### Changelog - v0.4.0
+### Changelog - v0.5.0
 
-* Fixed cron scheduling for sidekicks
+* Use service UUID for metadata lookups to allow renaming of stacks services
+* Handle case sensitivities more gracefully when comparing stack service names
 
 ### Usage
 
