@@ -11,7 +11,7 @@ services:
     
   secrets-bridge-v2-driver:
     privileged: true
-    image: rancher/storage-secrets-bridge-v2:v0.9.5
+    image: rancher/storage-secrets-bridge-v2:v0.9.6
     network_mode: host
     environment:
         VAULT_TOKEN_SERVER_URL: http://secrets-bridge-v2-server:8080/v1-vault-driver/tokens
