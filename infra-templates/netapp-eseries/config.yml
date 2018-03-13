@@ -1,7 +1,0 @@
-name: NetApp E-Series
-description: |
-  Volume plugin for E-Series
-version: 17.07
-category: Storage
-labels:
-  io.rancher.orchestration.supported: 'cattle'

@@ -1,7 +1,0 @@
-name: NetApp ONTAP NAS
-description: |
-  Volume plugin for ONTAP NAS
-version: 17.07
-category: Storage
-labels:
-  io.rancher.orchestration.supported: 'cattle'
