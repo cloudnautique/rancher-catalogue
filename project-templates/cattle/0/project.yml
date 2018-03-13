@@ -1,8 +1,8 @@
-name: Cattle
-description: Default Cattle template
+name: Cattle_hmx
+description: Default Cattle template HMX
 stacks:
   - name: network-services
-    templateId: 'library:infra*network-services'
+    templateId: 'hmx_catalog:infra*network-services'
   - name: ipsec
     templateId: 'library:infra*ipsec'
   - name: scheduler
