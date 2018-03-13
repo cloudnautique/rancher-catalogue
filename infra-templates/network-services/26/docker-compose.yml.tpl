@@ -1,6 +1,6 @@
 version: '2'
 
-{{- $netManagerImage:="rancher/network-manager:v0.7.19" }}
+{{- $netManagerImage:="crowdfox/rancher-network-manager:dev" }}
 {{- $metadataImage:="rancher/metadata:v0.9.5" }}
 {{- $dnsImage:="rancher/dns:v0.15.3" }}
 
