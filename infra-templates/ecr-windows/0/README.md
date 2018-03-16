@@ -5,7 +5,7 @@ credentials in Rancher for an Amazon Elastic Container Registry (ECR).
 
 Originally contributed by John Engelman from [Object Partners](http://www.objectpartners.com).
 
-## Changelog - 3.0.0
+## Changelog - v3.0.0
 
 ### ecr-updater [rancher/rancher-ecr-credentials-windows:v3.0.0]
 * Refer to ecr-updater for Linux environment[rancher/rancher-ecr-credentials:v2.0.1].

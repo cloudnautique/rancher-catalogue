@@ -2,6 +2,7 @@
     name: Network Services for Windows
     version: v0.1.0
     minimum_rancher_version: v1.6.13-rc1
+    maximum_rancher_version: v1.6.14
     questions:
     - variable: DNS_RECURSER_TIMEOUT
       label: Timeout for Rancher DNS Recurser
