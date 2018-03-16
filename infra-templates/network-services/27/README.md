@@ -11,12 +11,12 @@ This stack provides the following services:
 #### Metadata [rancher/metadata:v0.10.2]
 * Small bug fixes
 
-#### DNS [rancher/dns:v0.17.1]
+#### DNS [rancher/dns:v0.17.3]
 * Small bug fixes
 
 #### Network Manager [rancher/network-manager:v0.7.20]
-* Fixes issue during startup of healthcheck not able to reach server.
-* Fixes issue with deletiion of conntrack entries related to kubernetes cluster IP subnet.
+* Fixed an issue where during startup of healthcheck, it is not able to reach server.
+* Fixed an issue with deletiion of conntrack entries related to kubernetes cluster IP subnet.
 
 ### Configuration Options
 

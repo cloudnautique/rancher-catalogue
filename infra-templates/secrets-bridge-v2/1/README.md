@@ -6,6 +6,11 @@ This volume driver delivers access tokens per-container to authenticate with Has
 
 ## Changelog v0.3.2
 
+Secrets Bridge v2 Server [rancher/secrets-bridge-v2:v0.3.2]
+* Updated to change Secrets Bridge from Experimental to GA
+
+Secrets Bridge v2 Driver [rancher/storage-secrets-bridge-v2:v0.9.6]
+* Switched to stop using docker volumes and uses flex volumes
 
 ## Terms
 

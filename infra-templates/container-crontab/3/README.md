@@ -3,8 +3,9 @@ Starts, stops or restarts containers in your environment
 
 ### Changelog - v0.5.0
 
-* Use service UUID for metadata lookups to allow renaming of stacks services
+* Use service UUID for metadata lookups to allow renaming of stacks
 * Handle case sensitivities more gracefully when comparing stack service names
+* Return sidekicks names without primary name
 
 ### Usage
 

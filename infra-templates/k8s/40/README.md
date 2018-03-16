@@ -11,7 +11,13 @@ Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ign
 
 ### Changelog for Kubernetes v1.9.4
 
-* Fixed issue with conntrack entries being deleted incorrectly for Service IP range.
+* Switched the default add-on images (dashboard, dns, dashboard, etc) to be pulled from Rancher's repo in Dockerhub instead of GCR. The location is still configurable, but the default pulls from Rancher instead of GCR.
+* Fixed an issue with conntrack entries being deleted incorrectly for Service IP range.
+* Fixed an issue where add-ons might not be updated if using the same k8s image.
+* Secured kubelet port by no longer allowing anonymous requests.
+* Cleaned up some logging messages.
+* Fixed an issue where audit-logs were missing from the logs of the kube-api-server.
+* Fixed an issue where k8s certs were assuming k8s will be discovered using Rancher DNS.
 
 ### Required Open Ports on hosts
 

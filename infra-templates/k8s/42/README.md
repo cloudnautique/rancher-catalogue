@@ -11,7 +11,8 @@ Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ign
 
 ### Changelog for Kubernetes v1.8.9
 
-* Secured kubelet port 
+* Fixed an issue where add-ons might not be updated if using the same k8s image 
+* Secured kubelet port by no longer allowing anonymous requests
 
 ### Required Open Ports on hosts
 

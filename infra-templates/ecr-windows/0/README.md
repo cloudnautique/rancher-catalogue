@@ -33,7 +33,7 @@ Credentials are loaded in the following order:
 
 > **Note:** Cross account roles are not currently supported.
 
-You can update registries in other environments by providing the environment API endpoint of the environment containing the AWS registry to be updated. You will also need to provide the an Environment API key (access key and secret key) for the environment. 
+You can update registries in other environments by providing the environment API endpoint of the environment containing the AWS registry to be updated. You will also need to provide the an Environment API key (access key and secret key) for the environment.
 
 ## Notes
 
