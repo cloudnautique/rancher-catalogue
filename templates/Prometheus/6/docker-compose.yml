@@ -19,8 +19,7 @@ node-exporter:
 
 prom-conf:
     tty: true
-    image: richbrains/prom-conf:latest
-    #        infinityworks/prom-conf:20
+    image: infinityworks/prom-conf:20
     volumes:
       - /etc/prom-conf/
     net: none
@@ -73,11 +72,3 @@ prometheus-rancher-exporter:
       io.rancher.container.create_agent: true
       io.rancher.container.agent.role: environment
     image: infinityworks/prometheus-rancher-exporter:v0.22.52
-
-prometheus-mongodb-exporter:
-    tty: true
-    command: -web.listen-address :9001
-    labels:
-      io.rancher.container.create_agent: true
-      io.rancher.container.agent.role: environment
-    image: eses/mongodb_exporter:latest

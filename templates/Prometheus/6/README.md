@@ -1,7 +1,5 @@
 # Prometheus
 
-## HMX VERSION
-
 ### Info:
 
 This template deploys a collection of monitoring services based upon the technologies listed below, once deployed you should have a monitoring platform capable of querying a wide variety of metrics that represent your environment, also included are somehandy pre-configured dashboards to get you started.

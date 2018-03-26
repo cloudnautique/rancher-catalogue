@@ -1,7 +1,7 @@
 .catalog:
   name: "Prometheus"
-  version: "4.0.1"
-  description: "Prometheus Monitoring Solution holimetrix"
+  version: "4.0.0"
+  description: "Prometheus Monitoring Solution"
   uuid: prometheus-2
   minimum_rancher_version: v1.5.5
   questions:
@@ -47,16 +47,6 @@ prometheus-rancher-exporter:
   scale: 1
   health_check:
     port: 9173
-    interval: 5000
-    unhealthy_threshold: 3
-    request_line: ''
-    healthy_threshold: 2
-    response_timeout: 5000
-
-prometheus-mongodb-exporter:
-  scale: 1
-  health_check:
-    port: 9001
     interval: 5000
     unhealthy_threshold: 3
     request_line: ''
