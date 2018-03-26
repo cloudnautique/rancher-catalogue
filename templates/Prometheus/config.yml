@@ -1,0 +1,5 @@
+name: Prometheus
+description: |
+    Prometheus and friends, auto-discovering  based on inifinity works, added mongodb exporter based on RichBrains https://github.com/RichBrains
+version: 4.0.1
+category: Monitoring
