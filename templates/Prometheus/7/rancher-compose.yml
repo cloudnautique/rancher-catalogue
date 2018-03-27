@@ -22,6 +22,12 @@
       - rancher-nfs
       - rancher-efs
       - rancher-ebs
+  - variable: "MONGODB_CONN"
+    label: "mongodb connection scheme with password"
+    description: " like this mongodb://admin:xxxxxxxxxxx@mongodb.crawler-common-services:27017"
+    default: "mongodb://admin:xxxxxxxxx@mongodb.crawler-common-services:27017"
+    required: true
+    type: "string"
 
 prometheus:
   scale: 1
@@ -53,10 +59,10 @@ prometheus-rancher-exporter:
     healthy_threshold: 2
     response_timeout: 5000
 
-prometheus-mongodb-exporter:
+mongodb-exporter:
   scale: 1
   health_check:
-    port: 9001
+    port: 9216
     interval: 5000
     unhealthy_threshold: 3
     request_line: ''
