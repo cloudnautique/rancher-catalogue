@@ -67,6 +67,7 @@ kubelet:
         - rancher-cni-driver:/etc/cni:ro
         - rancher-cni-driver:/opt/cni:ro
         - /dev:/host/dev:rprivate
+        - /usr/libexec/kubernetes/kubelet-plugins:/usr/libexec/kubernetes/kubelet-plugins
     net: host
     pid: host
     ipc: host
