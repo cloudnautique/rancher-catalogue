@@ -32,6 +32,7 @@ kubelet:
         - --network-plugin=cni
         - --cni-conf-dir=/etc/cni/managed.d
         - --anonymous-auth=false
+        - --volume-plugin-dir=/var/lib/kubelet/volumeplugins
         - --client-ca-file=/etc/kubernetes/ssl/ca.pem
         {{- if and (ne .Values.REGISTRY "") (ne .Values.POD_INFRA_CONTAINER_IMAGE "") }}
         - --pod-infra-container-image=${REGISTRY}/${POD_INFRA_CONTAINER_IMAGE}
@@ -67,6 +68,7 @@ kubelet:
         - rancher-cni-driver:/etc/cni:ro
         - rancher-cni-driver:/opt/cni:ro
         - /dev:/host/dev:rprivate
+        - /usr/libexec/kubernetes/kubelet-plugins:/usr/libexec/kubernetes/kubelet-plugins
     net: host
     pid: host
     ipc: host
