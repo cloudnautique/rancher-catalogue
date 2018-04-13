@@ -6,17 +6,10 @@ This stack provides the following services:
 * DNS
 * Network Manager
 
-### Changelog for v0.2.9
+### Changelog for v0.2.10
 
-#### Metadata [rancher/metadata:v0.10.2]
-* Small bug fixes
-
-#### DNS [rancher/dns:v0.17.3]
-* Small bug fixes
-
-#### Network Manager [rancher/network-manager:v0.7.20]
-* Fixed an issue where during startup of healthcheck, it is not able to reach server.
-* Fixed an issue with deletiion of conntrack entries related to kubernetes cluster IP subnet.
+#### Network Manager [rancher/network-manager:v0.7.21]
+* Fixed an issue with iptables rules when accessing expose port from self host.
 
 ### Configuration Options
 
