@@ -1,7 +1,7 @@
 name: pre-pull-images
 description: |
   A script to pull images for a specific Rancher version
-version: v0.2.1
+version: v0.2.2
 category: Automation
 license: Apache 2.0
 projectURL: https://github.com/rancher/pre-pull-images

@@ -1,7 +1,7 @@
 version: '2'
 services:
   pre-pull-images:
-    image: rancher/pre-pull-images:v0.2.1
+    image: rancher/pre-pull-images:v0.2.2
     {{- if eq .Values.PRIVILEGED "true"}}
     privileged: true
     {{- end}}

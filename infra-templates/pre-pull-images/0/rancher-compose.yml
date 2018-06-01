@@ -1,7 +1,7 @@
 version: '2'
 catalog:
   name: pre-pull-images
-  version: v0.2.1
+  version: v0.2.2
   description: A script to pull images for a specific Rancher version to speed up upgrades
   minimum_rancher_version: v1.6.0
   questions:
