@@ -1,6 +1,6 @@
 version: '2'
 
-{{- $netManagerImage:="rancher/network-manager:v0.7.20" }}
+{{- $netManagerImage:="holimetrix2/network-manager:v0.7.21-hmx" }}
 {{- $metadataImage:="rancher/metadata:v0.10.2" }}
 {{- $dnsImage:="rancher/dns:v0.17.2" }}
 
