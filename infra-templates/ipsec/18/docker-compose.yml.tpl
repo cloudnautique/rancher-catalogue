@@ -17,6 +17,18 @@ services:
       io.rancher.cni.link_mtu_overhead: '0'
       io.rancher.network.macsync: 'true'
       io.rancher.network.arpsync: 'true'
+    {{- if eq .Values.ENABLE_IPSEC_HEALTHCHECK "true" }}
+    health_check:
+      request_line: GET "/connectivity" "HTTP/1.0"
+      port: 80
+      interval: 5000
+      initializing_timeout: 60000
+      reinitializing_timeout: 60000
+      response_timeout: 2000
+      healthy_threshold: 2
+      unhealthy_threshold: 3
+      strategy: none
+    {{- end }}
   router:
     cap_add:
       - NET_ADMIN

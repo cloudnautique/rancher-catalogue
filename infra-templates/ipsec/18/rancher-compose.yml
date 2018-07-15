@@ -99,15 +99,9 @@
       type: int
       default: 3000
       required: true
-
-ipsec:
-  health_check:
-    request_line: GET "/connectivity" "HTTP/1.0"
-    port: 80
-    interval: 5000
-    initializing_timeout: 60000
-    reinitializing_timeout: 60000
-    response_timeout: 2000
-    healthy_threshold: 2
-    unhealthy_threshold: 3
-    strategy: none
+    - variable: "ENABLE_IPSEC_HEALTHCHECK"
+      label: "Enable Health Check for IPSec"
+      description: "This will enable healtch check for IPSec service."
+      type: "boolean"
+      default: "false"
+      required: true
