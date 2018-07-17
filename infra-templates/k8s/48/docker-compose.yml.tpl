@@ -1,6 +1,6 @@
 
 {{- $k8sImage:="rancher/k8s:v1.10.5-rancher1-2" }}
-{{- $etcdImage:="rancher/etcd:v2.3.7-14" }}
+{{- $etcdImage:="rancher/etcd:v2.3.7-15" }}
 {{- $kubectldImage:="rancher/kubectld:v0.8.7" }}
 {{- $etcHostUpdaterImage:="rancher/etc-host-updater:v0.0.3" }}
 {{- $k8sAgentImage:="rancher/kubernetes-agent:v0.6.9" }}
@@ -187,6 +187,7 @@ etcd:
         ETCDCTL_CA_FILE: '/etc/etcd/ssl/ca.pem'
         ETCDCTL_KEY_FILE: '/etc/etcd/ssl/key.pem'
         ETCDCTL_CERT_FILE: '/etc/etcd/ssl/cert.pem'
+        ETCDCTL_ENDPOINT: 'https://localhost:2379'
     volumes:
     - etcd:/pdata:z
     - /var/etcd/backups:/data-backup:z
