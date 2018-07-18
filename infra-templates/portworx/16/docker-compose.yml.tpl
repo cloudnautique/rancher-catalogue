@@ -1,7 +1,7 @@
 version: '2'
 services:
   portworx:
-    image: portworx/oci-monitor:1.3.7
+    image: portworx/oci-monitor:1.3.7.0-ranch
     container_name: px-oci-mon
     privileged: true
     labels:
