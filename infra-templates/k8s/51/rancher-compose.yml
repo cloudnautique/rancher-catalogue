@@ -1,9 +1,8 @@
 .catalog:
   name: Kubernetes
-  version: v1.10.5-rancher1-4
+  version: v1.11.1-rancher1-3-1
   description: Rancher Kubernetes service
   minimum_rancher_version: v1.6.19-rc1
-  maximum_rancher_version: v1.6.19-rc1
   questions:
   - variable: CONSTRAINT_TYPE
     label: Plane Isolation
@@ -238,7 +237,6 @@
     required: true
     default: "169.254.169.250"
     type: string
-
 
 kubernetes:
     metadata:
