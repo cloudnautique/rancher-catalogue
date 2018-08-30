@@ -14,6 +14,7 @@ Warning: If you are using the `aws` cloud provider, tagging your cluster resourc
 ### Changelog for Kubernetes v1.11.2
 
 * Added ability to use XFS requires XFS binaries in rancher/k8s image
+* Fixed ingress controller issue where removed ingress instances were synced back to rancher as active ones
 
 ### Required Open Ports on hosts
 
