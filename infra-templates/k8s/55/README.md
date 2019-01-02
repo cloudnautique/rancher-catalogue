@@ -1,8 +1,8 @@
-## Kubernetes v1.11.5
+## Kubernetes v1.11.6
 
 ### Software Versions
 
-* Kubernetes v1.11.5
+* Kubernetes v1.11.6
 * Etcd v2.3.7
 
 ### Upgrading to this Version
@@ -11,9 +11,9 @@ Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ign
 
 Warning: If you are using the `aws` cloud provider, tagging your cluster resources with a `ClusterID` is required in Kubernetes v1.10. This needs to be done before upgrading. Please refer to the [documentation](https://rancher.com/docs/rancher/v1.6/en/kubernetes/providers/#configuring-the-clusterid) on how to tag your cluster resources.
 
-### Changelog for Kubernetes v1.11.5
+### Changelog for Kubernetes v1.11.6
 
-* Added v1.11.5 to address Kubernetes CVE-2018-1002105
+* Addressed the issue with internal/external IP addresses intermittent disappearance from nodes in Kubernetes clusters
 
 ### Required Open Ports on hosts
 
