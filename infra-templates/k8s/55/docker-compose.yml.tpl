@@ -159,6 +159,9 @@ proxy:
         - --kubeconfig=/etc/kubernetes/ssl/kubeconfig
         - --v=2
         - --healthz-bind-address=0.0.0.0
+        {{- if eq .Values.ENABLE_IPVS_PROXY_MODE "true" }}
+        - --proxy-mode=ipvs
+        {{- end }}
         {{- range $i, $elem := splitPreserveQuotes .Values.ADDITIONAL_KUBEPROXY_FLAGS }}
         - {{ $elem }}
         {{- end }}
@@ -172,6 +175,10 @@ proxy:
     net: host
     links:
         - kubernetes
+    {{- if eq .Values.ENABLE_IPVS_PROXY_MODE "true" }}
+    volumes:
+        - /lib/modules:/lib/modules:ro
+    {{- end }}
 
 etcd:
     image: {{$etcdImage}}

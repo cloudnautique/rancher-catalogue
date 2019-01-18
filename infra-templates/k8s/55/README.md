@@ -14,6 +14,7 @@ Warning: If you are using the `aws` cloud provider, tagging your cluster resourc
 ### Changelog for Kubernetes v1.11.6
 
 * Addressed the issue with internal/external IP addresses intermittent disappearance from nodes in Kubernetes clusters
+* Added ability to use ipvs mode for kube-proxy
 
 ### Required Open Ports on hosts
 
