@@ -1,7 +1,7 @@
 .catalog:
     name: Scheduler
     description: A resource based scheduler plugin for Rancher.
-    version: v0.8.5
+    version: v0.8.6
     minimum_rancher_version: v1.6.19-rc1
     questions:
         - variable: "RANCHER_DEBUG"

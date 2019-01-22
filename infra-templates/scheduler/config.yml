@@ -1,5 +1,5 @@
 name: Scheduler
-version: v0.8.5
+version: v0.8.6
 category: Framework
 description: A resource based scheduler plugin for Rancher.
 projectURL: https://github.com/rancher/scheduler
