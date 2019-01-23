@@ -66,7 +66,7 @@ kubelet:
         - /run:/run:rprivate
         - /var/run:/var/run:rprivate
         - /sys:/sys:ro,rprivate
-        - /var/lib/docker:/var/lib/docker:rw,rslave,z
+        - /var/lib/docker:/var/lib/docker:z
         - /var/lib/kubelet:/var/lib/kubelet:shared,z
         - /var/log/containers:/var/log/containers:rprivate
         - /var/log/pods:/var/log/pods:rprivate
@@ -138,7 +138,7 @@ kubelet-unschedulable:
         - /run:/run:rprivate
         - /var/run:/var/run:rprivate
         - /sys:/sys:ro,rprivate
-        - /var/lib/docker:/var/lib/docker:rw,rslave,z
+        - /var/lib/docker:/var/lib/docker:z
         - /var/lib/kubelet:/var/lib/kubelet:shared,z
         - /var/log/containers:/var/log/containers:rprivate
         - /var/log/pods:/var/log/pods:rprivate
