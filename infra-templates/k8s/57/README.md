@@ -13,7 +13,7 @@ Warning: If you are using the `aws` cloud provider, tagging your cluster resourc
 
 ### Changelog for Kubernetes v1.12.5
 
-* Initial release of Kubernetes 1.12
+* Added proxy environment variables for kubectld and kubectl-shell
 
 ### Required Open Ports on hosts
 

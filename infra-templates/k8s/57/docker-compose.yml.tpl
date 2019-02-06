@@ -299,6 +299,11 @@ kubectld:
     environment:
         SERVER: http://kubernetes.kubernetes.rancher.internal
         LISTEN: ":8091"
+    {{- if ne .Values.HTTP_PROXY "" }}
+        HTTP_PROXY: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTP_PROXY}
+        NO_PROXY: ${NO_PROXY}
+    {{- end }}
     image: {{$kubectldImage}}
     links:
         - kubernetes
@@ -315,6 +320,12 @@ kubectl-shell:
     command:
         - kubectl-shell-entry.sh
     image: {{$kubectldImage}}
+    {{- if ne .Values.HTTP_PROXY "" }}
+    environment:
+        HTTP_PROXY: ${HTTP_PROXY}
+        HTTPS_PROXY: ${HTTP_PROXY}
+        NO_PROXY: ${NO_PROXY}
+    {{- end }}
     privileged: true
     health_check:
         port: 10240
