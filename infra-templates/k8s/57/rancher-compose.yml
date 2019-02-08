@@ -2,7 +2,7 @@
   name: Kubernetes
   version: v1.12.5-rancher1-2
   description: Rancher Kubernetes service
-  minimum_rancher_version: v1.6.27-rc1
+  minimum_rancher_version: v1.6.26-rc1
   questions:
   - variable: CONSTRAINT_TYPE
     label: Plane Isolation
