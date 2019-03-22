@@ -1,0 +1,62 @@
+.catalog:
+  name: "Portworx"
+  version: "2.0.2.4-oci"
+  description: "Portworx Docker Volume Driver"
+  questions:
+
+    - variable: INSTALL_SCALE
+      label: Install scale
+      description: "Determine if Portworx should install globally on all the nodes, or scaled via stacks (starting with Scale=1)."
+      required: true
+      default: "global"
+      type: enum
+      options:
+      - "global"
+      - "scaled"
+    - variable: "CLUSTER_ID"
+      description: "Arbitrary Cluster ID, common to all nodes in PX cluster "
+      label: "Cluster ID"
+      type: "string"
+      required: true
+      default: ""
+    - variable: "KVDB"
+      description: "Key-value database, accessibe to all nodes in PX cluster"
+      label: "Key-Value Database"
+      type: "string"
+      required: true
+      default: ""
+    - variable: "USE_DISKS"
+      description: "Specify which disks to use (Ex: '-a' for all available unformatted disks, or '-s /dev/sdX' for each individual disk)"
+      label: "Use Disks"
+      type: "string"
+      required: true
+      default: "-a"
+    - variable: "EXTRA_OPTS"
+      description: "Extra portworx options (see https://docs.portworx.com/runc/#command-line-arguments)"
+      label: "Extra Options"
+      type: "string"
+      required: false
+      default: ""
+
+portworx:
+  metadata:
+    version: 1
+    storageDriverName: pxd
+    debug: true
+    volumeDriverName: pxd
+  storage_driver:
+    name: pxd
+    scope: environment
+    volume_access_mode: multiHostRW
+    blockDevicePath: null
+  start_on_create: true
+  health_check:
+    request_line: GET /health HTTP/1.0
+    port: 9015
+    interval: 10000
+    response_timeout: 5000
+    unhealthy_threshold: 3
+    healthy_threshold: 2
+    initializing_timeout: 840000
+    strategy: none
+
