@@ -1,10 +1,9 @@
 ## Rancher EBS
 
-### Changelog - 0.6.0
+### Changelog - 0.6.1
 
-#### Rancher EBS [rancher/storage-ebs:v0.9.7]
- * Added support for volume partitions
- * Added ability to specify snapshot by tag key and value pair
+#### Rancher EBS [rancher/storage-ebs:v0.9.8]
+ * Addressed the issue where if all device paths were used on an ec2 instance, then ebs volumes would be spawned in a detached state in a perpetual loop.
 
 ### Restrictions when using EBS
 
