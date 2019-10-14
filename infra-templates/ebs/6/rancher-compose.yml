@@ -4,6 +4,7 @@
   description: |
     Docker volume plugin for EBS
   minimum_rancher_version: v1.6.19-rc1
+  maximum_rancher_version: v1.6.29-rc1
   questions:
   - variable: AWS_ACCESS_KEY_ID
     label: AWS Access Key
