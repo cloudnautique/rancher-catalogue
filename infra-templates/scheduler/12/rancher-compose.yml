@@ -3,6 +3,7 @@
     description: A resource based scheduler plugin for Rancher.
     version: v0.8.5
     minimum_rancher_version: v1.6.19-rc1
+    maximum_rancher_version: v1.6.25
     questions:
         - variable: "RANCHER_DEBUG"
           label: "Enable Debug Logs"
@@ -32,7 +33,7 @@
           label: "Healthcheck response timeout"
           description: "The number of milliseconds before a check without response times out."
           type: "int"
-          default: 2000
+          default: 30000
           required: true
         - variable: "HEALTHCHECK_UNHEALTHY_THRESHHOLD"
           label: "Healthcheck unhealthy threshhold"

@@ -1,0 +1,28 @@
+.catalog:
+  name: "Rancher EBS"
+  version: "0.6.1"
+  description: |
+    Docker volume plugin for EBS
+  minimum_rancher_version: v1.6.29-rc1
+  questions:
+  - variable: AWS_ACCESS_KEY_ID
+    label: AWS Access Key
+    type: string
+    description: Optional if using IAM Profile
+  - variable: AWS_SECRET_ACCESS_KEY
+    label: AWS Secret Key
+    type: password
+    description: Optional if using IAM Profile
+  - variable: RANCHER_DEBUG
+    label: Debug Mode
+    type: enum
+    description: Enable or disable verbose logging
+    default: false
+    options:
+    - true
+    - false
+ebs-driver:
+  storage_driver:
+    name: rancher-ebs
+    scope: environment
+    volume_access_mode: singleHostRW

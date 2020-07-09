@@ -1,0 +1,59 @@
+.catalog:
+    name: Scheduler
+    description: A resource based scheduler plugin for Rancher.
+    version: v0.8.6
+    minimum_rancher_version: v1.6.26-rc1
+    questions:
+        - variable: "RANCHER_DEBUG"
+          label: "Enable Debug Logs"
+          description: "This will enable very verbose debug logs."
+          type: "boolean"
+          default: "false"
+          required: true
+        - variable: "HEALTHCHECK_INTERVAL"
+          label: "Healthcheck interval"
+          description: "The number of milliseconds between checks."
+          type: "int"
+          default: 2000
+          required: true
+        - variable: "HEALTHCHECK_INIT_TIMEOUT"
+          label: "Healthcheck initializing timeout"
+          description: "The number of milliseconds before we exit initializing."
+          type: "int"
+          default: 10000
+          required: true
+        - variable: "HEALTHCHECK_REINIT_TIMEOUT"
+          label: "Healthcheck reinitializing timeout"
+          description: "The number of milliseconds before we exit reinitializing."
+          type: "int"
+          default: 10000
+          required: true
+        - variable: "HEALTHCHECK_RESPONSE_TIMEOUT"
+          label: "Healthcheck response timeout"
+          description: "The number of milliseconds before a check without response times out."
+          type: "int"
+          default: 30000
+          required: true
+        - variable: "HEALTHCHECK_UNHEALTHY_THRESHHOLD"
+          label: "Healthcheck unhealthy threshhold"
+          description: "The number of failed check responses before a (currently marked healthy) container is considered unhealthy."
+          type: "int"
+          default: 3
+          required: true
+        - variable: "HEALTHCHECK_HEALTHY_THRESHHOLD"
+          label: "Healthcheck healthy threshhold"
+          description: "The number of successful check responses before a (currently marked unhealthy) container is considered healthy again."
+          type: "int"
+          default: 2
+          required: true
+
+scheduler:
+    health_check:
+        request_line: GET /healthcheck HTTP/1.0
+        port: 80
+        interval: ${HEALTHCHECK_INTERVAL}
+        initializing_timeout: ${HEALTHCHECK_INIT_TIMEOUT}
+        reinitializing_timeout: ${HEALTHCHECK_REINIT_TIMEOUT}
+        response_timeout: ${HEALTHCHECK_RESPONSE_TIMEOUT}
+        unhealthy_threshold: ${HEALTHCHECK_UNHEALTHY_THRESHHOLD}
+        healthy_threshold: ${HEALTHCHECK_HEALTHY_THRESHHOLD}

@@ -7,4 +7,7 @@ setup(
       'core',
     ],
     license='ASL 2.0',
+    tests_require=[
+        "more-itertools<6.0.0",
+    ],
 )

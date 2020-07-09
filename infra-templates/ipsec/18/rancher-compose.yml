@@ -97,7 +97,7 @@
       label: "Connection timeout when connecting to a peer (in milliseconds)"
       description: "This is an advanced setting and most users will not need to use this. Incorrect values can break your Rancher installation."
       type: int
-      default: 3000
+      default: 60000
       required: true
 
 ipsec:

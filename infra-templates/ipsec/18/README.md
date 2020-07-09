@@ -8,12 +8,12 @@ Traffic to and from hosts require UDP ports `500` and `4500` to be open.
 
 ### Changelog - 0.2.5
 
-#### Router, CNI Driver, Connectivity Check [rancher/net:v0.13.16]
+#### Router, CNI Driver, Connectivity Check [rancher/net:v0.13.17]
 * Added loglevel to the service to help with debugging
 * Remove connectivity check requirements during upgrades.
 * Changed default connection check interval from 5 seconds to 10 seconds.
-* Changed default connection timeout from 1 seconds to 3 seconds.
-* Connectivity check requirement is driven by the flag
+* Changed default connection timeout from 1 seconds to 60 seconds.
+*  Changed connectivity check requirement to be configurable.
 
 ### Configuration options
 * `RANCHER_DEBUG`

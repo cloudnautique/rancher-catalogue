@@ -11,6 +11,14 @@ Warning: The existing template version _must be_ `v1.2.4-rancher9` or later. Ign
 
 Warning: If you are using the `aws` cloud provider, tagging your cluster resources with a `ClusterID` is required in Kubernetes v1.10. This needs to be done before upgrading. Please refer to the [documentation](https://rancher.com/docs/rancher/v1.6/en/kubernetes/providers/#configuring-the-clusterid) on how to tag your cluster resources.
 
+Warning: If you are upgrading to this version from a version lower than `v1.9.5-rancher1-3`, it's possible to hit an issue with kubelet failing to start after the upgrade. To work around this issue, run the following commands on the hosts:
+```bash
+mount -o rw,remount /sys/fs/cgroup
+mount --bind /sys/fs/cgroup/cpu,cpuacct/ /sys/fs/cgroup/cpuacct,cpu/
+mount --bind /sys/fs/cgroup/net_cls,net_prio/ /sys/fs/cgroup/net_prio,net_cls/
+```
+This issue is resolved in Rancher `v1.6.19` with Kubernetes `v1.10.5`.
+
 ### Changelog for Kubernetes v1.10.0
 
 * Updated for the latest Kubernetes release.
